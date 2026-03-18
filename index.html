@@ -254,152 +254,137 @@ const SHEET_URL = "https://script.google.com/macros/s/AKfycby_VfYPSs1mfif77JTQrB
 
 // ─── Question bank ─────────────────────────────────────────────────────────────
 const ALL_QUESTIONS = [
-  // PEOPLE — all wrong answers are real Netbridge staff names or real qualifications
+
+  // ── PEOPLE: all 4 options are real Netbridge names, numbers, or credentials ──
+
   {
-    q: "Which Netbridge team member is the Network Migration Engineer?",
-    opts: ["Alexander Lykov", "Jun Marasigan", "Anjelo Fernando", "Hamish Cummins"],
-    a: 3, diff: 3, dl: "Medium",
-    f: "Hamish Cummins is the Network Migration Engineer. Alexander Lykov is Senior Network Engineer, Jun Marasigan is Network Engineer, Anjelo Fernando is Network Analyst — all real Netbridge staff."
+    q: "What is Jack Tan's direct phone number listed on the Netbridge website?",
+    opts: ["+64 21 525 366", "+64 21 552 633", "+64 21 525 633", "+64 21 256 633"],
+    a: 2, diff: 5, dl: "Expert",
+    f: "Jack Tan's direct number is +64 21 525 633 — listed on the About Us page. All four options use the same digits rearranged. You had to write it down."
   },
   {
-    q: "Which Netbridge team member completed their Masters in Business at Lincoln University?",
-    opts: ["Jack Tan", "Ashley Pirimona", "Simran Singh", "Eviv Hu"],
-    a: 3, diff: 3, dl: "Medium",
-    f: "Eviv Hu completed her Masters in Business at Lincoln University. Jack Tan completed his Masters in Business and Commercial Law at Auckland University — easy to mix up."
+    q: "What is Simran Singh's direct phone number listed on the Netbridge website?",
+    opts: ["+64 21 313 283", "+64 21 331 283", "+64 21 331 832", "+64 21 133 283"],
+    a: 1, diff: 5, dl: "Expert",
+    f: "Simran Singh's direct number is +64 21 331 283. The wrong options swap pairs of digits — indistinguishable without having written it down."
   },
   {
-    q: "Mak Kulkarni's role at Netbridge is listed as what?",
-    opts: ["General Manager", "Business Development Manager", "Director", "Senior Network Engineer"],
-    a: 2, diff: 3, dl: "Medium",
-    f: "Mak Kulkarni is listed as Director. Jack Tan is the General Manager — a role many would assume Mak holds."
-  },
-  {
-    q: "Which Netbridge staff member is ITIL certified?",
-    opts: ["Eviv Hu", "Simran Singh", "Ashley Pirimona", "Jack Tan"],
+    q: "What is Jack Tan's email address at Netbridge?",
+    opts: ["j.tan@netbridge.co.nz", "jacktan@netbridge.co.nz", "jack.tan@netbridge.co.nz", "jtan@netbridge.co.nz"],
     a: 2, diff: 4, dl: "Hard",
-    f: "Ashley Pirimona is ITIL certified. Eviv Hu holds a CCNA. Simran Singh holds Cisco and Microsoft vendor qualifications. Jack Tan holds an engineering and commercial law degree."
+    f: "Jack Tan's email is jack.tan@netbridge.co.nz — the format firstname.lastname is confirmed on the About Us page. The other three follow formats used by other NZ companies."
   },
   {
-    q: "Jack Tan completed his degrees at Auckland University. What were they?",
-    opts: ["B.Eng + Masters in Telecommunications", "B.IT + Masters in Cybersecurity", "B.ComSci + Masters in Business Administration", "B.Eng + Masters in Business and Commercial Law"],
+    q: "Simran Singh has commercial qualifications from Cisco and Microsoft, AND academic qualifications from Unitec. What specific diplomas did he earn at Unitec?",
+    opts: ["Diplomas in Networking and Cybersecurity", "Diplomas in Information Technology and Support", "Diplomas in Systems Administration and Cloud Computing", "Diplomas in Telecommunications and Network Engineering"],
+    a: 1, diff: 5, dl: "Expert",
+    f: "Simran holds IT Diplomas in Information Technology and Support from Unitec. The other three are plausible-sounding IT diploma names but none are what his profile says."
+  },
+  {
+    q: "Eviv Hu has three postgraduate qualifications. Which combination is correct?",
+    opts: ["Masters in Telecoms (AUT), Masters in Business (Massey), B.Eng (Lincoln)", "B.Telecoms, Masters in Telecoms (Auckland Uni), Masters in Business (AUT)", "B.Telecoms, Masters in Telecoms (AUT), Masters in Business (Lincoln)", "Masters in Telecoms (Unitec), B.IT, Masters in Business (AUT)"],
+    a: 2, diff: 5, dl: "Expert",
+    f: "Eviv Hu holds a Bachelor's in Telecommunications, a Masters in Telecommunications from AUT, and a Masters in Business from Lincoln University. The other options swap institutions between qualifications — deliberately."
+  },
+  {
+    q: "Ashley Pirimona has expertise across Microsoft technologies AND holds which two specific credentials?",
+    opts: ["ITIL certified and Cisco qualified", "Microsoft qualified and PRINCE2 certified", "Microsoft qualified and ITIL certified", "ITIL certified and CCNA qualified"],
+    a: 2, diff: 5, dl: "Expert",
+    f: "Ashley holds commercial qualifications from Microsoft and is ITIL certified. Cisco, PRINCE2, and CCNA are real credentials held by other Netbridge staff — not Ashley."
+  },
+  {
+    q: "Netbridge's PO Box number is listed as what on their contact page?",
+    opts: ["PO Box 13 2243, Sylvia Park", "PO Box 13 2324, Sylvia Park", "PO Box 12 2234, Sylvia Park", "PO Box 13 2234, Sylvia Park"],
+    a: 3, diff: 5, dl: "Expert",
+    f: "Netbridge's PO Box is 13 2234, Sylvia Park, Auckland 1644. The wrong options transpose individual digits — you need to have copied this exactly."
+  },
+  {
+    q: "Which of these is a Netbridge technology partner listed on their website?",
+    opts: ["Extreme Networks", "Ruckus Networks", "HPE Networking", "Allied Telesis"],
     a: 3, diff: 4, dl: "Hard",
-    f: "Jack Tan completed a Bachelor of Engineering and a Masters in Business and Commercial Law — not an MBA, not cybersecurity, not telecoms. The distinction matters."
-  },
-  {
-    q: "Which Netbridge team member is the Business Development Manager?",
-    opts: ["Paul Batchelor", "Anjelo Fernando", "Donna Whittington", "Alexander Lykov"],
-    a: 2, diff: 3, dl: "Medium",
-    f: "Donna Whittington is the Business Development Manager. Paul Batchelor is the Client Manager — a different role that is easy to confuse."
-  },
-  {
-    q: "What is Netbridge's general enquiry email address?",
-    opts: ["info@netbridge.co.nz", "enable@netbridge.co.nz", "hello@netbridge.co.nz", "contact@netbridge.co.nz"],
-    a: 1, diff: 3, dl: "Medium",
-    f: "Netbridge's contact email is enable@netbridge.co.nz — their contact page tagline is 'Let us enable your connectivity!' All four look like plausible business emails."
-  },
-  {
-    q: "Which secondary school did Jack Tan attend?",
-    opts: ["Rangitoto College", "Westlake Boys High School", "Auckland Grammar School", "Macleans College"],
-    a: 1, diff: 4, dl: "Hard",
-    f: "Jack Tan attended Westlake Boys High School. All four are real Auckland secondary schools — you need to have read his profile to know this."
-  },
-  {
-    q: "Eviv Hu achieved a CCNA in 2023. CCNA is a certification from which vendor?",
-    opts: ["Juniper Networks", "Microsoft", "Fortinet", "Cisco"],
-    a: 3, diff: 4, dl: "Hard",
-    f: "CCNA stands for Cisco Certified Network Associate — a Cisco qualification. Juniper, Microsoft, and Fortinet all offer their own certifications, but CCNA is specifically Cisco."
-  },
-  {
-    q: "What is Netbridge's exact street number on Great South Road, Ellerslie?",
-    opts: ["442", "744", "644", "544"],
-    a: 2, diff: 4, dl: "Hard",
-    f: "Netbridge is at 644 Great South Road, Ellerslie. All four options are plausible numbers on a long Auckland arterial road."
-  },
-  {
-    q: "Which partner brand on the Netbridge website specialises in healthcare technology?",
-    opts: ["DZS", "Talius", "Molex", "Vitalcare"],
-    a: 3, diff: 4, dl: "Hard",
-    f: "Vitalcare specialises in healthcare technology. Molex makes cabling, DZS makes broadband equipment, and Talius makes physical security enclosures — all real Netbridge partners."
+    f: "Allied Telesis is a genuine Netbridge partner. Extreme Networks, Ruckus, and HPE Networking are all major real enterprise networking brands — but none are listed as Netbridge partners."
   },
   {
     q: "What company designed the Netbridge website, as credited in the footer?",
-    opts: ["Digital Nation NZ", "Young and Creative", "Studio Pacific", "Webcraft NZ"],
-    a: 1, diff: 5, dl: "Expert",
+    opts: ["Digital Nation NZ", "Studio Pacific", "Young and Creative", "Webcraft NZ"],
+    a: 2, diff: 5, dl: "Expert",
     f: "Young and Creative (youngandcreative.co.nz) is credited in the footer — only visible if you scroll to the very bottom of the page."
   },
   {
-    q: "Which of these is listed under Netbridge's Telecommunications services, NOT their Networks services?",
-    opts: ["SASE", "SDWAN", "IoT Internet of Things", "RF over Fiber"],
-    a: 3, diff: 5, dl: "Expert",
-    f: "RF over Fiber is listed under Telecommunications. SASE, SDWAN, and IoT are all listed under Networks. Both pages look similar — you need to have read each service page carefully."
+    q: "Which of these is listed under Netbridge's Networks expertise, NOT Telecommunications?",
+    opts: ["RF over Fiber", "4G/5G LTE Services", "Copper Cable G.hn Solutions", "PBX / VoIP"],
+    a: 2, diff: 5, dl: "Expert",
+    f: "G.hn is listed under Networks. RF over Fiber, 4G/5G LTE Services, and PBX/VoIP are all listed under Telecommunications — both pages look almost identical so you need to have read each carefully."
   },
   {
-    q: "Which of these is listed under Netbridge's Networks expertise?",
-    opts: ["RF over Fiber", "4G/5G LTE Services", "PBX / VoIP", "Copper Cable G.hn Solutions"],
-    a: 3, diff: 5, dl: "Expert",
-    f: "G.hn is listed under Networks. RF over Fiber, 4G/5G LTE, and PBX/VoIP are all listed under Telecommunications — easy to confuse if you haven't read both pages."
+    q: "Which specific cyber service does Netbridge offer that provides outsourced executive security leadership?",
+    opts: ["CISO Advisory Retainer", "Cyber Assurance Policy", "VCISO", "Security Governance Audit"],
+    a: 2, diff: 4, dl: "Hard",
+    f: "VCISO (Virtual Chief Information Security Officer) is specifically listed under Netbridge's cyber services. The others sound plausible but only VCISO appears on their services page."
+  },
+  {
+    q: "What does Netbridge list under Managed Services that no ordinary MSP would include?",
+    opts: ["Cloud Risk Assessment", "Procurement", "AI & Chat GPT", "IT Roadmap & Design"],
+    a: 2, diff: 4, dl: "Hard",
+    f: "All four are real items on Netbridge's Managed Services list — but AI & Chat GPT stands out as the unusual one no typical MSP lists. You need to have read the full list to spot it."
   },
 
-  // INDUSTRY — requires real technical knowledge
+  // ── INDUSTRY: requires knowing exact values and applied technical judgement ──
+
   {
-    q: "A Netbridge client's VoIP calls drop every day at 9am when staff arrive. What is the most likely cause?",
-    opts: ["The VoIP server needs a firmware update", "Network congestion with no QoS policy prioritising voice traffic", "The firewall is blocking SIP registrations at peak time", "Wi-Fi channel overlap from nearby access points"],
-    a: 1, diff: 4, dl: "Hard",
-    f: "Without QoS (Quality of Service), voice packets compete equally with bulk data at peak hours. The fix is tagging VoIP traffic with DSCP EF so switches forward it first. Firmware, firewalls, and Wi-Fi are all plausible but congestion + no QoS is the classic cause."
+    q: "VoIP traffic should be marked with which specific DSCP value to guarantee priority over other traffic?",
+    opts: ["DSCP CS3 (24)", "DSCP AF41 (34)", "DSCP EF (46)", "DSCP CS5 (40)"],
+    a: 2, diff: 5, dl: "Expert",
+    f: "VoIP voice bearer traffic is marked DSCP EF (Expedited Forwarding) — decimal value 46. CS5 is used for call signalling, CS3 for video conferencing, and AF41 for interactive video. Using the wrong DSCP value is a common configuration mistake."
   },
   {
-    q: "Netbridge deploys GPON for a multi-tenancy building. A single fibre serves 32 apartments. What component makes this possible without any powered equipment in the field?",
-    opts: ["An optical line terminal", "A passive optical splitter", "A wavelength division multiplexer", "A fibre distribution frame"],
-    a: 1, diff: 4, dl: "Hard",
-    f: "A passive optical splitter divides one fibre signal into many using only the physics of light — no power required. This is why GPON is called 'passive' — the splitters between the exchange and premises require no electricity."
+    q: "A GPON network uses a 1:32 split ratio. If the OLT transmits at 2.488Gbps downstream, what is the maximum bandwidth available per ONT at full saturation?",
+    opts: ["77.75Mbps", "156Mbps", "312Mbps", "622Mbps"],
+    a: 0, diff: 5, dl: "Expert",
+    f: "2488Mbps ÷ 32 = 77.75Mbps per ONT at full saturation. In practice GPON uses dynamic bandwidth allocation so ONTs can burst higher when others are idle — but the theoretical floor is ~77.75Mbps shared equally."
   },
   {
-    q: "A building's BMS, CCTV, and corporate laptops are all on the same flat network. A CCTV camera is compromised. What can an attacker do that they couldn't if the network were properly segmented?",
-    opts: ["Stream footage at higher resolution", "Move laterally to reach the BMS and corporate systems directly", "Disable the camera's IR night vision remotely", "Reset the camera to factory settings"],
-    a: 1, diff: 4, dl: "Hard",
-    f: "On a flat network, a compromised camera has direct layer-2 access to every other device. Lateral movement to the BMS or corporate systems is trivial. Proper VLAN segmentation with inter-VLAN firewall rules would contain the breach to the camera VLAN only."
+    q: "Netbridge deploys SASE. Which component of SASE specifically replaces traditional VPN remote access?",
+    opts: ["CASB", "SWG", "ZTNA", "FWaaS"],
+    a: 2, diff: 5, dl: "Expert",
+    f: "ZTNA (Zero Trust Network Access) is the SASE component that replaces traditional VPN. CASB secures cloud app usage, SWG filters web traffic, and FWaaS is the cloud-delivered firewall. VPN gives broad network access; ZTNA grants access only to specific applications."
   },
   {
-    q: "Under a Zero Trust model, what happens when a user already inside the corporate network tries to access a sensitive internal server?",
-    opts: ["They are trusted automatically because they are already inside the perimeter", "They must authenticate and be authorised for that specific resource regardless of location", "They are redirected through the external firewall for verification", "They are given read-only access until their session token expires"],
-    a: 1, diff: 4, dl: "Hard",
-    f: "Zero Trust rejects the idea that being 'inside' the network earns any trust. Every access request must be authenticated and authorised for that specific resource — regardless of location. This prevents lateral movement after a breach."
-  },
-  {
-    q: "What does OSINT stand for — a methodology listed in Netbridge's cyber services?",
-    opts: ["Operational Security Intelligence", "Online Systems Intrusion Testing", "Open Source Intelligence", "Outbound Security Incident Tracking"],
-    a: 2, diff: 4, dl: "Hard",
-    f: "OSINT stands for Open Source Intelligence — gathering information from publicly available sources like LinkedIn, domain records, and job postings to map an organisation's attack surface before a pen test."
-  },
-  {
-    q: "Netbridge installs PA systems in commercial buildings. In a life-safety scenario, what network behaviour must a PA system have that normal data traffic does not?",
-    opts: ["It must use a dedicated physical cable separate from all data networks", "It must be assigned the highest QoS priority to guarantee delivery during congestion", "It must bypass the firewall to reach all devices simultaneously", "It must operate on a 5GHz Wi-Fi band to avoid interference"],
-    a: 1, diff: 4, dl: "Hard",
-    f: "In an emergency, a PA system cannot wait behind bulk data in a congested queue. Assigning the highest QoS priority ensures emergency audio is always delivered first. A separate physical network is costly and unnecessary with correct QoS design."
-  },
-  {
-    q: "What does SASE combine that traditional SD-WAN alone does not provide?",
-    opts: ["Copper and fibre in a single network run", "SD-WAN connectivity with cloud-delivered security services in one architecture", "IPv4 and IPv6 dual-stack routing for legacy systems", "Wired and wireless access in a unified management platform"],
+    q: "In a converged IT/OT building network, which protocol would Netbridge expect to see on a legacy SCADA device that they would need to firewall at the application layer?",
+    opts: ["MQTT", "Modbus TCP", "SNMP", "NetFlow"],
     a: 1, diff: 5, dl: "Expert",
-    f: "SASE (Secure Access Service Edge) bundles SD-WAN with cloud-native security services — including ZTNA, SWG, CASB, and FWaaS — into one architecture. SD-WAN alone only handles intelligent routing. SASE adds the full security stack."
+    f: "Modbus TCP is the classic legacy SCADA/industrial protocol that application-aware firewalls must whitelist — and block everything else. MQTT is IoT messaging, SNMP is network management, and NetFlow is traffic telemetry — none are SCADA control protocols."
   },
   {
-    q: "A Netbridge client wants to keep legacy SCADA on a converged IT/OT network but the system cannot be patched. What is the correct compensating control?",
-    opts: ["Encrypt all SCADA traffic using TLS 1.3", "Place the SCADA system in an isolated OT DMZ with application-layer firewall rules permitting only specific OT protocols", "Install endpoint antivirus on the SCADA workstation", "Schedule monthly reboots to clear any malware in memory"],
+    q: "Netbridge installs access control systems integrated to a BMS. A door controller uses OSDP over RS-485. What security advantage does OSDP have over the older Wiegand protocol?",
+    opts: ["OSDP supports longer cable runs than Wiegand", "OSDP uses AES-128 encrypted and mutually authenticated communication; Wiegand transmits credentials in cleartext", "OSDP is faster because it uses TCP/IP instead of serial", "OSDP allows more card formats than Wiegand"],
     a: 1, diff: 5, dl: "Expert",
-    f: "When a system cannot be patched, the security perimeter must be built around it. An OT DMZ with application-aware firewall rules — only permitting OT protocols like Modbus or DNP3 — contains any breach. TLS and antivirus are ineffective on systems too old to support them."
+    f: "Wiegand is a 1970s unidirectional protocol that transmits card data in cleartext — trivially sniffable or replayed. OSDP (Open Supervised Device Protocol) v2 provides AES-128 encryption and mutual authentication between reader and controller, and is bidirectional. This is why modern access control deployments are migrating to OSDP."
   },
   {
-    q: "Netbridge deploys XGPON as well as GPON. What is the key downstream speed difference?",
-    opts: ["GPON: 1Gbps, XGPON: 2.5Gbps", "GPON: 2.5Gbps, XGPON: 10Gbps", "GPON: 5Gbps, XGPON: 25Gbps", "GPON: 100Mbps, XGPON: 1Gbps"],
-    a: 1, diff: 5, dl: "Expert",
-    f: "Standard GPON delivers up to 2.5Gbps downstream. XGPON (10-Gigabit PON) delivers up to 10Gbps downstream — a 4x increase, important for high-density commercial deployments."
+    q: "A Netbridge engineer is configuring inter-VLAN routing between the corporate IT VLAN and the IoT VLAN. Which approach provides the most granular application-layer security between them?",
+    opts: ["A Layer 3 switch with static routes between VLANs", "A router-on-a-stick configuration on a Layer 2 switch", "A next-generation firewall as the inter-VLAN gateway with application-aware policy", "ACLs applied directly on the Layer 3 switch interfaces"],
+    a: 2, diff: 5, dl: "Expert",
+    f: "A next-generation firewall inspects traffic at Layer 7 and can enforce policy based on application identity, not just IP/port. A Layer 3 switch with static routes or ACLs only operates at Layer 3-4 — it cannot distinguish legitimate IoT telemetry from a compromised device exfiltrating data on the same port."
   },
   {
-    q: "What does 'RF over Fiber' — listed in Netbridge's Telecommunications services — allow in a commercial building?",
-    opts: ["It converts fibre ethernet to copper to reach legacy devices", "It distributes radio frequency signals like cellular over fibre optic cable instead of coax", "It provides redundant internet via 4G as a fibre backup", "It enables wireless backhaul between buildings without cabling"],
+    q: "Netbridge deploys RF over Fiber in a commercial building. What is the primary technical reason fibre is preferred over coax for this application at distances over 100m?",
+    opts: ["Fibre supports higher split ratios than coax in passive DAS deployments", "Coax has significantly higher signal attenuation per metre at RF frequencies, causing unacceptable loss over long runs", "Fibre is cheaper to terminate and test than coax in building environments", "Coax cannot carry frequencies above 2.4GHz, limiting Wi-Fi and cellular distribution"],
     a: 1, diff: 5, dl: "Expert",
-    f: "RF over Fiber (RFoF) carries radio frequency signals — such as cellular or DAS — over fibre rather than coax, allowing low-loss RF distribution over long distances inside buildings."
+    f: "Coax suffers significant RF signal loss over distance — at 2.4GHz, standard RG-6 loses roughly 30dB per 100m. Fibre has near-zero loss over the same run. In a large commercial building a coax DAS would require active amplifiers every 50-100m; RFoF replaces this with passive fibre runs and remote antenna units at each endpoint."
+  },
+  {
+    q: "During a Netbridge OSINT assessment, the analyst finds the client's IT manager posted their firewall model and firmware version on a public forum while seeking help. Why is this specifically dangerous?",
+    opts: ["It allows competitors to identify which vendor the client uses", "It lets attackers cross-reference known CVEs for that exact firmware version and target unpatched vulnerabilities", "It breaches the client's vendor contract confidentiality clause", "It reveals the client's internal IP addressing scheme to attackers"],
+    a: 1, diff: 5, dl: "Expert",
+    f: "Knowing the exact firewall model and firmware version lets an attacker look up its CVE history and identify unpatched vulnerabilities specific to that version. This is precisely why OSINT assessments look for technology disclosures in public sources — forum posts, job ads listing specific tech stacks, and LinkedIn profiles are goldmines for attackers."
+  },
+  {
+    q: "A hospital running Nurse Call, VoIP, and corporate IT on a converged network reports that Nurse Call alerts are delayed by 3-4 seconds during shift change. QoS is already configured. What is the most likely root cause?",
+    opts: ["The Nurse Call system has a firmware bug causing delayed SIP registration", "The QoS policy is correctly prioritising traffic but the uplink between access and distribution switches is congested, creating a queuing bottleneck upstream of the QoS enforcement point", "Wi-Fi interference from staff mobile devices is degrading the Nurse Call wireless signal", "The Nurse Call VLAN has an MTU mismatch causing packet fragmentation delays"],
+    a: 1, diff: 5, dl: "Expert",
+    f: "QoS only works where it is enforced. If the policy is on access switches but the uplink to distribution or core is a 1Gbps port running at 95% utilisation during shift change, queuing delay occurs upstream of where QoS can act. The fix is either uplink capacity upgrade or ensuring QoS is enforced end-to-end including on all uplinks and the distribution layer."
   },
 ];
 
