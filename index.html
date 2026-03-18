@@ -21,6 +21,8 @@
   .orb1 { width: 420px; height: 420px; background: var(--cyan); top: -120px; right: -100px; }
   .orb2 { width: 320px; height: 320px; background: var(--blue); bottom: -80px; left: -100px; }
   .wrapper { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding: 48px 24px 72px; }
+
+  /* ── Header ── */
   .header { text-align: center; margin-bottom: 44px; }
   .event-badge {
     display: inline-flex; align-items: center; gap: 8px;
@@ -33,13 +35,69 @@
   h1 { font-size: clamp(30px, 5vw, 48px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
   h1 em { color: var(--cyan); font-style: normal; }
   .tagline { color: var(--gray); font-size: 15px; margin-top: 10px; }
-  .hint { display: inline-block; margin-top: 14px; background: rgba(240,180,41,0.1); border: 1px solid rgba(240,180,41,0.25); border-radius: 8px; padding: 7px 16px; font-size: 13px; color: var(--gold); }
-  .round-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+
+  /* ── Registration screen ── */
+  #registerScreen {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px; padding: 40px 36px; animation: slideUp 0.3s ease;
+  }
+  .reg-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .reg-sub { color: var(--gray); font-size: 14px; margin-bottom: 28px; line-height: 1.6; }
+  .field { margin-bottom: 20px; }
+  .field label { display: block; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+  .field input {
+    width: 100%; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 10px; padding: 14px 16px; color: var(--white);
+    font-family: 'Syne', sans-serif; font-size: 16px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .field input:focus { border-color: var(--cyan); }
+  .field input::placeholder { color: var(--gray); }
+  .field-error { color: var(--danger); font-size: 12px; font-family: 'DM Mono', monospace; margin-top: 6px; display: none; }
+  .rules-box {
+    background: rgba(240,180,41,0.07); border: 1px solid rgba(240,180,41,0.2);
+    border-radius: 12px; padding: 16px 18px; margin-bottom: 28px;
+  }
+  .rules-box h3 { font-size: 13px; color: var(--gold); font-family: 'DM Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .rules-box ul { list-style: none; padding: 0; }
+  .rules-box ul li { color: var(--gray); font-size: 13px; padding: 3px 0; display: flex; gap: 8px; }
+  .rules-box ul li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+  .start-btn {
+    width: 100%; background: var(--cyan); border: none; border-radius: 12px;
+    color: var(--navy); font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700;
+    padding: 16px; cursor: pointer; transition: all 0.18s;
+  }
+  .start-btn:hover { background: #00dff5; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,200,224,0.28); }
+
+  /* ── Already attempted screen ── */
+  #doneScreen {
+    display: none; text-align: center;
+    background: rgba(255,77,109,0.06); border: 1px solid rgba(255,77,109,0.2);
+    border-radius: 20px; padding: 56px 36px; animation: slideUp 0.3s ease;
+  }
+  .done-icon { font-size: 56px; margin-bottom: 12px; }
+  .done-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+  .done-sub { color: var(--gray); font-size: 15px; line-height: 1.6; }
+
+  /* ── Quiz area ── */
+  #quizArea { display: none; }
+  .quiz-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
   .q-counter { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; }
-  .score-tally { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--gray); }
-  .score-tally span { color: var(--gold); }
-  .progress-track { background: rgba(255,255,255,0.07); border-radius: 100px; height: 5px; margin-bottom: 28px; overflow: hidden; }
+  .player-tag { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--gray); }
+  .player-tag span { color: var(--white); }
+
+  /* ── Timer ── */
+  .timer-row { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .progress-track { flex: 1; background: rgba(255,255,255,0.07); border-radius: 100px; height: 6px; overflow: hidden; }
   .progress-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--cyan)); border-radius: 100px; transition: width 0.35s ease; }
+  .timer-fill { height: 100%; border-radius: 100px; transition: width 1s linear, background 1s linear; }
+  .timer-display {
+    font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500;
+    color: var(--cyan); min-width: 28px; text-align: right;
+    transition: color 0.3s;
+  }
+  .timer-display.urgent { color: var(--danger); }
+
   .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px; backdrop-filter: blur(10px); }
   .card.animate { animation: slideUp 0.3s ease; }
   @keyframes slideUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
@@ -71,11 +129,13 @@
   .opt.correct .opt-key { background: var(--success); color: var(--navy); }
   .opt.wrong { border-color: var(--danger); background: rgba(255,77,109,0.08); }
   .opt.wrong .opt-key { background: var(--danger); color: var(--white); }
+  .opt.timeout { border-color: rgba(255,255,255,0.2); opacity: 0.5; }
   .opt:disabled { cursor: default; }
   .feedback { margin-top: 18px; padding: 14px 18px; border-radius: 12px; font-size: 14px; line-height: 1.6; display: none; }
   .feedback.show { display: block; animation: slideUp 0.22s ease; }
   .feedback.ok  { background: rgba(34,208,122,0.09); border: 1px solid rgba(34,208,122,0.28); color: #b6f5d6; }
   .feedback.bad { background: rgba(255,77,109,0.09); border: 1px solid rgba(255,77,109,0.28); color: #ffc2cc; }
+  .feedback.timed { background: rgba(240,180,41,0.09); border: 1px solid rgba(240,180,41,0.28); color: #ffe8a0; }
   .feedback strong { color: var(--white); }
   .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 22px; flex-wrap: wrap; gap: 10px; }
   .running-score { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--gray); }
@@ -83,16 +143,22 @@
   .next-btn { background: var(--cyan); border: none; border-radius: 11px; color: var(--navy); font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; padding: 13px 30px; cursor: pointer; transition: all 0.18s; display: none; }
   .next-btn.show { display: inline-flex; align-items: center; gap: 7px; }
   .next-btn:hover { background: #00dff5; transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,200,224,0.28); }
+
+  /* ── Result screen ── */
   .result-screen { display: none; text-align: center; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 56px 36px; }
   .result-screen.show { display: block; animation: slideUp 0.35s ease; }
   .result-icon { font-size: 62px; margin-bottom: 6px; }
   .result-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+  .result-name { font-size: 18px; font-weight: 700; color: var(--cyan); margin-bottom: 4px; }
+  .result-id { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--gray); margin-bottom: 16px; }
   .result-big { font-size: 86px; font-weight: 800; color: var(--cyan); line-height: 1; }
   .result-of { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--gray); letter-spacing: 0.08em; margin-bottom: 4px; }
   .result-msg { font-size: 22px; font-weight: 700; margin: 20px 0 8px; }
   .result-sub { color: var(--gray); font-size: 15px; margin-bottom: 28px; line-height: 1.6; }
   .done-note { display: inline-block; background: rgba(0,200,224,0.08); border: 1px solid rgba(0,200,224,0.2); border-radius: 10px; padding: 12px 24px; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--cyan); letter-spacing: 0.05em; line-height: 1.6; }
-  @media (max-width: 580px) { .card { padding: 24px 18px; } .question { font-size: 18px; } .opt { font-size: 14px; padding: 13px 14px; } }
+  .saving-note { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray); margin-top: 16px; }
+
+  @media (max-width: 580px) { .card { padding: 24px 18px; } .question { font-size: 18px; } .opt { font-size: 14px; padding: 13px 14px; } #registerScreen { padding: 28px 20px; } }
 </style>
 </head>
 <body>
@@ -102,15 +168,55 @@
   <div class="header">
     <div class="event-badge">Industry Connect Event</div>
     <h1>Netbridge <em>Quiz</em></h1>
-    <p class="tagline">5 questions — research carefully and win the prize!</p>
-    <span class="hint">💡 Answers on netbridge.co.nz, their LinkedIn, and your industry knowledge</span>
+    <p class="tagline">Research hard. Answer fast. Win the prize.</p>
   </div>
-  <div id="quizArea">
-    <div class="round-bar">
-      <span class="q-counter" id="qCounter">Question 1 of 5</span>
-      <span class="score-tally">Score: <span id="scoreTally">0</span></span>
+
+  <!-- Registration -->
+  <div id="registerScreen">
+    <div class="reg-title">Enter your details to begin</div>
+    <p class="reg-sub">Your name, student ID, and score will be recorded. Each student ID can only attempt the quiz once.</p>
+    <div class="field">
+      <label>Full Name</label>
+      <input type="text" id="nameInput" placeholder="e.g. Jamie Smith" autocomplete="off">
+      <div class="field-error" id="nameError">Please enter your full name.</div>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="field">
+      <label>Student ID</label>
+      <input type="text" id="idInput" placeholder="e.g. 12345678" autocomplete="off">
+      <div class="field-error" id="idError">Please enter your student ID.</div>
+      <div class="field-error" id="idUsedError">This student ID has already been used.</div>
+    </div>
+    <div class="rules-box">
+      <h3>⚡ Quiz Rules</h3>
+      <ul>
+        <li>5 questions — each with a 30-second time limit</li>
+        <li>Questions and answer order are randomised for every player</li>
+        <li>You only get one attempt — no replays</li>
+        <li>Show your final score screen to claim the prize</li>
+      </ul>
+    </div>
+    <button class="start-btn" onclick="startQuiz()">Start Quiz →</button>
+  </div>
+
+  <!-- Already attempted -->
+  <div id="doneScreen">
+    <div class="done-icon">🔒</div>
+    <div class="done-title">Already attempted</div>
+    <p class="done-sub">Student ID <strong id="usedId"></strong> has already completed this quiz.<br>Each student ID can only be used once.</p>
+  </div>
+
+  <!-- Quiz -->
+  <div id="quizArea">
+    <div class="quiz-meta">
+      <span class="q-counter" id="qCounter">Question 1 of 5</span>
+      <span class="player-tag">Playing as <span id="playerName"></span></span>
+    </div>
+    <div class="timer-row">
+      <div class="progress-track" style="height:6px">
+        <div class="timer-fill" id="timerFill" style="width:100%; background: var(--cyan);"></div>
+      </div>
+      <div class="timer-display" id="timerDisplay">30</div>
+    </div>
     <div class="card" id="card">
       <div class="q-header">
         <span class="q-num" id="qNum"></span>
@@ -125,26 +231,30 @@
       </div>
     </div>
   </div>
+
+  <!-- Result -->
   <div class="result-screen" id="resultScreen">
     <div class="result-icon" id="resultIcon"></div>
     <div class="result-label">Your final score</div>
+    <div class="result-name" id="resultName"></div>
+    <div class="result-id" id="resultIdDisplay"></div>
     <div class="result-big" id="resultBig"></div>
     <div class="result-of">out of 5</div>
     <div class="result-msg" id="resultMsg"></div>
     <div class="result-sub" id="resultSub"></div>
     <div class="done-note">Show this screen to claim your prize! 🎒</div>
+    <div class="saving-note" id="savingNote"></div>
   </div>
 </div>
 
 <script>
-// opts = answer strings in original order
-// a = index of correct answer in opts[] before shuffling
-// Shuffling happens at render time so the correct letter changes every page load
+// ─── Google Sheets endpoint ───────────────────────────────────────────────────
+// Replace with your deployed Google Apps Script URL (see README instructions)
+const SHEET_URL = "https://script.google.com/macros/s/AKfycby_VfYPSs1mfif77JTQrBo3ADvowLJYV-Nt5OlpGhRiwQLBKD5gRIpWRChSecq12WH7Yw/exec";
 
+// ─── Question bank ─────────────────────────────────────────────────────────────
 const ALL_QUESTIONS = [
-
-  // ── NETBRIDGE PEOPLE — all wrong answers are real staff names or real qualifications ──
-
+  // PEOPLE — all wrong answers are real Netbridge staff names or real qualifications
   {
     q: "Which Netbridge team member is the Network Migration Engineer?",
     opts: ["Alexander Lykov", "Jun Marasigan", "Anjelo Fernando", "Hamish Cummins"],
@@ -191,31 +301,31 @@ const ALL_QUESTIONS = [
     q: "Which secondary school did Jack Tan attend?",
     opts: ["Rangitoto College", "Westlake Boys High School", "Auckland Grammar School", "Macleans College"],
     a: 1, diff: 4, dl: "Hard",
-    f: "Jack Tan attended Westlake Boys High School. All four are real Auckland secondary schools — you need to have read his profile to know this one."
+    f: "Jack Tan attended Westlake Boys High School. All four are real Auckland secondary schools — you need to have read his profile to know this."
   },
   {
     q: "Eviv Hu achieved a CCNA in 2023. CCNA is a certification from which vendor?",
     opts: ["Juniper Networks", "Microsoft", "Fortinet", "Cisco"],
     a: 3, diff: 4, dl: "Hard",
-    f: "CCNA stands for Cisco Certified Network Associate — it is a Cisco qualification. Juniper, Microsoft, and Fortinet all offer their own certifications, but CCNA is specifically Cisco."
+    f: "CCNA stands for Cisco Certified Network Associate — a Cisco qualification. Juniper, Microsoft, and Fortinet all offer their own certifications, but CCNA is specifically Cisco."
   },
   {
     q: "What is Netbridge's exact street number on Great South Road, Ellerslie?",
     opts: ["442", "744", "644", "544"],
     a: 2, diff: 4, dl: "Hard",
-    f: "Netbridge is at 644 Great South Road, Ellerslie. All four options are plausible numbers on a long Auckland arterial road — only 644 is correct."
+    f: "Netbridge is at 644 Great South Road, Ellerslie. All four options are plausible numbers on a long Auckland arterial road."
   },
   {
-    q: "Which of these partner brands on the Netbridge website specialises in healthcare technology?",
+    q: "Which partner brand on the Netbridge website specialises in healthcare technology?",
     opts: ["DZS", "Talius", "Molex", "Vitalcare"],
     a: 3, diff: 4, dl: "Hard",
-    f: "Vitalcare specialises in healthcare technology. Molex makes cabling infrastructure, DZS makes broadband equipment, and Talius makes physical security enclosures — all are real Netbridge partners."
+    f: "Vitalcare specialises in healthcare technology. Molex makes cabling, DZS makes broadband equipment, and Talius makes physical security enclosures — all real Netbridge partners."
   },
   {
-    q: "What company is credited for designing the Netbridge website, as shown in the footer?",
+    q: "What company designed the Netbridge website, as credited in the footer?",
     opts: ["Digital Nation NZ", "Young and Creative", "Studio Pacific", "Webcraft NZ"],
     a: 1, diff: 5, dl: "Expert",
-    f: "Young and Creative (youngandcreative.co.nz) is credited in the Netbridge footer. You only find this by scrolling to the very bottom of the page."
+    f: "Young and Creative (youngandcreative.co.nz) is credited in the footer — only visible if you scroll to the very bottom of the page."
   },
   {
     q: "Which of these is listed under Netbridge's Telecommunications services, NOT their Networks services?",
@@ -224,84 +334,81 @@ const ALL_QUESTIONS = [
     f: "RF over Fiber is listed under Telecommunications. SASE, SDWAN, and IoT are all listed under Networks. Both pages look similar — you need to have read each service page carefully."
   },
   {
-    q: "What specific copper networking standard does Netbridge list under their Networks expertise?",
-    opts: ["DOCSIS", "G.fast", "HomePNA", "G.hn"],
+    q: "Which of these is listed under Netbridge's Networks expertise?",
+    opts: ["RF over Fiber", "4G/5G LTE Services", "PBX / VoIP", "Copper Cable G.hn Solutions"],
     a: 3, diff: 5, dl: "Expert",
-    f: "Netbridge lists 'Copper Cable G.hn Solutions' — an ITU standard for networking over existing copper wiring. G.fast, HomePNA, and DOCSIS are all real copper standards but none are listed by Netbridge."
+    f: "G.hn is listed under Networks. RF over Fiber, 4G/5G LTE, and PBX/VoIP are all listed under Telecommunications — easy to confuse if you haven't read both pages."
   },
 
-  // ── INDUSTRY — genuinely hard, requires real technical knowledge ─────────────
-
+  // INDUSTRY — requires real technical knowledge
   {
     q: "A Netbridge client's VoIP calls drop every day at 9am when staff arrive. What is the most likely cause?",
     opts: ["The VoIP server needs a firmware update", "Network congestion with no QoS policy prioritising voice traffic", "The firewall is blocking SIP registrations at peak time", "Wi-Fi channel overlap from nearby access points"],
     a: 1, diff: 4, dl: "Hard",
-    f: "Without QoS (Quality of Service), voice packets compete equally with bulk data at peak hours. The fix is to tag VoIP traffic with DSCP EF so switches and routers forward it first. Firmware, firewalls, and Wi-Fi are all plausible but congestion + no QoS is the classic cause."
+    f: "Without QoS (Quality of Service), voice packets compete equally with bulk data at peak hours. The fix is tagging VoIP traffic with DSCP EF so switches forward it first. Firmware, firewalls, and Wi-Fi are all plausible but congestion + no QoS is the classic cause."
   },
   {
-    q: "Netbridge deploys GPON for a multi-tenancy building. A single fibre from the exchange serves 32 apartments. What component makes this possible without any powered equipment in the field?",
+    q: "Netbridge deploys GPON for a multi-tenancy building. A single fibre serves 32 apartments. What component makes this possible without any powered equipment in the field?",
     opts: ["An optical line terminal", "A passive optical splitter", "A wavelength division multiplexer", "A fibre distribution frame"],
     a: 1, diff: 4, dl: "Hard",
-    f: "A passive optical splitter divides one fibre signal into many using only the physics of light — no power required in the field. This is why GPON is called 'passive' — the splitters between the exchange and premises require no electricity."
+    f: "A passive optical splitter divides one fibre signal into many using only the physics of light — no power required. This is why GPON is called 'passive' — the splitters between the exchange and premises require no electricity."
   },
   {
-    q: "A building's BMS, CCTV, and corporate laptops are all on the same flat network. A CCTV camera is compromised. What can an attacker do that they couldn't if the network were segmented?",
-    opts: ["Stream footage at higher resolution", "Move laterally to reach the BMS and corporate systems directly", "Disable the camera's IR night vision remotely", "Reset the camera firmware to factory settings"],
+    q: "A building's BMS, CCTV, and corporate laptops are all on the same flat network. A CCTV camera is compromised. What can an attacker do that they couldn't if the network were properly segmented?",
+    opts: ["Stream footage at higher resolution", "Move laterally to reach the BMS and corporate systems directly", "Disable the camera's IR night vision remotely", "Reset the camera to factory settings"],
     a: 1, diff: 4, dl: "Hard",
-    f: "On a flat network, a compromised IoT device like a camera has direct layer-2 access to every other device. Lateral movement to the BMS or corporate systems is trivial. Proper segmentation with VLANs and inter-VLAN firewall rules would contain the breach to just the camera VLAN."
+    f: "On a flat network, a compromised camera has direct layer-2 access to every other device. Lateral movement to the BMS or corporate systems is trivial. Proper VLAN segmentation with inter-VLAN firewall rules would contain the breach to the camera VLAN only."
   },
   {
-    q: "Netbridge offers Zero Trust & Identity Access Management. Under a Zero Trust model, what happens when a user who is already inside the corporate network tries to access a sensitive internal server?",
+    q: "Under a Zero Trust model, what happens when a user already inside the corporate network tries to access a sensitive internal server?",
     opts: ["They are trusted automatically because they are already inside the perimeter", "They must authenticate and be authorised for that specific resource regardless of location", "They are redirected through the external firewall for verification", "They are given read-only access until their session token expires"],
     a: 1, diff: 4, dl: "Hard",
-    f: "Zero Trust rejects the idea that being 'inside' the network earns any trust. Every access request — even from inside the perimeter — must be authenticated and authorised for that specific resource. This prevents lateral movement after a breach."
+    f: "Zero Trust rejects the idea that being 'inside' the network earns any trust. Every access request must be authenticated and authorised for that specific resource — regardless of location. This prevents lateral movement after a breach."
   },
   {
-    q: "What does OSINT stand for, a methodology listed in Netbridge's cyber services?",
+    q: "What does OSINT stand for — a methodology listed in Netbridge's cyber services?",
     opts: ["Operational Security Intelligence", "Online Systems Intrusion Testing", "Open Source Intelligence", "Outbound Security Incident Tracking"],
     a: 2, diff: 4, dl: "Hard",
-    f: "OSINT stands for Open Source Intelligence — gathering information from publicly available sources like LinkedIn, domain records, and job postings to map an organisation's attack surface before a pen test. All four options are plausible-sounding acronyms."
+    f: "OSINT stands for Open Source Intelligence — gathering information from publicly available sources like LinkedIn, domain records, and job postings to map an organisation's attack surface before a pen test."
   },
   {
     q: "Netbridge installs PA systems in commercial buildings. In a life-safety scenario, what network behaviour must a PA system have that normal data traffic does not?",
     opts: ["It must use a dedicated physical cable separate from all data networks", "It must be assigned the highest QoS priority to guarantee delivery during congestion", "It must bypass the firewall to reach all devices simultaneously", "It must operate on a 5GHz Wi-Fi band to avoid interference"],
     a: 1, diff: 4, dl: "Hard",
-    f: "In an emergency, a PA system must be heard immediately — it cannot wait behind bulk data in a congested queue. Assigning the highest QoS priority (DSCP CS7 or similar) ensures PA and emergency audio is always delivered first. A dedicated physical network is expensive and unnecessary with correct QoS design."
+    f: "In an emergency, a PA system cannot wait behind bulk data in a congested queue. Assigning the highest QoS priority ensures emergency audio is always delivered first. A separate physical network is costly and unnecessary with correct QoS design."
   },
   {
-    q: "Netbridge lists SASE under their Networks expertise. What does SASE combine that traditional SD-WAN alone does not provide?",
-    opts: ["Copper and fibre cabling in a single network run", "SD-WAN connectivity with cloud-delivered security services in one architecture", "IPv4 and IPv6 dual-stack routing for legacy systems", "Wired and wireless access in a unified management platform"],
+    q: "What does SASE combine that traditional SD-WAN alone does not provide?",
+    opts: ["Copper and fibre in a single network run", "SD-WAN connectivity with cloud-delivered security services in one architecture", "IPv4 and IPv6 dual-stack routing for legacy systems", "Wired and wireless access in a unified management platform"],
     a: 1, diff: 5, dl: "Expert",
-    f: "SASE (Secure Access Service Edge) bundles SD-WAN with cloud-native security services — including ZTNA, SWG, CASB, and FWaaS — into a single architecture. SD-WAN alone only handles intelligent routing. SASE adds the security stack, which is why it's a step beyond traditional SD-WAN."
+    f: "SASE (Secure Access Service Edge) bundles SD-WAN with cloud-native security services — including ZTNA, SWG, CASB, and FWaaS — into one architecture. SD-WAN alone only handles intelligent routing. SASE adds the full security stack."
   },
   {
-    q: "A Netbridge client wants to run legacy SCADA on a converged IT/OT network but the SCADA system cannot be patched. What is the correct compensating control?",
+    q: "A Netbridge client wants to keep legacy SCADA on a converged IT/OT network but the system cannot be patched. What is the correct compensating control?",
     opts: ["Encrypt all SCADA traffic using TLS 1.3", "Place the SCADA system in an isolated OT DMZ with application-layer firewall rules permitting only specific OT protocols", "Install endpoint antivirus on the SCADA workstation", "Schedule monthly reboots to clear any malware in memory"],
     a: 1, diff: 5, dl: "Expert",
-    f: "When a system cannot be patched, the security perimeter must be built around it. An OT DMZ with application-aware firewall rules — only permitting specific OT protocols like Modbus or DNP3 — contains any breach. TLS and antivirus are ineffective on systems too old to run them. Reboots clear nothing persistent."
+    f: "When a system cannot be patched, the security perimeter must be built around it. An OT DMZ with application-aware firewall rules — only permitting OT protocols like Modbus or DNP3 — contains any breach. TLS and antivirus are ineffective on systems too old to support them."
   },
   {
-    q: "Netbridge deploys XGPON as well as standard GPON. What is the key downstream speed difference between them?",
+    q: "Netbridge deploys XGPON as well as GPON. What is the key downstream speed difference?",
     opts: ["GPON: 1Gbps, XGPON: 2.5Gbps", "GPON: 2.5Gbps, XGPON: 10Gbps", "GPON: 5Gbps, XGPON: 25Gbps", "GPON: 100Mbps, XGPON: 1Gbps"],
     a: 1, diff: 5, dl: "Expert",
-    f: "Standard GPON delivers up to 2.5Gbps downstream. XGPON (10-Gigabit PON) delivers up to 10Gbps downstream — a 4x increase. This matters for high-density deployments like MDUs or commercial buildings where bandwidth demand is growing fast."
+    f: "Standard GPON delivers up to 2.5Gbps downstream. XGPON (10-Gigabit PON) delivers up to 10Gbps downstream — a 4x increase, important for high-density commercial deployments."
   },
   {
     q: "What does 'RF over Fiber' — listed in Netbridge's Telecommunications services — allow in a commercial building?",
-    opts: ["It converts fibre ethernet to copper to reach legacy devices", "It distributes radio frequency signals like cellular and Wi-Fi over fibre optic cable instead of coax", "It provides redundant internet connectivity using 4G as a fibre backup", "It enables wireless backhaul between buildings without physical cabling"],
+    opts: ["It converts fibre ethernet to copper to reach legacy devices", "It distributes radio frequency signals like cellular over fibre optic cable instead of coax", "It provides redundant internet via 4G as a fibre backup", "It enables wireless backhaul between buildings without cabling"],
     a: 1, diff: 5, dl: "Expert",
-    f: "RF over Fiber (RFoF) carries radio frequency signals — such as cellular, DAS, or broadcast — over fibre optic cable rather than traditional coax. This allows low-loss distribution of RF signals over long distances inside buildings, which is why it's listed under Netbridge's Telecommunications services."
+    f: "RF over Fiber (RFoF) carries radio frequency signals — such as cellular or DAS — over fibre rather than coax, allowing low-loss RF distribution over long distances inside buildings."
   },
 ];
 
-// ── Always Q5 — impossible to guess without writing it down ───────────────────
-// Eviv Hu's direct number is on the About Us page: +64 21 0289 9460
-// All wrong answers use identical format, differing by 1–2 digits only.
+// ── Always Q5 — impossible to guess ──────────────────────────────────────────
 const IMPOSSIBLE = {
   q: "What is Eviv Hu's direct phone number as listed on the Netbridge About Us page?",
   opts: ["+64 21 0279 9460", "+64 21 0289 9460", "+64 21 0289 9640", "+64 21 0289 4960"],
   a: 1, diff: 6, dl: "Impossible",
-  f: "Eviv Hu's direct number is +64 21 0289 9460. The other three options differ by just one or two digits. You had to write this down from the website to get it right."
+  f: "Eviv Hu's direct number is +64 21 0289 9460. The other three options differ by one or two digits. You had to write this down from the website to get it right."
 };
 
 // ── Shuffle helpers ───────────────────────────────────────────────────────────
@@ -314,36 +421,117 @@ function shuffle(arr) {
   return a;
 }
 
-// Shuffle the answer options and return { opts, a } with updated correct index
 function shuffleOpts(q) {
   const indexed = q.opts.map((text, i) => ({ text, correct: i === q.a }));
   const shuffled = shuffle(indexed);
-  return {
-    opts: shuffled.map(o => o.text),
-    a: shuffled.findIndex(o => o.correct)
-  };
+  return { opts: shuffled.map(o => o.text), a: shuffled.findIndex(o => o.correct) };
 }
 
-// Pick 4 random from pool, impossible question is always Q5
+// ── Session questions: 4 random + impossible last ─────────────────────────────
 const SESSION = shuffle(ALL_QUESTIONS).slice(0, 4).concat([IMPOSSIBLE])
-  .map(q => {
-    const { opts, a } = shuffleOpts(q);
-    return { ...q, opts, a };
-  });
+  .map(q => { const { opts, a } = shuffleOpts(q); return { ...q, opts, a }; });
 
 // ── State ─────────────────────────────────────────────────────────────────────
 let idx = 0, score = 0, answered = false;
+let timerInterval = null;
+let timeLeft = 30;
+let playerName = '', studentId = '';
+const TIMER_SECONDS = 30;
+const STORAGE_KEY = 'nbq_attempted';
 
+// ── Registration ──────────────────────────────────────────────────────────────
+function startQuiz() {
+  const nameVal = document.getElementById('nameInput').value.trim();
+  const idVal   = document.getElementById('idInput').value.trim();
+  let valid = true;
+
+  document.getElementById('nameError').style.display = 'none';
+  document.getElementById('idError').style.display = 'none';
+  document.getElementById('idUsedError').style.display = 'none';
+
+  if (!nameVal) { document.getElementById('nameError').style.display = 'block'; valid = false; }
+  if (!idVal)   { document.getElementById('idError').style.display = 'block'; valid = false; }
+
+  if (!valid) return;
+
+  // Check if this student ID has already attempted
+  const attempted = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  if (attempted.includes(idVal)) {
+    document.getElementById('usedId').textContent = idVal;
+    document.getElementById('registerScreen').style.display = 'none';
+    document.getElementById('doneScreen').style.display = 'block';
+    return;
+  }
+
+  playerName = nameVal;
+  studentId  = idVal;
+  document.getElementById('playerName').textContent = nameVal;
+
+  document.getElementById('registerScreen').style.display = 'none';
+  document.getElementById('quizArea').style.display = 'block';
+  showQuestion();
+}
+
+// ── Timer ─────────────────────────────────────────────────────────────────────
+function startTimer() {
+  clearInterval(timerInterval);
+  timeLeft = TIMER_SECONDS;
+  updateTimerUI();
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerUI();
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      timeExpired();
+    }
+  }, 1000);
+}
+
+function updateTimerUI() {
+  const pct = (timeLeft / TIMER_SECONDS) * 100;
+  const fill = document.getElementById('timerFill');
+  const disp = document.getElementById('timerDisplay');
+
+  fill.style.width = pct + '%';
+  // Green → amber → red as time runs out
+  const r = timeLeft <= 10 ? 255 : Math.round(255 * (1 - (timeLeft - 10) / 20));
+  const g = timeLeft <= 10 ? Math.round(208 * timeLeft / 10) : 208;
+  fill.style.background = `rgb(${r}, ${g}, 80)`;
+
+  disp.textContent = timeLeft;
+  disp.className = 'timer-display' + (timeLeft <= 10 ? ' urgent' : '');
+}
+
+function timeExpired() {
+  answered = true;
+  const q = SESSION[idx];
+
+  document.querySelectorAll('.opt').forEach((btn, j) => {
+    btn.disabled = true;
+    if (j === q.a) btn.classList.add('correct');
+    else btn.classList.add('timeout');
+  });
+
+  document.getElementById('answeredCount').textContent = idx + 1;
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback show timed';
+  fb.innerHTML = `<strong>⏱ Time's up!</strong> ${q.f}`;
+
+  const nb = document.getElementById('nextBtn');
+  nb.className = 'next-btn show';
+  nb.textContent = idx === 4 ? 'See My Score →' : 'Next →';
+}
+
+// ── Question ──────────────────────────────────────────────────────────────────
 function showQuestion() {
   const q = SESSION[idx];
   answered = false;
 
   document.getElementById('qCounter').textContent = `Question ${idx + 1} of 5`;
-  document.getElementById('scoreTally').textContent = score;
-  document.getElementById('progressFill').style.width = (idx / 5 * 100) + '%';
+  document.getElementById('qNum').textContent = `Q${idx + 1}`;
   document.getElementById('correctCount').textContent = score;
   document.getElementById('answeredCount').textContent = idx;
-  document.getElementById('qNum').textContent = `Q${idx + 1}`;
 
   const dp = document.getElementById('diffPill');
   dp.textContent = q.dl;
@@ -369,16 +557,19 @@ function showQuestion() {
   card.classList.remove('animate');
   void card.offsetWidth;
   card.classList.add('animate');
+
+  startTimer();
 }
 
 function selectAnswer(i) {
   if (answered) return;
   answered = true;
+  clearInterval(timerInterval);
+
   const q = SESSION[idx];
   const correct = i === q.a;
   if (correct) score++;
 
-  document.getElementById('scoreTally').textContent = score;
   document.getElementById('correctCount').textContent = score;
   document.getElementById('answeredCount').textContent = idx + 1;
 
@@ -402,26 +593,60 @@ document.getElementById('nextBtn').onclick = () => {
   else showResult();
 };
 
+// ── Result & save ─────────────────────────────────────────────────────────────
 function showResult() {
-  document.getElementById('progressFill').style.width = '100%';
+  clearInterval(timerInterval);
   document.getElementById('quizArea').style.display = 'none';
   document.getElementById('resultScreen').classList.add('show');
+
+  document.getElementById('resultName').textContent = playerName;
+  document.getElementById('resultIdDisplay').textContent = `Student ID: ${studentId}`;
   document.getElementById('resultBig').textContent = score;
 
   const outcomes = [
-    { icon: '📖', msg: 'Keep digging!',     sub: 'The answers are on netbridge.co.nz — every detail matters.' },
-    { icon: '💡', msg: 'Getting warmer!',   sub: 'You\'re on the right pages — go deeper.' },
-    { icon: '⚡', msg: 'Solid effort!',     sub: 'You\'ve clearly done some homework!' },
-    { icon: '🎯', msg: 'Very impressive!',  sub: 'You really know Netbridge inside and out.' },
-    { icon: '🏆', msg: 'Perfect Score!',    sub: 'Outstanding — you nailed every question!' },
+    { icon: '📖', msg: 'Keep digging!',    sub: 'Head to netbridge.co.nz — every detail is there.' },
+    { icon: '💡', msg: 'Getting warmer!',  sub: 'You\'re on the right pages — go deeper next time.' },
+    { icon: '⚡', msg: 'Solid effort!',    sub: 'You\'ve clearly done some homework!' },
+    { icon: '🎯', msg: 'Very impressive!', sub: 'You really know Netbridge inside and out.' },
+    { icon: '🏆', msg: 'Perfect Score!',   sub: 'Outstanding — you nailed every question!' },
   ];
   const o = outcomes[score === 5 ? 4 : score === 4 ? 3 : score === 3 ? 2 : score <= 1 ? 0 : 1];
   document.getElementById('resultIcon').textContent = o.icon;
   document.getElementById('resultMsg').textContent = o.msg;
   document.getElementById('resultSub').textContent = o.sub;
+
+  // Lock this student ID in localStorage
+  const attempted = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  if (!attempted.includes(studentId)) {
+    attempted.push(studentId);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(attempted));
+  }
+
+  // Save to Google Sheets
+  saveResult();
 }
 
-showQuestion();
+function saveResult() {
+  const note = document.getElementById('savingNote');
+  note.textContent = '⏳ Saving your result...';
+
+  const timestamp = new Date().toLocaleString('en-NZ', { timeZone: 'Pacific/Auckland' });
+
+  fetch(SHEET_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: playerName,
+      studentId: studentId,
+      score: score,
+      outOf: 5,
+      timestamp: timestamp
+    })
+  })
+  .then(() => { note.textContent = '✓ Result saved.'; })
+  .catch(() => { note.textContent = ''; });
+}
 </script>
 </body>
 </html>
