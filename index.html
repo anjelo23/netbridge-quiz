@@ -215,189 +215,291 @@ const QUIZ_TOKEN = "REPLACE_WITH_YOUR_QUIZ_TOKEN";
 
 const ALL_QUESTIONS = [
 
-  // ── NETBRIDGE: requires having read the site in detail ──────────────────────
+  // ── PROJECTS — specific numbers and details from Netbridge case studies ──────
 
   {
-    q: "Netbridge's About Us page describes Simran Singh as bringing what quality to projects?",
+    q: "The AIA Building DAS project delivered what total coverage outcome?",
     opts: [
-      "A sharp analytical edge and rapid problem-solving",
-      "A steady hand with thoughtful insights from extensive experience",
-      "A creative approach to technology deployment and design",
-      "A structured project governance framework across all engagements"
+      "19,722m2 total with no over-delivery achieved",
+      "13,500m2 contracted plus 1,200m2 over-delivery",
+      "16,722m2 contracted plus 3,000m2 over-delivery",
+      "16,722m2 contracted with no additional area"
     ],
-    a: 1, diff: 4, dl: "Hard",
-    f: "The About Us page says Simran 'provides a steady hand to all our projects with thoughtful insights based on his extensive experience.' The other options sound plausible but are fabricated."
+    a: 2, diff: 5, dl: "Expert",
+    f: "Netbridge delivered 16,722m2 of contracted coverage plus an additional 3,000m2 over-delivery — including reception, dining, and serviced offices not in the original contract."
   },
   {
-    q: "Netbridge's vision statement says they aspire to establish enduring relationships built on three qualities. Which three?",
+    q: "At the AIA Building, Carrier 2 signal performance averaged what result?",
+    opts: [
+      "12.7dB above minimum — 16x stronger than required",
+      "18.4dB above minimum — 64x stronger than required",
+      "10.2dB above minimum — 8x stronger than required",
+      "22.8dB above minimum — 193x stronger than required"
+    ],
+    a: 3, diff: 5, dl: "Expert",
+    f: "Carrier 2 averaged -72.14dBm — 22.8dB above the minimum standard, making it 193x stronger than required. Carrier 1 was 16x stronger. Both specific numbers are in the case study."
+  },
+  {
+    q: "What caused the mobile signal loss at the AIA Building during construction?",
+    opts: [
+      "Reinforced concrete in the floor slabs",
+      "Steel mesh panels in the external walls",
+      "Lead lining installed in the basement ceiling",
+      "Metal oxide contained within the glass cladding"
+    ],
+    a: 3, diff: 4, dl: "Hard",
+    f: "Metal oxide in the glass cladding blocked mobile signals. This is specific to the AIA Building case study on the Netbridge website — a detail you'd only know by reading it."
+  },
+  {
+    q: "What antenna type did Netbridge use exclusively in the AIA Building DAS?",
+    opts: [
+      "Omnidirectional ceiling-mount antennas only",
+      "Panel antennas only, with mechanical down-tilt",
+      "Leaky feeder coax cable run throughout floors",
+      "Yagi directional antennas at each floor entry"
+    ],
+    a: 1, diff: 5, dl: "Expert",
+    f: "Netbridge used panel antennas only with mechanical down-tilting — this reduced antenna count while maximising coverage footprint, including areas outside the contracted zones."
+  },
+  {
+    q: "Netbridge supports the Ministry of Education across how many sites nationwide?",
+    opts: [
+      "1,800 sites nationwide",
+      "3,200 sites nationwide",
+      "4,100 sites nationwide",
+      "2,500 sites nationwide"
+    ],
+    a: 3, diff: 4, dl: "Hard",
+    f: "The Ministry of Education project involves network LAN switching and WiFi support services across 2,500 sites nationwide. It is listed on Netbridge's Projects page."
+  },
+  {
+    q: "For Metlifecare, which network technology did Netbridge specifically deploy?",
+    opts: [
+      "Dark fibre point-to-point between buildings",
+      "HFC hybrid fibre coax across all village sites",
+      "XGPON fibre with a centralised OLT per village",
+      "GPON fibre, LAN switching and wireless WiFi"
+    ],
+    a: 3, diff: 4, dl: "Hard",
+    f: "The Metlifecare solution on Netbridge's Projects page specifically lists GPON Fibre, LAN switching and wireless WiFi design, build and provisioning across multi-site village builds."
+  },
+  {
+    q: "The DCI Data Centers project was a large data centre build in which city?",
+    opts: [
+      "Hamilton CBD",
+      "Wellington CBD",
+      "Christchurch CBD",
+      "Auckland CBD"
+    ],
+    a: 3, diff: 3, dl: "Medium",
+    f: "The DCI Data Centers project was a large data centre build in Auckland — listed on Netbridge's Projects page. All four are real NZ cities where large data centres operate."
+  },
+  {
+    q: "Netbridge worked for Downer across which combination of sectors?",
+    opts: [
+      "Retail, hospitality, education, health, government",
+      "Mining, agriculture, transport, commercial, education",
+      "Defence, transport, utilities, retail, local government",
+      "Transport, construction, health, commercial, local government"
+    ],
+    a: 3, diff: 4, dl: "Hard",
+    f: "The Downer project page lists: transport, construction, health, commercial, and local government. The other options mix in sectors not mentioned — retail, mining, defence, agriculture."
+  },
+
+  // ── STAFF — all wrong answers use real names, real institutions, real quals ──
+
+  {
+    q: "What two degrees did Jack Tan complete at Auckland University?",
+    opts: [
+      "B.Eng and Masters in Business Administration",
+      "B.ComSci and Masters in Telecommunications",
+      "B.IT and Masters in Information Management",
+      "B.Eng and Masters in Business and Commercial Law"
+    ],
+    a: 3, diff: 4, dl: "Hard",
+    f: "Jack Tan holds a Bachelor of Engineering and a Masters in Business and Commercial Law from Auckland University — not an MBA, not telecoms. The Commercial Law component is what makes it distinctive."
+  },
+  {
+    q: "Where did Simran Singh complete his IT Diplomas in Information Technology and Support?",
+    opts: [
+      "Auckland University of Technology",
+      "Manukau Institute of Technology",
+      "Massey University Albany Campus",
+      "Unitec Institute of Technology"
+    ],
+    a: 3, diff: 4, dl: "Hard",
+    f: "Simran Singh holds IT Diplomas from Unitec Institute of Technology. AUT, MIT Manukau, and Massey are all real Auckland institutions — but Unitec is specifically named in his profile."
+  },
+  {
+    q: "Ashley Pirimona holds Microsoft commercial qualifications and which certification?",
+    opts: [
+      "PRINCE2 certified",
+      "CCNA certified",
+      "PMP certified",
+      "ITIL certified"
+    ],
+    a: 3, diff: 4, dl: "Hard",
+    f: "Ashley Pirimona is ITIL certified. Eviv Hu holds a CCNA. PRINCE2 and PMP are real project management certifications — but neither is mentioned for Ashley. All four are real credentials."
+  },
+  {
+    q: "Netbridge's About Us page describes Simran Singh as bringing what to projects?",
+    opts: [
+      "A sharp analytical edge and rapid problem-solving ability",
+      "A creative and innovative approach to technology deployment",
+      "A structured governance framework across all engagements",
+      "A steady hand with thoughtful insights from extensive experience"
+    ],
+    a: 3, diff: 4, dl: "Hard",
+    f: "The exact wording on his profile is: 'Simran provides a steady hand to all our projects with thoughtful insights based on his extensive experience.' The other options are invented but plausible."
+  },
+  {
+    q: "Netbridge's vision statement names three qualities for enduring relationships — which?",
     opts: [
       "Excellence, innovation, and accountability",
-      "Trust, transparency, and mutual respect",
-      "Integrity, reliability, and performance",
-      "Quality, speed, and client satisfaction"
+      "Integrity, reliability, and continuous improvement",
+      "Quality, speed, and client satisfaction",
+      "Trust, transparency, and mutual respect"
     ],
-    a: 1, diff: 5, dl: "Expert",
-    f: "Netbridge's vision statement on the About Us page reads: '…enduring relationships built on trust, transparency, and mutual respect.' The others are real-sounding corporate values but not what Netbridge wrote."
+    a: 3, diff: 4, dl: "Hard",
+    f: "The About Us page states: 'enduring relationships built on trust, transparency, and mutual respect.' All four options sound like genuine corporate values — only one is Netbridge's actual wording."
   },
   {
-    q: "What does Netbridge's mission state as their ultimate aim for every project?",
+    q: "What is Netbridge's stated ultimate aim for every project, per their mission?",
     opts: [
-      "To deliver on time, within scope, and to specification",
-      "To exceed client expectations while maintaining profitability",
-      "To complete on deadline, under budget, and surpass customer expectations",
-      "To build long-term partnerships through consistent delivery"
+      "Deliver on time, within scope, and to full specification",
+      "Exceed client expectations while maintaining team profitability",
+      "Build long-term partnerships through consistent delivery",
+      "Complete on deadline, under budget, and surpass customer expectations"
     ],
-    a: 2, diff: 4, dl: "Hard",
-    f: "The About Us page states: 'Our ultimate aim is to complete projects on deadline, under budget, and to surpass customer expectations.' The other options are real project management aspirations but not Netbridge's words."
+    a: 3, diff: 4, dl: "Hard",
+    f: "Their exact words: 'Our ultimate aim is to complete projects on deadline, under budget, and to surpass customer expectations.' The others are real project management goals but not Netbridge's wording."
   },
   {
-    q: "Which of these correctly describes what Jack Tan's About Us profile says he can do that most technical leaders cannot?",
+    q: "Eviv Hu's three qualifications — which combination is exactly correct?",
     opts: [
-      "Manage multi-vendor contracts and draft legal agreements independently",
-      "Simplify complex IT scenarios and explain the benefits in an easy-to-understand way, while also getting 'techie' when needed",
-      "Simultaneously oversee engineering delivery and financial reporting",
-      "Run penetration tests and present findings to a board audience"
+      "B.Telecoms, Masters in Telecoms (AUT), Masters in Business (Lincoln)",
+      "B.Eng, Masters in Telecoms (AUT), Masters in Business (Massey)",
+      "B.Telecoms, Masters in IT (Unitec), Masters in Business (AUT)",
+      "B.IT, Masters in Telecoms (Auckland Uni), Masters in Business (Lincoln)"
     ],
-    a: 1, diff: 4, dl: "Hard",
-    f: "Jack Tan's profile says: 'Jack has the ability to simplify complex IT scenarios and explain the benefits in an easy-to-understand way; he can also get techie when needed.' This is a direct quote — the others are reasonable but invented."
-  },
-  {
-    q: "Which two environment types does Ashley Pirimona's profile specifically cite as his background?",
-    opts: [
-      "Healthcare and education",
-      "Defence and government",
-      "Commercial and local government",
-      "Retail and commercial"
-    ],
-    a: 2, diff: 4, dl: "Hard",
-    f: "Ashley's profile says 'over 25 years of IT experience across commercial and local government environments.' Healthcare, defence, retail, and education are not mentioned."
-  },
-  {
-    q: "Under Cloud Applications, Netbridge lists a service that most cloud vendors actively avoid offering. Which one?",
-    opts: ["Cloud Migration and Enablement", "Cloud Risk Assessment", "Legacy Systems", "Storage and Backups"],
-    a: 2, diff: 4, dl: "Hard",
-    f: "All four are real items on Netbridge's Cloud Applications list — but 'Legacy Systems' is the one cloud vendors avoid because it means helping clients keep on-premise infrastructure rather than pushing them fully to cloud. It's a differentiator worth noting."
-  },
-  {
-    q: "Netbridge's Managed Services page lists something that no traditional MSP would include. Which item is it?",
-    opts: ["24×7 Escalated Support", "IT Roadmap & Design", "AI & Chat GPT", "Network Advisory Consultancy"],
-    a: 2, diff: 4, dl: "Hard",
-    f: "All four are genuine items on Netbridge's Managed Services list — but 'AI & Chat GPT' stands out as something no traditional MSP listed until very recently. You need to have read the full list to pick it."
-  },
-  {
-    q: "Which of these correctly describes what Eviv Hu's role involves day-to-day, according to her Netbridge profile?",
-    opts: [
-      "Designing network architectures and producing detailed technical specifications",
-      "Managing vendor relationships and procurement for all Netbridge projects",
-      "Maintaining day-to-day operations with the team and customer base, driving projects to completion on budget and on time",
-      "Overseeing cyber security assessments and delivering client training programmes"
-    ],
-    a: 2, diff: 4, dl: "Hard",
-    f: "Her profile says: 'Eviv maintains the day-to-day operations with our team and customer base. Eviv keeps the projects ticking over and always looks to drive them to successful completion, on budget, on time.' The others are fabricated."
-  },
-  {
-    q: "What does Netbridge's contact page say their email address enables?",
-    opts: [
-      "Their tagline is 'Let us secure your network'",
-      "Their tagline is 'Let us connect your business'",
-      "Their tagline is 'Let us enable your connectivity'",
-      "Their tagline is 'Let us bridge the digital divide'"
-    ],
-    a: 2, diff: 3, dl: "Medium",
-    f: "Netbridge's contact page says 'Let us enable your connectivity!' — which is why their email is enable@netbridge.co.nz. The other taglines are plausible but not what the contact page says."
-  },
-  {
-    q: "Netbridge lists VCISO under their cyber security services. What does VCISO stand for and what does it replace for a client?",
-    opts: [
-      "Virtual Cyber Infrastructure Security Officer — replaces the IT Manager",
-      "Verified Cyber Incident and Security Operations — replaces the SOC team",
-      "Virtual Chief Information Security Officer — provides executive security leadership without a full-time hire",
-      "Validated Compliance and Information Security Oversight — replaces an external audit firm"
-    ],
-    a: 2, diff: 4, dl: "Hard",
-    f: "VCISO stands for Virtual Chief Information Security Officer. It gives organisations CIO-level security governance and strategy on a part-time outsourced basis — without the $200k+ cost of a full-time CISO. The other expansions are fabricated."
-  },
-
-  // ── INDUSTRY: applied technical knowledge, exact values required ─────────────
-
-  {
-    q: "VoIP voice bearer traffic should be marked with which DSCP value for highest priority queuing?",
-    opts: ["DSCP CS3 (24)", "DSCP AF41 (34)", "DSCP CS5 (40)", "DSCP EF (46)"],
-    a: 3, diff: 5, dl: "Expert",
-    f: "DSCP EF (Expedited Forwarding, value 46) is the correct marking for VoIP voice bearer traffic. CS5 (40) is for call signalling, AF41 (34) for interactive video, CS3 (24) for broadcast video. Wrong DSCP markings are one of the most common QoS misconfigurations in real deployments."
-  },
-  {
-    q: "A GPON OLT transmits at 2.488Gbps downstream to a 1:32 passive splitter. What is the maximum bandwidth per ONT at full saturation?",
-    opts: ["155.5Mbps", "77.75Mbps", "311Mbps", "622Mbps"],
-    a: 1, diff: 5, dl: "Expert",
-    f: "2488Mbps ÷ 32 = 77.75Mbps per ONT at full saturation. In practice GPON uses dynamic bandwidth allocation so ONTs can burst higher when others are idle — but the shared floor is 77.75Mbps. This is why XGPON (10Gbps) matters for high-density buildings."
-  },
-  {
-    q: "In a SASE architecture like Netbridge deploys, which specific component replaces traditional remote-access VPN?",
-    opts: ["CASB", "SWG", "FWaaS", "ZTNA"],
-    a: 3, diff: 5, dl: "Expert",
-    f: "ZTNA (Zero Trust Network Access) replaces VPN. VPN grants broad network access once authenticated; ZTNA grants access only to the specific application requested, with continuous verification. CASB secures cloud apps, SWG filters web traffic, FWaaS is the cloud firewall — all real SASE components."
-  },
-  {
-    q: "Netbridge secures OT environments running legacy SCADA. Which protocol would an application-layer firewall need to whitelist for a Modbus-based industrial network?",
-    opts: ["TCP/502", "TCP/102", "TCP/1911", "TCP/4840"],
     a: 0, diff: 5, dl: "Expert",
-    f: "Modbus TCP uses port TCP/502. TCP/102 is ISO-TSAP (used by Siemens S7), TCP/1911 is Niagara Fox (building automation), TCP/4840 is OPC-UA. In OT security, knowing exact protocol ports is critical — an overly permissive rule defeats the purpose of application-layer inspection."
+    f: "Eviv Hu holds a Bachelor's in Telecommunications, a Masters in Telecommunications from AUT, and a Masters in Business from Lincoln University. The wrong options swap institutions between qualifications."
   },
+
+  // ── SERVICES — requires reading each page carefully ─────────────────────────
+
   {
-    q: "Netbridge integrates access control systems using OSDP. What is the specific security advantage of OSDP v2 over legacy Wiegand?",
+    q: "Which of these appears under Netbridge's Networks list, NOT Telecommunications?",
     opts: [
-      "OSDP supports longer RS-485 cable runs than Wiegand",
-      "OSDP uses AES-128 encryption and mutual authentication; Wiegand transmits credentials in cleartext",
-      "OSDP is bidirectional and uses TCP/IP instead of serial signalling",
-      "OSDP allows card readers to store credentials locally without a controller"
+      "RF over Fiber",
+      "PBX and VoIP",
+      "4G and 5G LTE",
+      "Copper Cable G.hn"
     ],
-    a: 1, diff: 5, dl: "Expert",
-    f: "OSDP v2 provides AES-128 encrypted, mutually authenticated communication between card reader and controller. Wiegand — still used in millions of buildings — is a 1970s protocol that transmits card data in unencrypted cleartext, making it trivially sniffable or replayed with cheap hardware."
+    a: 3, diff: 5, dl: "Expert",
+    f: "Copper Cable G.hn Solutions is listed under Networks. RF over Fiber, PBX/VoIP, and 4G/5G LTE Services are all listed under Telecommunications. Both pages look nearly identical."
   },
   {
-    q: "A Netbridge engineer configures inter-VLAN routing between a corporate IT VLAN and an IoT VLAN. What does a next-generation firewall provide that a Layer 3 switch with ACLs cannot?",
+    q: "Which item on Netbridge's Managed Services list stands out as unusual for an MSP?",
     opts: [
-      "Higher throughput between VLANs under load",
-      "The ability to block traffic by destination IP address",
-      "Application-layer inspection that can identify malicious traffic regardless of port",
-      "Support for more VLANs than a Layer 3 switch can handle"
+      "24x7 Escalated Support service",
+      "Network Advisory Consultancy service",
+      "AI and Chat GPT integration service",
+      "IT Roadmap and Design service"
+    ],
+    a: 2, diff: 4, dl: "Hard",
+    f: "All four are real items on Netbridge's Managed Services page — but AI and Chat GPT stands out as something no traditional MSP listed until very recently. You need to have read the full list."
+  },
+  {
+    q: "Which Netbridge cyber service specifically names industrial OT in its title?",
+    opts: [
+      "ICS Threat Detection service",
+      "OT Endpoint Protection service",
+      "SCADA Hardening and Review service",
+      "Industrial OT BMS Cyber Security"
+    ],
+    a: 3, diff: 5, dl: "Expert",
+    f: "Industrial OT BMS Cyber Security is the exact service name on Netbridge's Services page. ICS, SCADA, and OT Endpoint Protection all sound real but are fabricated for this question."
+  },
+  {
+    q: "Under Cloud Applications, which Netbridge service helps clients retain on-premise systems?",
+    opts: [
+      "Cloud Risk Assessment offering",
+      "Storage and Backups management",
+      "Legacy Systems integration offering",
+      "Cloud Migration and Enablement"
+    ],
+    a: 2, diff: 4, dl: "Hard",
+    f: "Legacy Systems is listed under Netbridge's Cloud Applications — unusual because most cloud vendors push clients fully off-premises. All four are real items from the same page."
+  },
+  {
+    q: "What does VCISO stand for as listed in Netbridge's cyber security services?",
+    opts: [
+      "Verified Cyber Infrastructure Security Officer",
+      "Validated Compliance and Information Security Oversight",
+      "Virtual Chief Information Security Officer",
+      "Virtual Cyber Incident and Security Operations"
+    ],
+    a: 2, diff: 4, dl: "Hard",
+    f: "VCISO stands for Virtual Chief Information Security Officer — an outsourced executive security leadership role. The other three expansions are fabricated but follow the same initialism."
+  },
+
+  // ── INDUSTRY — applied technical knowledge with exact values ─────────────────
+
+  {
+    q: "VoIP voice bearer traffic should be tagged with which DSCP marking?",
+    opts: [
+      "CS3 — decimal 24",
+      "AF41 — decimal 34",
+      "CS5 — decimal 40",
+      "EF — decimal 46"
+    ],
+    a: 3, diff: 5, dl: "Expert",
+    f: "DSCP EF (Expedited Forwarding, decimal 46) is the correct marking for VoIP voice bearer traffic. CS5 is for call signalling, AF41 for interactive video, CS3 for broadcast video — all real DSCP values."
+  },
+  {
+    q: "GPON at 2.488Gbps downstream splits 1:32. What is the max per ONT at full load?",
+    opts: [
+      "155.5Mbps",
+      "311Mbps",
+      "77.75Mbps",
+      "622Mbps"
     ],
     a: 2, diff: 5, dl: "Expert",
-    f: "A Layer 3 switch with ACLs only sees IP addresses and port numbers — it cannot tell whether port 443 traffic is legitimate HTTPS or an attacker tunnelling C2 traffic over HTTPS. A next-generation firewall performs deep packet inspection and can identify application behaviour, block lateral movement, and enforce identity-based policies regardless of port."
+    f: "2488Mbps divided by 32 equals 77.75Mbps per ONT at full saturation. In practice dynamic bandwidth allocation lets ONTs burst higher — but 77.75Mbps is the shared floor. This is why XGPON (10Gbps) matters."
   },
   {
-    q: "During a Netbridge OSINT assessment, the analyst finds the client's sysadmin posted their firewall firmware version on a public vendor forum. Why is this specifically dangerous beyond just revealing the brand?",
+    q: "In a SASE architecture, which component specifically replaces traditional VPN?",
     opts: [
-      "It allows competitors to identify the client's technology budget",
-      "It lets attackers cross-reference that exact firmware version against known CVEs and target unpatched vulnerabilities",
-      "It breaches the client's vendor support contract terms",
-      "It reveals which ports are open on the client's perimeter"
+      "CASB — Cloud Access Security Broker",
+      "SWG — Secure Web Gateway",
+      "FWaaS — Firewall as a Service",
+      "ZTNA — Zero Trust Network Access"
+    ],
+    a: 3, diff: 5, dl: "Expert",
+    f: "ZTNA replaces VPN by granting access only to specific applications, not the whole network. CASB secures cloud app usage, SWG filters web traffic, FWaaS is the cloud firewall — all real SASE components."
+  },
+  {
+    q: "Modbus TCP — used in Netbridge's SCADA OT deployments — runs on which port?",
+    opts: [
+      "TCP 102",
+      "TCP 502",
+      "TCP 1911",
+      "TCP 4840"
     ],
     a: 1, diff: 5, dl: "Expert",
-    f: "Knowing the exact firmware version lets an attacker query CVE databases and exploit-DB for vulnerabilities specific to that build. Many critical infrastructure attacks begin exactly this way — version disclosure from a help forum post turns into a targeted exploit within hours. This is the core value of OSINT assessments."
+    f: "Modbus TCP uses port 502. TCP 102 is Siemens S7, TCP 1911 is Niagara Fox building automation, TCP 4840 is OPC-UA — all real OT protocol ports. Knowing exact port numbers is critical for OT firewall rules."
   },
   {
-    q: "A hospital has QoS configured on all access switches, but Nurse Call alerts still delay 3–4 seconds during shift change. What is the most likely root cause?",
+    q: "What specific security advantage does OSDP v2 have over legacy Wiegand?",
     opts: [
-      "The Nurse Call system has a firmware bug causing delayed packet generation",
-      "The DSCP markings are being re-marked to best-effort by the access switch",
-      "The uplink between access and distribution is saturated — QoS is enforced but queuing delay occurs upstream of the enforcement point",
-      "Wi-Fi interference from staff mobile devices is corrupting Nurse Call packets"
-    ],
-    a: 2, diff: 5, dl: "Expert",
-    f: "QoS only solves congestion at the interface where it is configured. If the uplink from access to distribution is a 1Gbps port running at 95% utilisation, traffic queues upstream of where QoS can act. The fix is uplink capacity upgrade or ensuring QoS trust and scheduling is configured end-to-end — including on all uplinks and distribution layer interfaces."
-  },
-  {
-    q: "Netbridge deploys RF over Fiber (RFoF) in large commercial buildings. What is the primary technical reason fibre is preferred over coax at distances beyond 100m?",
-    opts: [
-      "Fibre supports higher passive split ratios than coax for multi-outlet coverage",
-      "Coax attenuation at RF frequencies is significantly higher per metre, causing unacceptable signal loss over long building runs",
-      "Fibre terminations are cheaper and faster than coax connectors in building fit-outs",
-      "Coax cannot carry frequencies above 2.4GHz, limiting cellular and Wi-Fi distribution"
+      "Longer RS-485 cable runs without signal loss",
+      "AES-128 encryption versus Wiegand cleartext transmission",
+      "Local credential storage without needing a controller",
+      "Bidirectional TCP/IP instead of serial signalling"
     ],
     a: 1, diff: 5, dl: "Expert",
-    f: "Standard RG-6 coax loses approximately 30dB per 100m at 2.4GHz — often more than the entire link budget for a DAS system. Fibre has near-zero attenuation over the same distance. In a large building, coax-based DAS would need active amplifiers every 50–100m; RFoF replaces this with passive fibre runs and compact remote antenna units."
+    f: "OSDP v2 provides AES-128 encryption and mutual authentication. Wiegand transmits card data in cleartext — trivially sniffable with cheap hardware. OSDP is bidirectional but still uses RS-485, not TCP/IP."
   },
 ];
 
