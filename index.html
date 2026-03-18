@@ -7,14 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #0a1628;
-    --blue: #1a4a8a;
-    --cyan: #00c8e0;
-    --gold: #f0b429;
-    --white: #ffffff;
-    --gray: #8a9bb5;
-    --success: #22d07a;
-    --danger: #ff4d6d;
+    --navy: #0a1628; --blue: #1a4a8a; --cyan: #00c8e0; --gold: #f0b429;
+    --white: #ffffff; --gray: #8a9bb5; --success: #22d07a; --danger: #ff4d6d;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Syne', sans-serif; background: var(--navy); color: var(--white); min-height: 100vh; overflow-x: hidden; }
@@ -40,31 +34,22 @@
   h1 em { color: var(--cyan); font-style: normal; }
   .tagline { color: var(--gray); font-size: 15px; margin-top: 10px; }
   .hint { display: inline-block; margin-top: 14px; background: rgba(240,180,41,0.1); border: 1px solid rgba(240,180,41,0.25); border-radius: 8px; padding: 7px 16px; font-size: 13px; color: var(--gold); }
-
   .round-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-  .round-label { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; }
-  .total-score-label { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--gray); }
-  .total-score-label span { color: var(--gold); }
-
+  .q-counter { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; }
+  .score-tally { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--gray); }
+  .score-tally span { color: var(--gold); }
   .progress-track { background: rgba(255,255,255,0.07); border-radius: 100px; height: 5px; margin-bottom: 28px; overflow: hidden; }
   .progress-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--cyan)); border-radius: 100px; transition: width 0.35s ease; }
-
-  .card {
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 20px; padding: 36px; backdrop-filter: blur(10px);
-  }
+  .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px; backdrop-filter: blur(10px); }
   .card.animate { animation: slideUp 0.3s ease; }
   @keyframes slideUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-
   .q-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
   .q-num { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; }
   .diff-pill { font-family: 'DM Mono', monospace; font-size: 11px; padding: 3px 11px; border-radius: 100px; letter-spacing: 0.07em; text-transform: uppercase; }
-  .d1 { background: rgba(34,208,122,0.15); color: #22d07a; border: 1px solid rgba(34,208,122,0.3); }
-  .d2 { background: rgba(130,210,80,0.12); color: #8be05a; border: 1px solid rgba(130,210,80,0.25); }
   .d3 { background: rgba(240,180,41,0.12); color: #f0c050; border: 1px solid rgba(240,180,41,0.25); }
   .d4 { background: rgba(255,140,0,0.12); color: #ff9f43; border: 1px solid rgba(255,140,0,0.25); }
   .d5 { background: rgba(255,77,109,0.12); color: var(--danger); border: 1px solid rgba(255,77,109,0.3); }
-
+  .d6 { background: rgba(180,0,255,0.15); color: #d580ff; border: 1px solid rgba(180,0,255,0.35); }
   .question { font-size: 21px; font-weight: 700; line-height: 1.42; margin-bottom: 26px; letter-spacing: -0.01em; }
   .options { display: flex; flex-direction: column; gap: 11px; }
   .opt {
@@ -87,40 +72,26 @@
   .opt.wrong { border-color: var(--danger); background: rgba(255,77,109,0.08); }
   .opt.wrong .opt-key { background: var(--danger); color: var(--white); }
   .opt:disabled { cursor: default; }
-
   .feedback { margin-top: 18px; padding: 14px 18px; border-radius: 12px; font-size: 14px; line-height: 1.6; display: none; }
   .feedback.show { display: block; animation: slideUp 0.22s ease; }
   .feedback.ok  { background: rgba(34,208,122,0.09); border: 1px solid rgba(34,208,122,0.28); color: #b6f5d6; }
   .feedback.bad { background: rgba(255,77,109,0.09); border: 1px solid rgba(255,77,109,0.28); color: #ffc2cc; }
   .feedback strong { color: var(--white); }
-
   .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 22px; flex-wrap: wrap; gap: 10px; }
   .running-score { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--gray); }
   .running-score b { color: var(--cyan); }
-  .next-btn {
-    background: var(--cyan); border: none; border-radius: 11px; color: var(--navy);
-    font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700;
-    padding: 13px 30px; cursor: pointer; transition: all 0.18s; display: none;
-  }
+  .next-btn { background: var(--cyan); border: none; border-radius: 11px; color: var(--navy); font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; padding: 13px 30px; cursor: pointer; transition: all 0.18s; display: none; }
   .next-btn.show { display: inline-flex; align-items: center; gap: 7px; }
   .next-btn:hover { background: #00dff5; transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,200,224,0.28); }
-
-  .result-screen {
-    display: none; text-align: center;
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 20px; padding: 56px 36px;
-  }
+  .result-screen { display: none; text-align: center; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 56px 36px; }
   .result-screen.show { display: block; animation: slideUp 0.35s ease; }
   .result-icon { font-size: 62px; margin-bottom: 6px; }
-  .result-round-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
-  .result-big { font-size: 76px; font-weight: 800; color: var(--cyan); line-height: 1; }
-  .result-of { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--gray); letter-spacing: 0.08em; margin-bottom: 8px; }
-  .result-msg { font-size: 19px; font-weight: 700; margin: 18px 0 6px; }
-  .result-sub { color: var(--gray); font-size: 15px; margin-bottom: 10px; }
-  .result-total { display: inline-block; background: rgba(240,180,41,0.12); border: 1px solid rgba(240,180,41,0.3); border-radius: 10px; padding: 10px 22px; margin-bottom: 32px; font-family: 'DM Mono', monospace; font-size: 13px; color: var(--gold); }
-  .play-again-btn { background: var(--cyan); border: none; border-radius: 12px; color: var(--navy); font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; padding: 15px 40px; cursor: pointer; transition: all 0.18s; }
-  .play-again-btn:hover { background: #00dff5; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,200,224,0.28); }
-
+  .result-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+  .result-big { font-size: 86px; font-weight: 800; color: var(--cyan); line-height: 1; }
+  .result-of { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--gray); letter-spacing: 0.08em; margin-bottom: 4px; }
+  .result-msg { font-size: 22px; font-weight: 700; margin: 20px 0 8px; }
+  .result-sub { color: var(--gray); font-size: 15px; margin-bottom: 28px; line-height: 1.6; }
+  .done-note { display: inline-block; background: rgba(0,200,224,0.08); border: 1px solid rgba(0,200,224,0.2); border-radius: 10px; padding: 12px 24px; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--cyan); letter-spacing: 0.05em; line-height: 1.6; }
   @media (max-width: 580px) { .card { padding: 24px 18px; } .question { font-size: 18px; } .opt { font-size: 14px; padding: 13px 14px; } }
 </style>
 </head>
@@ -131,241 +102,209 @@
   <div class="header">
     <div class="event-badge">Industry Connect Event</div>
     <h1>Netbridge <em>Quiz</em></h1>
-    <p class="tagline">5 questions per round — all about Netbridge. Do your research!</p>
-    <span class="hint">💡 All answers are on netbridge.co.nz and their LinkedIn</span>
+    <p class="tagline">5 questions — research carefully and win the prize!</p>
+    <span class="hint">💡 Answers on netbridge.co.nz, their LinkedIn, and your industry knowledge</span>
   </div>
-
   <div id="quizArea">
     <div class="round-bar">
-      <span class="round-label" id="roundLabel">Round 1</span>
-      <span class="total-score-label">Total: <span id="totalScoreDisplay">0</span> pts</span>
+      <span class="q-counter" id="qCounter">Question 1 of 5</span>
+      <span class="score-tally">Score: <span id="scoreTally">0</span></span>
     </div>
     <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
     <div class="card" id="card">
       <div class="q-header">
-        <span class="q-num" id="qNum">Question 1 of 5</span>
+        <span class="q-num" id="qNum"></span>
         <span class="diff-pill" id="diffPill"></span>
       </div>
       <div class="question" id="questionText"></div>
       <div class="options" id="options"></div>
       <div class="feedback" id="feedback"></div>
       <div class="card-footer">
-        <span class="running-score">Round score: <b id="roundScore">0</b> / <b id="roundMax">0</b></span>
+        <span class="running-score">Correct: <b id="correctCount">0</b> / <b id="answeredCount">0</b></span>
         <button class="next-btn" id="nextBtn">Next →</button>
       </div>
     </div>
   </div>
-
   <div class="result-screen" id="resultScreen">
     <div class="result-icon" id="resultIcon"></div>
-    <div class="result-round-label" id="resultRoundLabel"></div>
+    <div class="result-label">Your final score</div>
     <div class="result-big" id="resultBig"></div>
     <div class="result-of">out of 5</div>
     <div class="result-msg" id="resultMsg"></div>
     <div class="result-sub" id="resultSub"></div>
-    <div class="result-total" id="resultTotal"></div><br>
-    <button class="play-again-btn" id="playAgainBtn">Next Round →</button>
+    <div class="done-note">Show this screen to claim your prize! 🎒</div>
   </div>
 </div>
 
 <script>
-// All questions require reading netbridge.co.nz or their LinkedIn.
-// No general networking knowledge will help here.
+// opts = answer strings in original order
+// a = index of correct answer in opts[] before shuffling
+// Shuffling happens at render time so the correct letter changes every page load
 
-const BANK = {
-  1: [ // Easy — glanceable from the homepage or About Us
-    {
-      q: "What is Netbridge's tagline on their homepage?",
-      opts: ["Connecting New Zealand", "Bridging the digital divide", "Technology made simple", "Networks built to last"],
-      a: 1, f: "Netbridge's tagline is 'Bridging the digital divide' — visible right on their homepage."
-    },
-    {
-      q: "What is the name of Netbridge's General Manager?",
-      opts: ["Simran Singh", "Mak Kulkarni", "Jack Tan", "Ashley Pirimona"],
-      a: 2, f: "Jack Tan is Netbridge's General Manager, with 20+ years of IT and OT experience. He's listed on the About Us page."
-    },
-    {
-      q: "What suburb is Netbridge's office located in?",
-      opts: ["Newmarket", "Parnell", "Penrose", "Ellerslie"],
-      a: 3, f: "Netbridge is based at 644 Great South Road, Ellerslie, Auckland 1051."
-    },
-    {
-      q: "What is Eviv Hu's role at Netbridge?",
-      opts: ["Infrastructure Analyst", "Network Engineering Manager", "Project Manager", "Senior Network Engineer"],
-      a: 2, f: "Eviv Hu is Netbridge's Project Manager, keeping projects on track, on time, and on budget."
-    },
-    {
-      q: "What is Ashley Pirimona's job title at Netbridge?",
-      opts: ["Project Manager", "Solutions Architect", "Infrastructure Analyst", "Network Engineering Manager"],
-      a: 2, f: "Ashley Pirimona is Netbridge's Infrastructure Analyst, with over 25 years of IT experience across commercial and local government environments."
-    },
-    {
-      q: "What accreditation does Netbridge hold relating to health and safety on project sites?",
-      opts: ["ISO 9001", "WorkSafe NZ", "NZQA Registered", "Site Safe"],
-      a: 3, f: "Netbridge holds Site Safe accreditation — demonstrating compliance with NZ health and safety standards on construction and project sites."
-    },
-    {
-      q: "Who is Netbridge's Network Engineering Manager?",
-      opts: ["Jack Tan", "Anjelo Fernando", "Ashley Pirimona", "Simran Singh"],
-      a: 3, f: "Simran Singh is Netbridge's Network Engineering Manager, with expertise across IT/OT, desktop, unified communications, and network engineering."
-    },
-  ],
-  2: [ // Easy–Med — requires reading more than the homepage
-    {
-      q: "What is Donna Whittington's role at Netbridge?",
-      opts: ["Project Manager", "Business Development Manager", "Senior Network Engineer", "Infrastructure Analyst"],
-      a: 1, f: "Donna Whittington is Netbridge's Business Development Manager — responsible for growing client relationships and new business opportunities."
-    },
-    {
-      q: "What is the general enquiry email address listed on Netbridge's contact page?",
-      opts: ["info@netbridge.co.nz", "hello@netbridge.co.nz", "enable@netbridge.co.nz", "contact@netbridge.co.nz"],
-      a: 2, f: "Netbridge's contact email is enable@netbridge.co.nz — their tagline 'Let us enable your connectivity!' is shown on the contact page."
-    },
-    {
-      q: "How long has Netbridge been providing managed services to clients?",
-      opts: ["Over 5 years", "Over 10 years", "Over 15 years", "Over 20 years"],
-      a: 1, f: "Netbridge states on their Managed Services page that they have been providing operations and maintenance support for over 10 years."
-    },
-    {
-      q: "Which of these is a genuine Netbridge technology partner?",
-      opts: ["Cisco", "Nokia", "Allied Telesis", "Ericsson"],
-      a: 2, f: "Allied Telesis is listed as a Netbridge technology partner. Cisco, Nokia, and Ericsson are not listed as partners on their website."
-    },
-    {
-      q: "What backgrounds does Netbridge say their cyber security team comes from?",
-      opts: ["Finance, legal, and compliance", "Telecommunications, cloud, and software", "Government intelligence, military, and commercial", "Healthcare, education, and government"],
-      a: 2, f: "Netbridge's cyber team includes experts with backgrounds in government intelligence services, military, and commercial environments — giving them threat knowledge beyond standard commercial certifications."
-    },
-    {
-      q: "What is Paul Batchelor's role at Netbridge?",
-      opts: ["Network Engineer", "Systems Support", "Client Manager", "Senior Network Engineer"],
-      a: 2, f: "Paul Batchelor is Netbridge's Client Manager — managing ongoing relationships with Netbridge's client base."
-    },
-    {
-      q: "Which satellite connectivity provider does Netbridge list in their network capabilities?",
-      opts: ["OneWeb", "Viasat", "HughesNet", "Star Link"],
-      a: 3, f: "Netbridge lists Satellite / Star Link in their network integration capabilities — reflecting their ability to connect clients in remote or difficult-to-reach locations."
-    },
-  ],
-  3: [ // Medium — requires reading staff profiles and service pages carefully
-    {
-      q: "Where did Simran Singh complete his IT Diplomas?",
-      opts: ["AUT", "MIT Manukau", "Massey University", "Unitec"],
-      a: 3, f: "Simran Singh holds IT Diplomas in Information Technology and Support from Unitec, plus commercial qualifications from Cisco and Microsoft."
-    },
-    {
-      q: "Which university did Jack Tan attend for both his degrees?",
-      opts: ["AUT", "Victoria University", "Massey University", "Auckland University"],
-      a: 3, f: "Jack Tan attended Auckland University, where he completed both his Bachelor of Engineering and his Masters in Business and Commercial Law."
-    },
-    {
-      q: "What certification did Eviv Hu achieve in 2023, posted on her LinkedIn?",
-      opts: ["PMP", "PRINCE2", "CCNA", "ITIL"],
-      a: 2, f: "Eviv Hu posted on LinkedIn in 2023 celebrating her CCNA (Cisco Certified Network Associate) achievement — showing she actively upskills beyond her project management role."
-    },
-    {
-      q: "Under Managed Services, Netbridge lists an AI-related offering. What is it?",
-      opts: ["ML Model Deployment", "AI & Chat GPT", "Generative AI Governance", "AI Security Auditing"],
-      a: 1, f: "Netbridge's Managed Services list includes 'AI & Chat GPT' — reflecting their role helping clients integrate emerging AI tools into their technology roadmap."
-    },
-    {
-      q: "What is Anjelo Fernando's role at Netbridge?",
-      opts: ["Client Manager", "Network Analyst", "Systems Support", "Network Migration Engineer"],
-      a: 1, f: "Anjelo Fernando is a Network Analyst at Netbridge, contributing to the technical delivery of client network solutions."
-    },
-    {
-      q: "What PO Box suburb does Netbridge list for their postal address?",
-      opts: ["Ellerslie", "Penrose", "Newmarket", "Sylvia Park"],
-      a: 3, f: "Netbridge's postal address is PO Box 13 2234, Sylvia Park, Auckland 1644 — different from their physical Ellerslie office."
-    },
-    {
-      q: "Which of these Netbridge cyber services describes an outsourced executive security leadership role?",
-      opts: ["Penetration Testing", "OSINT Assessment", "VCISO", "Business Continuity Planning"],
-      a: 2, f: "VCISO (Virtual Chief Information Security Officer) is an outsourced, part-time executive security role — giving clients CIO-level security governance without the cost of a full-time hire. Netbridge offers this under their Security Governance (GRC) services."
-    },
-  ],
-  4: [ // Hard — specific qualifications, staff details, and service specifics
-    {
-      q: "Jack Tan holds a Bachelor of Engineering plus a Masters in what subject?",
-      opts: ["Cybersecurity and Risk Management", "Computer Science and Management", "Telecommunications Engineering", "Business and Commercial Law"],
-      a: 3, f: "Jack Tan completed a Bachelor of Engineering and a Masters in Business and Commercial Law at Auckland University — a rare combination helping Netbridge navigate both technical and contractual complexity on large projects."
-    },
-    {
-      q: "Eviv Hu completed her Masters in Business at which institution?",
-      opts: ["AUT", "Auckland University", "Massey University", "Lincoln University"],
-      a: 3, f: "Eviv Hu completed her Masters in Business at Lincoln University — on top of a Bachelor's in Telecommunications and a Masters in Telecommunications from AUT. Three postgraduate qualifications."
-    },
-    {
-      q: "Ashley Pirimona holds which IT service management certification?",
-      opts: ["PMP", "PRINCE2", "ITIL", "CISSP"],
-      a: 2, f: "Ashley Pirimona is ITIL certified — the globally recognised framework for IT service management. He also holds Microsoft commercial qualifications."
-    },
-    {
-      q: "What is Hamish Cummins' specific role at Netbridge?",
-      opts: ["Senior Network Engineer", "Network Analyst", "Systems Support", "Network Migration Engineer"],
-      a: 3, f: "Hamish Cummins is a Network Migration Engineer at Netbridge — a specialised role focused on migrating clients from legacy network infrastructure to modern architectures."
-    },
-    {
-      q: "What specific next-generation network architecture does Netbridge list beyond SDWAN?",
-      opts: ["MPLS", "BGP Anycast", "SASE", "NSX Overlay"],
-      a: 2, f: "SASE (Secure Access Service Edge) is listed under Netbridge's Networks expertise — a modern cloud-delivered architecture combining networking and security. It shows Netbridge works beyond traditional enterprise network deployments."
-    },
-    {
-      q: "What is Alexander Lykov's role at Netbridge?",
-      opts: ["Network Analyst", "Network Migration Engineer", "Client Manager", "Senior Network Engineer"],
-      a: 3, f: "Alexander Lykov is a Senior Network Engineer at Netbridge — one of the technical leads delivering complex network integration projects for clients."
-    },
-    {
-      q: "What secondary school did Jack Tan attend before university?",
-      opts: ["Auckland Grammar School", "Rangitoto College", "Macleans College", "Westlake Boys High School"],
-      a: 3, f: "Jack Tan attended Westlake Boys High School on Auckland's North Shore before going to Auckland University. It's a detail on his About Us profile on the Netbridge website."
-    },
-  ],
-  5: [ // Expert — requires reading every word of the site and LinkedIn carefully
-    {
-      q: "What is Mak Kulkarni's role at Netbridge?",
-      opts: ["General Manager", "Senior Network Engineer", "Director", "Business Development Manager"],
-      a: 2, f: "Mak Kulkarni is listed as Director at Netbridge — a detail found via their company profile rather than prominently on the main website."
-    },
-    {
-      q: "Beyond standard GPON, what extended fibre standard does Netbridge list in their Networks expertise?",
-      opts: ["EPON", "NG-PON2", "XGPON", "WDM-PON"],
-      a: 2, f: "Netbridge lists 'Fibre GPON/XGPON' under their Networks expertise. XGPON (10-Gigabit Passive Optical Network) offers up to 10Gbps downstream — a step up from GPON's 2.5Gbps."
-    },
-    {
-      q: "Netbridge's cyber services list includes 'Vulnerability & OSINT Assessments.' What does OSINT stand for?",
-      opts: ["Operational Security Intelligence", "Outbound Security Incident Tracking", "Open Source Intelligence", "Online Systems Intrusion Testing"],
-      a: 2, f: "OSINT stands for Open Source Intelligence — gathering information from publicly available sources to identify what an attacker could learn about a target. Netbridge uses it as part of their vulnerability assessment methodology."
-    },
-    {
-      q: "What specific copper networking standard does Netbridge list under their Networks expertise?",
-      opts: ["DOCSIS", "G.hn", "HomePNA", "G.fast"],
-      a: 1, f: "Netbridge lists 'Copper Cable G.hn Solutions' — an ITU standard for high-speed networking over existing copper wiring (phone lines, coax, power lines). Useful for building retrofits where laying new cabling isn't feasible."
-    },
-    {
-      q: "What company is credited for designing the Netbridge website, as shown in the footer?",
-      opts: ["Studio Pacific", "Digital Nation NZ", "Young and Creative", "Webcraft NZ"],
-      a: 2, f: "Young and Creative (youngandcreative.co.nz) is credited as the website designer in Netbridge's footer — only visible if you scroll all the way to the bottom."
-    },
-    {
-      q: "What is the specific name of Netbridge's industrial cyber security service listed on their Services page?",
-      opts: ["ICS Threat Detection", "SCADA Hardening Services", "Industrial OT BMS Cyber Security", "OT Endpoint Protection"],
-      a: 2, f: "Netbridge lists 'Industrial OT BMS Cyber Security' as a named service — covering the intersection of operational technology, building management systems, and cyber defence. A very specialist area most generalist IT firms don't offer."
-    },
-    {
-      q: "What is Jun Marasigan's role at Netbridge?",
-      opts: ["Senior Network Engineer", "Network Analyst", "Client Manager", "Network Engineer"],
-      a: 3, f: "Jun Marasigan is a Network Engineer at Netbridge — part of the technical delivery team designing and implementing network solutions for clients."
-    },
-  ]
+const ALL_QUESTIONS = [
+
+  // ── NETBRIDGE PEOPLE — all wrong answers are real staff names or real qualifications ──
+
+  {
+    q: "Which Netbridge team member is the Network Migration Engineer?",
+    opts: ["Alexander Lykov", "Jun Marasigan", "Anjelo Fernando", "Hamish Cummins"],
+    a: 3, diff: 3, dl: "Medium",
+    f: "Hamish Cummins is the Network Migration Engineer. Alexander Lykov is Senior Network Engineer, Jun Marasigan is Network Engineer, Anjelo Fernando is Network Analyst — all real Netbridge staff."
+  },
+  {
+    q: "Which Netbridge team member completed their Masters in Business at Lincoln University?",
+    opts: ["Jack Tan", "Ashley Pirimona", "Simran Singh", "Eviv Hu"],
+    a: 3, diff: 3, dl: "Medium",
+    f: "Eviv Hu completed her Masters in Business at Lincoln University. Jack Tan completed his Masters in Business and Commercial Law at Auckland University — easy to mix up."
+  },
+  {
+    q: "Mak Kulkarni's role at Netbridge is listed as what?",
+    opts: ["General Manager", "Business Development Manager", "Director", "Senior Network Engineer"],
+    a: 2, diff: 3, dl: "Medium",
+    f: "Mak Kulkarni is listed as Director. Jack Tan is the General Manager — a role many would assume Mak holds."
+  },
+  {
+    q: "Which Netbridge staff member is ITIL certified?",
+    opts: ["Eviv Hu", "Simran Singh", "Ashley Pirimona", "Jack Tan"],
+    a: 2, diff: 4, dl: "Hard",
+    f: "Ashley Pirimona is ITIL certified. Eviv Hu holds a CCNA. Simran Singh holds Cisco and Microsoft vendor qualifications. Jack Tan holds an engineering and commercial law degree."
+  },
+  {
+    q: "Jack Tan completed his degrees at Auckland University. What were they?",
+    opts: ["B.Eng + Masters in Telecommunications", "B.IT + Masters in Cybersecurity", "B.ComSci + Masters in Business Administration", "B.Eng + Masters in Business and Commercial Law"],
+    a: 3, diff: 4, dl: "Hard",
+    f: "Jack Tan completed a Bachelor of Engineering and a Masters in Business and Commercial Law — not an MBA, not cybersecurity, not telecoms. The distinction matters."
+  },
+  {
+    q: "Which Netbridge team member is the Business Development Manager?",
+    opts: ["Paul Batchelor", "Anjelo Fernando", "Donna Whittington", "Alexander Lykov"],
+    a: 2, diff: 3, dl: "Medium",
+    f: "Donna Whittington is the Business Development Manager. Paul Batchelor is the Client Manager — a different role that is easy to confuse."
+  },
+  {
+    q: "What is Netbridge's general enquiry email address?",
+    opts: ["info@netbridge.co.nz", "enable@netbridge.co.nz", "hello@netbridge.co.nz", "contact@netbridge.co.nz"],
+    a: 1, diff: 3, dl: "Medium",
+    f: "Netbridge's contact email is enable@netbridge.co.nz — their contact page tagline is 'Let us enable your connectivity!' All four look like plausible business emails."
+  },
+  {
+    q: "Which secondary school did Jack Tan attend?",
+    opts: ["Rangitoto College", "Westlake Boys High School", "Auckland Grammar School", "Macleans College"],
+    a: 1, diff: 4, dl: "Hard",
+    f: "Jack Tan attended Westlake Boys High School. All four are real Auckland secondary schools — you need to have read his profile to know this one."
+  },
+  {
+    q: "Eviv Hu achieved a CCNA in 2023. CCNA is a certification from which vendor?",
+    opts: ["Juniper Networks", "Microsoft", "Fortinet", "Cisco"],
+    a: 3, diff: 4, dl: "Hard",
+    f: "CCNA stands for Cisco Certified Network Associate — it is a Cisco qualification. Juniper, Microsoft, and Fortinet all offer their own certifications, but CCNA is specifically Cisco."
+  },
+  {
+    q: "What is Netbridge's exact street number on Great South Road, Ellerslie?",
+    opts: ["442", "744", "644", "544"],
+    a: 2, diff: 4, dl: "Hard",
+    f: "Netbridge is at 644 Great South Road, Ellerslie. All four options are plausible numbers on a long Auckland arterial road — only 644 is correct."
+  },
+  {
+    q: "Which of these partner brands on the Netbridge website specialises in healthcare technology?",
+    opts: ["DZS", "Talius", "Molex", "Vitalcare"],
+    a: 3, diff: 4, dl: "Hard",
+    f: "Vitalcare specialises in healthcare technology. Molex makes cabling infrastructure, DZS makes broadband equipment, and Talius makes physical security enclosures — all are real Netbridge partners."
+  },
+  {
+    q: "What company is credited for designing the Netbridge website, as shown in the footer?",
+    opts: ["Digital Nation NZ", "Young and Creative", "Studio Pacific", "Webcraft NZ"],
+    a: 1, diff: 5, dl: "Expert",
+    f: "Young and Creative (youngandcreative.co.nz) is credited in the Netbridge footer. You only find this by scrolling to the very bottom of the page."
+  },
+  {
+    q: "Which of these is listed under Netbridge's Telecommunications services, NOT their Networks services?",
+    opts: ["SASE", "SDWAN", "IoT Internet of Things", "RF over Fiber"],
+    a: 3, diff: 5, dl: "Expert",
+    f: "RF over Fiber is listed under Telecommunications. SASE, SDWAN, and IoT are all listed under Networks. Both pages look similar — you need to have read each service page carefully."
+  },
+  {
+    q: "What specific copper networking standard does Netbridge list under their Networks expertise?",
+    opts: ["DOCSIS", "G.fast", "HomePNA", "G.hn"],
+    a: 3, diff: 5, dl: "Expert",
+    f: "Netbridge lists 'Copper Cable G.hn Solutions' — an ITU standard for networking over existing copper wiring. G.fast, HomePNA, and DOCSIS are all real copper standards but none are listed by Netbridge."
+  },
+
+  // ── INDUSTRY — genuinely hard, requires real technical knowledge ─────────────
+
+  {
+    q: "A Netbridge client's VoIP calls drop every day at 9am when staff arrive. What is the most likely cause?",
+    opts: ["The VoIP server needs a firmware update", "Network congestion with no QoS policy prioritising voice traffic", "The firewall is blocking SIP registrations at peak time", "Wi-Fi channel overlap from nearby access points"],
+    a: 1, diff: 4, dl: "Hard",
+    f: "Without QoS (Quality of Service), voice packets compete equally with bulk data at peak hours. The fix is to tag VoIP traffic with DSCP EF so switches and routers forward it first. Firmware, firewalls, and Wi-Fi are all plausible but congestion + no QoS is the classic cause."
+  },
+  {
+    q: "Netbridge deploys GPON for a multi-tenancy building. A single fibre from the exchange serves 32 apartments. What component makes this possible without any powered equipment in the field?",
+    opts: ["An optical line terminal", "A passive optical splitter", "A wavelength division multiplexer", "A fibre distribution frame"],
+    a: 1, diff: 4, dl: "Hard",
+    f: "A passive optical splitter divides one fibre signal into many using only the physics of light — no power required in the field. This is why GPON is called 'passive' — the splitters between the exchange and premises require no electricity."
+  },
+  {
+    q: "A building's BMS, CCTV, and corporate laptops are all on the same flat network. A CCTV camera is compromised. What can an attacker do that they couldn't if the network were segmented?",
+    opts: ["Stream footage at higher resolution", "Move laterally to reach the BMS and corporate systems directly", "Disable the camera's IR night vision remotely", "Reset the camera firmware to factory settings"],
+    a: 1, diff: 4, dl: "Hard",
+    f: "On a flat network, a compromised IoT device like a camera has direct layer-2 access to every other device. Lateral movement to the BMS or corporate systems is trivial. Proper segmentation with VLANs and inter-VLAN firewall rules would contain the breach to just the camera VLAN."
+  },
+  {
+    q: "Netbridge offers Zero Trust & Identity Access Management. Under a Zero Trust model, what happens when a user who is already inside the corporate network tries to access a sensitive internal server?",
+    opts: ["They are trusted automatically because they are already inside the perimeter", "They must authenticate and be authorised for that specific resource regardless of location", "They are redirected through the external firewall for verification", "They are given read-only access until their session token expires"],
+    a: 1, diff: 4, dl: "Hard",
+    f: "Zero Trust rejects the idea that being 'inside' the network earns any trust. Every access request — even from inside the perimeter — must be authenticated and authorised for that specific resource. This prevents lateral movement after a breach."
+  },
+  {
+    q: "What does OSINT stand for, a methodology listed in Netbridge's cyber services?",
+    opts: ["Operational Security Intelligence", "Online Systems Intrusion Testing", "Open Source Intelligence", "Outbound Security Incident Tracking"],
+    a: 2, diff: 4, dl: "Hard",
+    f: "OSINT stands for Open Source Intelligence — gathering information from publicly available sources like LinkedIn, domain records, and job postings to map an organisation's attack surface before a pen test. All four options are plausible-sounding acronyms."
+  },
+  {
+    q: "Netbridge installs PA systems in commercial buildings. In a life-safety scenario, what network behaviour must a PA system have that normal data traffic does not?",
+    opts: ["It must use a dedicated physical cable separate from all data networks", "It must be assigned the highest QoS priority to guarantee delivery during congestion", "It must bypass the firewall to reach all devices simultaneously", "It must operate on a 5GHz Wi-Fi band to avoid interference"],
+    a: 1, diff: 4, dl: "Hard",
+    f: "In an emergency, a PA system must be heard immediately — it cannot wait behind bulk data in a congested queue. Assigning the highest QoS priority (DSCP CS7 or similar) ensures PA and emergency audio is always delivered first. A dedicated physical network is expensive and unnecessary with correct QoS design."
+  },
+  {
+    q: "Netbridge lists SASE under their Networks expertise. What does SASE combine that traditional SD-WAN alone does not provide?",
+    opts: ["Copper and fibre cabling in a single network run", "SD-WAN connectivity with cloud-delivered security services in one architecture", "IPv4 and IPv6 dual-stack routing for legacy systems", "Wired and wireless access in a unified management platform"],
+    a: 1, diff: 5, dl: "Expert",
+    f: "SASE (Secure Access Service Edge) bundles SD-WAN with cloud-native security services — including ZTNA, SWG, CASB, and FWaaS — into a single architecture. SD-WAN alone only handles intelligent routing. SASE adds the security stack, which is why it's a step beyond traditional SD-WAN."
+  },
+  {
+    q: "A Netbridge client wants to run legacy SCADA on a converged IT/OT network but the SCADA system cannot be patched. What is the correct compensating control?",
+    opts: ["Encrypt all SCADA traffic using TLS 1.3", "Place the SCADA system in an isolated OT DMZ with application-layer firewall rules permitting only specific OT protocols", "Install endpoint antivirus on the SCADA workstation", "Schedule monthly reboots to clear any malware in memory"],
+    a: 1, diff: 5, dl: "Expert",
+    f: "When a system cannot be patched, the security perimeter must be built around it. An OT DMZ with application-aware firewall rules — only permitting specific OT protocols like Modbus or DNP3 — contains any breach. TLS and antivirus are ineffective on systems too old to run them. Reboots clear nothing persistent."
+  },
+  {
+    q: "Netbridge deploys XGPON as well as standard GPON. What is the key downstream speed difference between them?",
+    opts: ["GPON: 1Gbps, XGPON: 2.5Gbps", "GPON: 2.5Gbps, XGPON: 10Gbps", "GPON: 5Gbps, XGPON: 25Gbps", "GPON: 100Mbps, XGPON: 1Gbps"],
+    a: 1, diff: 5, dl: "Expert",
+    f: "Standard GPON delivers up to 2.5Gbps downstream. XGPON (10-Gigabit PON) delivers up to 10Gbps downstream — a 4x increase. This matters for high-density deployments like MDUs or commercial buildings where bandwidth demand is growing fast."
+  },
+  {
+    q: "What does 'RF over Fiber' — listed in Netbridge's Telecommunications services — allow in a commercial building?",
+    opts: ["It converts fibre ethernet to copper to reach legacy devices", "It distributes radio frequency signals like cellular and Wi-Fi over fibre optic cable instead of coax", "It provides redundant internet connectivity using 4G as a fibre backup", "It enables wireless backhaul between buildings without physical cabling"],
+    a: 1, diff: 5, dl: "Expert",
+    f: "RF over Fiber (RFoF) carries radio frequency signals — such as cellular, DAS, or broadcast — over fibre optic cable rather than traditional coax. This allows low-loss distribution of RF signals over long distances inside buildings, which is why it's listed under Netbridge's Telecommunications services."
+  },
+];
+
+// ── Always Q5 — impossible to guess without writing it down ───────────────────
+// Eviv Hu's direct number is on the About Us page: +64 21 0289 9460
+// All wrong answers use identical format, differing by 1–2 digits only.
+const IMPOSSIBLE = {
+  q: "What is Eviv Hu's direct phone number as listed on the Netbridge About Us page?",
+  opts: ["+64 21 0279 9460", "+64 21 0289 9460", "+64 21 0289 9640", "+64 21 0289 4960"],
+  a: 1, diff: 6, dl: "Impossible",
+  f: "Eviv Hu's direct number is +64 21 0289 9460. The other three options differ by just one or two digits. You had to write this down from the website to get it right."
 };
 
-// ─── Game state ───────────────────────────────────────────────────────────────
-let round = 1, totalScore = 0, roundScore = 0, questionIndex = 0;
-let currentQuestion = null, answered = false;
-let pools = { 1: [], 2: [], 3: [], 4: [], 5: [] };
-let roundQuestions = [];
-
+// ── Shuffle helpers ───────────────────────────────────────────────────────────
 function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -375,70 +314,78 @@ function shuffle(arr) {
   return a;
 }
 
-function drawQuestion(diff) {
-  if (pools[diff].length === 0) pools[diff] = shuffle(BANK[diff]);
-  return pools[diff].pop();
+// Shuffle the answer options and return { opts, a } with updated correct index
+function shuffleOpts(q) {
+  const indexed = q.opts.map((text, i) => ({ text, correct: i === q.a }));
+  const shuffled = shuffle(indexed);
+  return {
+    opts: shuffled.map(o => o.text),
+    a: shuffled.findIndex(o => o.correct)
+  };
 }
 
-function buildRound() {
-  roundQuestions = [1, 2, 3, 4, 5].map(d => ({ ...drawQuestion(d), diff: d }));
-  questionIndex = 0;
-  roundScore = 0;
-}
+// Pick 4 random from pool, impossible question is always Q5
+const SESSION = shuffle(ALL_QUESTIONS).slice(0, 4).concat([IMPOSSIBLE])
+  .map(q => {
+    const { opts, a } = shuffleOpts(q);
+    return { ...q, opts, a };
+  });
 
-function diffLabel(d) {
-  return ['', 'Easy', 'Easy–Med', 'Medium', 'Hard', 'Expert'][d];
-}
+// ── State ─────────────────────────────────────────────────────────────────────
+let idx = 0, score = 0, answered = false;
 
 function showQuestion() {
-  currentQuestion = roundQuestions[questionIndex];
+  const q = SESSION[idx];
   answered = false;
 
-  document.getElementById('roundLabel').textContent = `Round ${round}`;
-  document.getElementById('totalScoreDisplay').textContent = totalScore;
-  document.getElementById('qNum').textContent = `Question ${questionIndex + 1} of 5`;
-  document.getElementById('progressFill').style.width = (questionIndex / 5 * 100) + '%';
-  document.getElementById('roundScore').textContent = roundScore;
-  document.getElementById('roundMax').textContent = questionIndex;
+  document.getElementById('qCounter').textContent = `Question ${idx + 1} of 5`;
+  document.getElementById('scoreTally').textContent = score;
+  document.getElementById('progressFill').style.width = (idx / 5 * 100) + '%';
+  document.getElementById('correctCount').textContent = score;
+  document.getElementById('answeredCount').textContent = idx;
+  document.getElementById('qNum').textContent = `Q${idx + 1}`;
 
   const dp = document.getElementById('diffPill');
-  dp.textContent = diffLabel(currentQuestion.diff);
-  dp.className = `diff-pill d${currentQuestion.diff}`;
-  document.getElementById('questionText').textContent = currentQuestion.q;
+  dp.textContent = q.dl;
+  dp.className = `diff-pill d${q.diff}`;
+
+  document.getElementById('questionText').textContent = q.q;
 
   const container = document.getElementById('options');
   container.innerHTML = '';
   ['A','B','C','D'].forEach((key, i) => {
     const btn = document.createElement('button');
     btn.className = 'opt';
-    btn.innerHTML = `<span class="opt-key">${key}</span>${currentQuestion.opts[i]}`;
+    btn.innerHTML = `<span class="opt-key">${key}</span>${q.opts[i]}`;
     btn.onclick = () => selectAnswer(i);
     container.appendChild(btn);
   });
 
-  const fb = document.getElementById('feedback');
-  fb.className = 'feedback'; fb.innerHTML = '';
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').innerHTML = '';
   document.getElementById('nextBtn').className = 'next-btn';
 
   const card = document.getElementById('card');
-  card.classList.remove('animate'); void card.offsetWidth; card.classList.add('animate');
+  card.classList.remove('animate');
+  void card.offsetWidth;
+  card.classList.add('animate');
 }
 
-function selectAnswer(idx) {
+function selectAnswer(i) {
   if (answered) return;
   answered = true;
-  const q = currentQuestion;
-  const correct = idx === q.a;
-  if (correct) { roundScore++; totalScore++; }
+  const q = SESSION[idx];
+  const correct = i === q.a;
+  if (correct) score++;
 
-  document.getElementById('roundScore').textContent = roundScore;
-  document.getElementById('roundMax').textContent = questionIndex + 1;
-  document.getElementById('totalScoreDisplay').textContent = totalScore;
+  document.getElementById('scoreTally').textContent = score;
+  document.getElementById('correctCount').textContent = score;
+  document.getElementById('answeredCount').textContent = idx + 1;
 
-  document.querySelectorAll('.opt').forEach((btn, i) => {
+  document.querySelectorAll('.opt').forEach((btn, j) => {
     btn.disabled = true;
-    if (i === q.a) btn.classList.add('correct');
-    if (i === idx && !correct) btn.classList.add('wrong');
+    if (j === q.a) btn.classList.add('correct');
+    if (j === i && !correct) btn.classList.add('wrong');
   });
 
   const fb = document.getElementById('feedback');
@@ -447,11 +394,11 @@ function selectAnswer(idx) {
 
   const nb = document.getElementById('nextBtn');
   nb.className = 'next-btn show';
-  nb.textContent = questionIndex === 4 ? 'See Results →' : 'Next →';
+  nb.textContent = idx === 4 ? 'See My Score →' : 'Next →';
 }
 
 document.getElementById('nextBtn').onclick = () => {
-  if (questionIndex < 4) { questionIndex++; showQuestion(); }
+  if (idx < 4) { idx++; showQuestion(); }
   else showResult();
 };
 
@@ -459,33 +406,21 @@ function showResult() {
   document.getElementById('progressFill').style.width = '100%';
   document.getElementById('quizArea').style.display = 'none';
   document.getElementById('resultScreen').classList.add('show');
-  document.getElementById('resultRoundLabel').textContent = `Round ${round} complete`;
-  document.getElementById('resultBig').textContent = roundScore;
+  document.getElementById('resultBig').textContent = score;
 
   const outcomes = [
-    { icon: '📖', msg: 'Keep digging!',   sub: 'Head to netbridge.co.nz and have a good read.' },
-    { icon: '💡', msg: 'Getting there!',  sub: 'A bit more time on the site and you\'ll nail it.' },
-    { icon: '⚡', msg: 'Solid effort!',   sub: 'You\'ve clearly done some homework!' },
-    { icon: '🎯', msg: 'Great work!',     sub: 'You really know your Netbridge!' },
-    { icon: '🏆', msg: 'Perfect Round!',  sub: 'Outstanding — every answer correct!' },
+    { icon: '📖', msg: 'Keep digging!',     sub: 'The answers are on netbridge.co.nz — every detail matters.' },
+    { icon: '💡', msg: 'Getting warmer!',   sub: 'You\'re on the right pages — go deeper.' },
+    { icon: '⚡', msg: 'Solid effort!',     sub: 'You\'ve clearly done some homework!' },
+    { icon: '🎯', msg: 'Very impressive!',  sub: 'You really know Netbridge inside and out.' },
+    { icon: '🏆', msg: 'Perfect Score!',    sub: 'Outstanding — you nailed every question!' },
   ];
-  const o = outcomes[roundScore === 5 ? 4 : roundScore === 4 ? 3 : roundScore === 3 ? 2 : roundScore <= 1 ? 0 : 1];
+  const o = outcomes[score === 5 ? 4 : score === 4 ? 3 : score === 3 ? 2 : score <= 1 ? 0 : 1];
   document.getElementById('resultIcon').textContent = o.icon;
   document.getElementById('resultMsg').textContent = o.msg;
   document.getElementById('resultSub').textContent = o.sub;
-  document.getElementById('resultTotal').textContent = `Total score across all rounds: ${totalScore} pts`;
-  document.getElementById('playAgainBtn').textContent = 'Next Round →';
 }
 
-document.getElementById('playAgainBtn').onclick = () => {
-  round++;
-  document.getElementById('resultScreen').classList.remove('show');
-  document.getElementById('quizArea').style.display = '';
-  buildRound();
-  showQuestion();
-};
-
-buildRound();
 showQuestion();
 </script>
 </body>
