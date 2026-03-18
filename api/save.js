@@ -1,13 +1,3 @@
-// Vercel serverless function — /api/save
-// The Google Apps Script URL lives ONLY in Vercel environment variables.
-// It never appears in the frontend HTML or your GitHub repo.
-//
-// Setup:
-//   1. In Vercel dashboard → your project → Settings → Environment Variables
-//   2. Add:  SHEET_URL   = <your Apps Script web app URL>
-//   3.       QUIZ_TOKEN  = <any long random string you choose, e.g. "nbq-2025-xK9mP">
-//   4. Add the same QUIZ_TOKEN value to the HTML file where indicated.
-
 export default async function handler(req, res) {
   // Only accept POST
   if (req.method !== 'POST') {
