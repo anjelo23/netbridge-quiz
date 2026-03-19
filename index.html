@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Netbridge Industry Connect Quiz</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --navy: #0a1628; --blue: #1a4a8a; --cyan: #00c8e0; --gold: #f0b429;
     --white: #ffffff; --gray: #8a9bb5; --success: #22d07a; --danger: #ff4d6d;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Syne', sans-serif; background: var(--navy); color: var(--white); min-height: 100vh; overflow-x: hidden; }
+  body { font-family: 'Figtree', sans-serif; background: var(--navy); color: var(--white); min-height: 100vh; overflow-x: hidden; }
   body::before {
     content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
     background-image: linear-gradient(rgba(0,200,224,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,224,0.04) 1px, transparent 1px);
@@ -40,7 +40,7 @@
   .reg-sub { color: var(--gray); font-size: 14px; margin-bottom: 28px; line-height: 1.6; }
   .field { margin-bottom: 20px; }
   .field label { display: block; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
-  .field input { width: 100%; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 14px 16px; color: var(--white); font-family: 'Syne', sans-serif; font-size: 16px; outline: none; transition: border-color 0.2s; }
+  .field input { width: 100%; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 14px 16px; color: var(--white); font-family: 'Figtree', sans-serif; font-size: 16px; outline: none; transition: border-color 0.2s; }
   .field input:focus { border-color: var(--cyan); }
   .field input::placeholder { color: var(--gray); }
   .field-error { color: var(--danger); font-size: 12px; font-family: 'DM Mono', monospace; margin-top: 6px; display: none; }
@@ -49,7 +49,7 @@
   .rules-box ul { list-style: none; }
   .rules-box ul li { color: var(--gray); font-size: 13px; padding: 3px 0; display: flex; gap: 8px; }
   .rules-box ul li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
-  .start-btn { width: 100%; background: var(--cyan); border: none; border-radius: 12px; color: var(--navy); font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; padding: 16px; cursor: pointer; transition: all 0.18s; }
+  .start-btn { width: 100%; background: var(--cyan); border: none; border-radius: 12px; color: var(--navy); font-family: 'Figtree', sans-serif; font-size: 16px; font-weight: 700; padding: 16px; cursor: pointer; transition: all 0.18s; }
   .start-btn:hover { background: #00dff5; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,200,224,0.28); }
 
   /* Already attempted */
@@ -81,7 +81,7 @@
   .d6 { background: rgba(180,0,255,0.15); color: #d580ff; border: 1px solid rgba(180,0,255,0.35); }
   .question { font-size: 20px; font-weight: 700; line-height: 1.45; margin-bottom: 26px; letter-spacing: -0.01em; }
   .options { display: flex; flex-direction: column; gap: 11px; }
-  .opt { display: flex; align-items: flex-start; gap: 14px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.09); border-radius: 12px; padding: 15px 18px; font-size: 15px; font-weight: 500; line-height: 1.45; text-align: left; color: var(--white); font-family: 'Syne', sans-serif; cursor: pointer; transition: all 0.16s; width: 100%; }
+  .opt { display: flex; align-items: flex-start; gap: 14px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.09); border-radius: 12px; padding: 15px 18px; font-size: 15px; font-weight: 500; line-height: 1.45; text-align: left; color: var(--white); font-family: 'Figtree', sans-serif; cursor: pointer; transition: all 0.16s; width: 100%; }
   .opt-key { font-family: 'DM Mono', monospace; font-size: 11px; background: rgba(255,255,255,0.07); color: var(--gray); border-radius: 6px; padding: 3px 8px; min-width: 28px; text-align: center; flex-shrink: 0; margin-top: 2px; transition: all 0.16s; }
   .opt:hover:not(:disabled) { border-color: rgba(0,200,224,0.45); background: rgba(0,200,224,0.07); transform: translateX(4px); }
   .opt:hover:not(:disabled) .opt-key { background: rgba(0,200,224,0.2); color: var(--cyan); }
@@ -100,7 +100,7 @@
   .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 22px; flex-wrap: wrap; gap: 10px; }
   .running-score { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--gray); }
   .running-score b { color: var(--cyan); }
-  .next-btn { background: var(--cyan); border: none; border-radius: 11px; color: var(--navy); font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; padding: 13px 30px; cursor: pointer; transition: all 0.18s; display: none; }
+  .next-btn { background: var(--cyan); border: none; border-radius: 11px; color: var(--navy); font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 700; padding: 13px 30px; cursor: pointer; transition: all 0.18s; display: none; }
   .next-btn.show { display: inline-flex; align-items: center; gap: 7px; }
   .next-btn:hover { background: #00dff5; transform: translateY(-2px); }
 
@@ -117,7 +117,40 @@
   .result-sub { color: var(--gray); font-size: 15px; margin-bottom: 28px; line-height: 1.6; }
   .done-note { display: inline-block; background: rgba(0,200,224,0.08); border: 1px solid rgba(0,200,224,0.2); border-radius: 10px; padding: 12px 24px; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--cyan); letter-spacing: 0.05em; }
   .saving-note { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray); margin-top: 16px; }
-  @media (max-width: 580px) { .card { padding: 24px 18px; } .question { font-size: 17px; } .opt { font-size: 14px; padding: 13px 14px; } #registerScreen { padding: 28px 20px; } }
+  @media (max-width: 580px) { .card { padding: 24px 18px; } .question { font-size: 17px; } #registerScreen { padding: 28px 20px; } }
+
+  /* ── Dot progress ── */
+  .dot-row { display: flex; gap: 8px; justify-content: center; margin-bottom: 24px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.12); transition: all 0.3s; }
+  .dot.done-correct { background: var(--success); }
+  .dot.done-wrong   { background: var(--danger); }
+  .dot.done-timeout { background: var(--gold); }
+  .dot.active       { background: var(--cyan); transform: scale(1.3); }
+
+  /* ── Micro-animations ── */
+  @keyframes correctPulse { 0%{box-shadow:0 0 0 0 rgba(34,208,122,0.5)} 60%{box-shadow:0 0 0 14px rgba(34,208,122,0)} 100%{box-shadow:0 0 0 0 rgba(34,208,122,0)} }
+  @keyframes wrongShake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+  @keyframes timerPulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+  .opt.correct { animation: correctPulse 0.6s ease; }
+  .opt.wrong   { animation: wrongShake 0.4s ease; }
+  .timer-display.pulsing { animation: timerPulse 0.7s infinite; }
+
+  /* ── Auto-advance strip ── */
+  .advance-wrap { height: 3px; background: rgba(255,255,255,0.07); border-radius: 100px; margin-top: 18px; overflow: hidden; display: none; }
+  .advance-fill { height: 100%; background: var(--cyan); border-radius: 100px; width: 100%; }
+
+  /* ── Result breakdown ── */
+  .breakdown { margin: 20px 0 28px; display: flex; flex-direction: column; gap: 8px; text-align: left; }
+  .breakdown-row { display: flex; align-items: flex-start; gap: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 12px 14px; }
+  .breakdown-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .breakdown-q strong { display: block; color: var(--white); font-size: 13px; margin-bottom: 2px; }
+  .breakdown-q span { color: var(--gray); font-size: 12px; line-height: 1.5; }
+
+  /* ── Bigger touch targets on mobile ── */
+  @media (max-width: 580px) {
+    .opt { min-height: 52px; font-size: 14px; padding: 14px 14px; }
+    .start-btn, .next-btn { min-height: 52px; }
+  }
 </style>
 </head>
 <body>
@@ -167,6 +200,7 @@
       <span class="q-counter" id="qCounter">Question 1 of 5</span>
       <span class="player-tag">Playing as <span id="playerName"></span></span>
     </div>
+    <div class="dot-row" id="dotRow"></div>
     <div class="timer-row">
       <div class="timer-track">
         <div class="timer-fill" id="timerFill"></div>
@@ -181,6 +215,7 @@
       <div class="question" id="questionText"></div>
       <div class="options" id="options"></div>
       <div class="feedback" id="feedback"></div>
+      <div class="advance-wrap" id="advanceWrap"><div class="advance-fill" id="advanceFill"></div></div>
       <div class="card-footer">
         <span class="running-score">Correct: <b id="correctCount">0</b> / <b id="answeredCount">0</b></span>
         <button class="next-btn" id="nextBtn">Next →</button>
@@ -531,10 +566,13 @@ const SESSION = shuffle(ALL_QUESTIONS).slice(0, 4).concat([IMPOSSIBLE])
   .map(q => { const { opts, a } = shuffleOpts(q); return { ...q, opts, a }; });
 
 // ── State ─────────────────────────────────────────────────────────────────────
-let idx = 0, score = 0, answered = false, timerInterval = null, timeLeft = 30;
+let idx = 0, score = 0, answered = false, timerInterval = null, advanceTimeout = null, timeLeft = 30;
 let playerName = '', studentId = '';
+let dotStates = ['active','','','','']; // correct | wrong | timeout | active
 const TIMER_SECONDS = 30;
+const ADVANCE_MS = 2500; // auto-advance delay after answering
 const STORAGE_KEY = 'nbq_attempted_v2';
+let resultLog = []; // [{q, correct}]
 
 // ── Registration ──────────────────────────────────────────────────────────────
 function startQuiz() {
@@ -585,12 +623,14 @@ function updateTimerUI() {
   const green = timeLeft <= 10 ? Math.round(208 * timeLeft / 10) : 208;
   fill.style.background = `rgb(${red},${green},80)`;
   disp.textContent = timeLeft;
-  disp.className = 'timer-display' + (timeLeft <= 10 ? ' urgent' : '');
+  disp.className = 'timer-display' + (timeLeft <= 10 ? ' urgent pulsing' : '');
 }
 
 function timeExpired() {
   answered = true;
   const q = SESSION[idx];
+  dotStates[idx] = 'timeout';
+  resultLog.push({ q: q.q, correct: false, correctAns: q.opts[q.a], timedOut: true });
   document.querySelectorAll('.opt').forEach((btn, j) => {
     btn.disabled = true;
     if (j === q.a) btn.classList.add('correct'); else btn.classList.add('timeout');
@@ -599,19 +639,31 @@ function timeExpired() {
   const fb = document.getElementById('feedback');
   fb.className = 'feedback show timed';
   fb.innerHTML = `<strong>⏱ Time's up!</strong> ${q.f}`;
-  const nb = document.getElementById('nextBtn');
-  nb.className = 'next-btn show';
-  nb.textContent = idx === 4 ? 'See My Score →' : 'Next →';
+  document.getElementById('nextBtn').className = 'next-btn';
+  startAutoAdvance();
 }
 
 // ── Question ──────────────────────────────────────────────────────────────────
+function renderDots() {
+  const row = document.getElementById('dotRow');
+  row.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i < idx ? ' done-' + (dotStates[i] || 'correct') : i === idx ? ' active' : '');
+    row.appendChild(d);
+  }
+}
+
 function showQuestion() {
   const q = SESSION[idx];
   answered = false;
+  clearTimeout(advanceTimeout);
+  document.getElementById('advanceWrap').style.display = 'none';
   document.getElementById('qCounter').textContent = `Question ${idx + 1} of 5`;
   document.getElementById('qNum').textContent = `Q${idx + 1}`;
   document.getElementById('correctCount').textContent = score;
   document.getElementById('answeredCount').textContent = idx;
+  renderDots();
   const dp = document.getElementById('diffPill');
   dp.textContent = q.dl;
   dp.className = `diff-pill d${q.diff}`;
@@ -633,6 +685,21 @@ function showQuestion() {
   startTimer();
 }
 
+function startAutoAdvance() {
+  const wrap = document.getElementById('advanceWrap');
+  const fill = document.getElementById('advanceFill');
+  wrap.style.display = 'block';
+  fill.style.transition = 'none';
+  fill.style.width = '100%';
+  // Force reflow then animate
+  fill.offsetWidth;
+  fill.style.transition = `width ${ADVANCE_MS}ms linear`;
+  fill.style.width = '0%';
+  advanceTimeout = setTimeout(() => {
+    if (idx < 4) { idx++; showQuestion(); } else showResult();
+  }, ADVANCE_MS);
+}
+
 function selectAnswer(i) {
   if (answered) return;
   answered = true;
@@ -640,6 +707,9 @@ function selectAnswer(i) {
   const q = SESSION[idx];
   const correct = i === q.a;
   if (correct) score++;
+  dotStates[idx] = correct ? 'correct' : 'wrong';
+  resultLog.push({ q: q.q, correct, correctAns: q.opts[q.a] });
+
   document.getElementById('correctCount').textContent = score;
   document.getElementById('answeredCount').textContent = idx + 1;
   document.querySelectorAll('.opt').forEach((btn, j) => {
@@ -650,14 +720,12 @@ function selectAnswer(i) {
   const fb = document.getElementById('feedback');
   fb.className = `feedback show ${correct ? 'ok' : 'bad'}`;
   fb.innerHTML = `<strong>${correct ? '✓ Correct!' : '✗ Not quite.'}</strong> ${q.f}`;
-  const nb = document.getElementById('nextBtn');
-  nb.className = 'next-btn show';
-  nb.textContent = idx === 4 ? 'See My Score →' : 'Next →';
+  // Hide next button — auto-advance handles it
+  document.getElementById('nextBtn').className = 'next-btn';
+  startAutoAdvance();
 }
 
-document.getElementById('nextBtn').onclick = () => {
-  if (idx < 4) { idx++; showQuestion(); } else showResult();
-};
+// Navigation handled by auto-advance
 
 // ── Result & save ─────────────────────────────────────────────────────────────
 function showResult() {
