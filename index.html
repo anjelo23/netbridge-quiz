@@ -160,7 +160,8 @@ h2{font-size:21px;font-weight:700;margin-bottom:8px;}
   -webkit-appearance:none;
 }
 /* Only show focus ring when navigating by keyboard, not mouse/touch */
-.opt:focus-visible{border-color:rgba(0,200,224,0.45);}
+.opt:focus,.opt:focus-visible,.opt:focus-within{outline:none!important;box-shadow:none!important;}
+.opt:active{outline:none!important;}
 .opt-key{
   font-family:'DM Mono',monospace;font-size:11px;
   background:rgba(255,255,255,0.07);color:var(--gray);
@@ -176,7 +177,7 @@ h2{font-size:21px;font-weight:700;margin-bottom:8px;}
 .opt.wrong{border-color:var(--danger);background:rgba(255,77,109,0.08);animation:wShake 0.4s ease;}
 .opt.wrong .opt-key{background:var(--danger);color:var(--white);}
 .opt.timeout{border-color:rgba(255,255,255,0.12);opacity:0.4;}
-.opt:disabled{cursor:default;}
+.opt.spent{cursor:default;pointer-events:none;}
 
 /* Feedback */
 .feedback{margin-top:18px;padding:14px 18px;border-radius:12px;font-size:14px;line-height:1.6;display:none;}
@@ -542,6 +543,79 @@ function sndTick(){tone(900,0.04,'square',0.07);}
 function sndTimeout(){tone(340,0.28,'sawtooth',0.12);}
 function sndBeep(){tone(440,0.11);}
 function sndGo(){tone(660,0.08);setTimeout(()=>tone(880,0.2),70);}
+
+// Score result sounds — synthesised with Web Audio API
+// Each is distinct so students immediately feel the emotional result
+function sndScore(s){
+  if(muted)return;
+  const t=getCtx().currentTime;
+  // Score 0 or 1: sad trombone — descending wah-wah-wah
+  if(s<=1){
+    const notes=[494,466,440,415];
+    notes.forEach((f,i)=>{
+      const o=getCtx().createOscillator(),g=getCtx().createGain();
+      o.connect(g);g.connect(getCtx().destination);
+      o.type='sawtooth';o.frequency.setValueAtTime(f,t+i*0.22);
+      g.gain.setValueAtTime(0.18,t+i*0.22);
+      g.gain.exponentialRampToValueAtTime(0.001,t+i*0.22+0.3);
+      o.start(t+i*0.22);o.stop(t+i*0.22+0.35);
+    });
+    return;
+  }
+  // Score 2: double low "womp womp"
+  if(s===2){
+    [[300,0],[240,0.35]].forEach(([f,delay])=>{
+      const o=getCtx().createOscillator(),g=getCtx().createGain();
+      o.connect(g);g.connect(getCtx().destination);
+      o.type='sawtooth';o.frequency.setValueAtTime(f,t+delay);
+      o.frequency.linearRampToValueAtTime(f*0.7,t+delay+0.28);
+      g.gain.setValueAtTime(0.15,t+delay);
+      g.gain.exponentialRampToValueAtTime(0.001,t+delay+0.32);
+      o.start(t+delay);o.stop(t+delay+0.35);
+    });
+    return;
+  }
+  // Score 3: short upward "ding!" — neutral/ok
+  if(s===3){
+    [523,659,784].forEach((f,i)=>{
+      const o=getCtx().createOscillator(),g=getCtx().createGain();
+      o.connect(g);g.connect(getCtx().destination);
+      o.type='sine';o.frequency.value=f;
+      g.gain.setValueAtTime(0.2,t+i*0.11);
+      g.gain.exponentialRampToValueAtTime(0.001,t+i*0.11+0.22);
+      o.start(t+i*0.11);o.stop(t+i*0.11+0.25);
+    });
+    return;
+  }
+  // Score 4: happy 5-note ascending jingle
+  if(s===4){
+    [523,587,659,698,784].forEach((f,i)=>{
+      const o=getCtx().createOscillator(),g=getCtx().createGain();
+      o.connect(g);g.connect(getCtx().destination);
+      o.type='triangle';o.frequency.value=f;
+      g.gain.setValueAtTime(0.22,t+i*0.1);
+      g.gain.exponentialRampToValueAtTime(0.001,t+i*0.1+0.28);
+      o.start(t+i*0.1);o.stop(t+i*0.1+0.3);
+    });
+    return;
+  }
+  // Score 5: triumphant fanfare — full ascending chord resolution
+  if(s===5){
+    const fanfare=[
+      [523,0],[659,0.1],[784,0.2],
+      [523,0.4],[659,0.5],[784,0.6],[1047,0.6],
+      [880,0.9],[1047,1.0],[1175,1.1]
+    ];
+    fanfare.forEach(([f,delay])=>{
+      const o=getCtx().createOscillator(),g=getCtx().createGain();
+      o.connect(g);g.connect(getCtx().destination);
+      o.type='triangle';o.frequency.value=f;
+      g.gain.setValueAtTime(0.2,t+delay);
+      g.gain.exponentialRampToValueAtTime(0.001,t+delay+0.35);
+      o.start(t+delay);o.stop(t+delay+0.38);
+    });
+  }
+}
 function toggleMute(){
   muted=!muted;
   const b=document.getElementById('soundBtn');
@@ -664,7 +738,8 @@ function timeUp(){
   const q=SESSION[idx];dotStates[idx]='timeout';
   resultLog.push({q:q.q,correct:false,ans:q.opts[q.a],timedOut:true});
   document.querySelectorAll('.opt').forEach((b,j)=>{
-    b.disabled=true;
+    b.classList.add('spent');
+    b.onclick=null;
     if(j===q.a)b.classList.add('correct');else b.classList.add('timeout');
   });
   document.getElementById('answeredCount').textContent=idx+1;
@@ -696,9 +771,10 @@ function showQ(){
   }
 
   ['A','B','C','D'].forEach((k,i)=>{
-    const b=document.createElement('button');
+    const b=document.createElement('div');
     b.className='opt';
-    b.setAttribute('tabindex','-1'); // prevent tab-key focus from cycling through options
+    b.setAttribute('role','button');
+    // divs are NEVER auto-focused by browsers — no blue highlight can appear
     b.innerHTML=`<span class="opt-key">${k}</span>${q.opts[i]}`;
     b.onclick=()=>pick(i);
     con.appendChild(b);
@@ -718,7 +794,8 @@ function pick(i){
   document.getElementById('correctCount').textContent=score;
   document.getElementById('answeredCount').textContent=idx+1;
   document.querySelectorAll('.opt').forEach((b,j)=>{
-    b.disabled=true;
+    b.classList.add('spent');
+    b.onclick=null;
     if(j===q.a)b.classList.add('correct');
     if(j===i&&!ok)b.classList.add('wrong');
   });
@@ -771,6 +848,7 @@ function finish(){
   });
 
   if(score===5)setTimeout(launchConfetti,350);
+  setTimeout(()=>sndScore(score),400); // score-based sound after result screen animates in
 
   const done=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
   if(!done.includes(studentId)){done.push(studentId);localStorage.setItem(STORAGE_KEY,JSON.stringify(done));}
