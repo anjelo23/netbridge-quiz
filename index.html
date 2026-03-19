@@ -24,7 +24,7 @@
   --navy:#0b1120;--blue:#1352a0;--cyan:#00c4d8;--gold:#f0b429;
   --white:#ffffff;--gray:#8899b4;--success:#22d07a;--danger:#ff4d6d;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;outline:none;}
 body{font-family:'Figtree',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background-image:linear-gradient(rgba(0,196,216,0.04)1px,transparent 1px),linear-gradient(90deg,rgba(0,196,216,0.04)1px,transparent 1px);
@@ -762,15 +762,10 @@ function showQ(){
   document.getElementById('questionText').textContent=q.q;
   const con=document.getElementById('options');con.innerHTML='';
 
-  // FIX: Blur any active element before rendering new buttons.
-  // This prevents the browser from auto-focusing the first button in the new
-  // DOM and showing a blue focus ring — which could coincide with the correct
-  // answer's position and reveal it before the student clicks.
-  if(document.activeElement&&document.activeElement.blur){
-    document.activeElement.blur();
-  }
+  // Blur before building options
+  if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
 
-  // Build options first so they exist, but pointer-events off during animation
+  // Options built with pointer-events off — re-enabled after setTimeout(0) animation trigger
   con.style.pointerEvents='none';
   ['A','B','C','D'].forEach((k,i)=>{
     const b=document.createElement('div');
@@ -783,21 +778,21 @@ function showQ(){
   });
   document.getElementById('feedback').className='feedback';
   document.getElementById('feedback').innerHTML='';
-  // Animate card — reflow happens here, but pointer-events are off so
-  // browser cannot assign focus to any option during the layout pass
+  // Blur before card animation as belt-and-braces
+  if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
+
   const card=document.getElementById('card');
-  card.classList.remove('animate');void card.offsetWidth;card.classList.add('animate');
-  // Re-enable pointer events after the next paint — by this point any
-  // auto-focus the browser tried to assign has already been suppressed
-  requestAnimationFrame(()=>{
-    requestAnimationFrame(()=>{
-      con.style.pointerEvents='';
-      // Final safety blur — kills any lingering focus after double-rAF
-      if(document.activeElement&&document.activeElement!==document.body){
-        document.activeElement.blur();
-      }
-    });
-  });
+  card.classList.remove('animate');
+  // Use setTimeout(0) instead of void offsetWidth to trigger the CSS animation.
+  // void offsetWidth forces a synchronous reflow WHILE options exist in the DOM,
+  // causing the browser to assign focus to the first role=button div — the
+  // root cause of the blue highlight on Q2+.
+  // setTimeout(0) defers the class addition past the call stack, so no
+  // synchronous layout pass ever runs while option divs are present.
+  setTimeout(()=>{
+    card.classList.add('animate');
+    con.style.pointerEvents='';
+  },0);
   startTimer();
 }
 
