@@ -203,11 +203,8 @@
 </div>
 
 <script>
-// ─── Token (must match QUIZ_TOKEN in Vercel environment variables) ────────────
-// Replace this string with whatever you set as QUIZ_TOKEN in Vercel.
-// This is safe in your source code — it only validates YOUR frontend can save,
-// but the real secret (the Sheet URL) never appears here at all.
-const QUIZ_TOKEN = "REPLACE_WITH_YOUR_QUIZ_TOKEN";
+// Paste your Google Apps Script URL below
+const SHEET_URL = "https://script.google.com/macros/s/AKfycby_VfYPSs1mfif77JTQrBo3ADvowLJYV-Nt5OlpGhRiwQLBKD5gRIpWRChSecq12WH7Yw/exec";
 
 // ─── Question bank ────────────────────────────────────────────────────────────
 // Mix of Netbridge-specific and applied industry questions.
@@ -698,14 +695,13 @@ function saveResult() {
   note.textContent = '⏳ Saving your result...';
   const timestamp = new Date().toLocaleString('en-NZ', { timeZone: 'Pacific/Auckland' });
 
-  // Posts to /api/save — a Vercel serverless function.
-  // The Google Sheets URL never appears in this file.
-  fetch('/api/save', {
+  fetch(SHEET_URL, {
     method: 'POST',
+    mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ token: QUIZ_TOKEN, name: playerName, studentId, score, outOf: 5, timestamp })
+    body: JSON.stringify({ name: playerName, studentId, score, outOf: 5, timestamp })
   })
-  .then(r => { note.textContent = r.ok ? '✓ Result saved.' : ''; })
+  .then(() => { note.textContent = '✓ Result saved.'; })
   .catch(() => { note.textContent = ''; });
 }
 </script>
