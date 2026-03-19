@@ -6,206 +6,291 @@
 <title>Netbridge Industry Connect Quiz</title>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0a1628; --blue: #1a4a8a; --cyan: #00c8e0; --gold: #f0b429;
-    --white: #ffffff; --gray: #8a9bb5; --success: #22d07a; --danger: #ff4d6d;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Figtree', sans-serif; background: var(--navy); color: var(--white); min-height: 100vh; overflow-x: hidden; }
-  body::before {
-    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
-    background-image: linear-gradient(rgba(0,200,224,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,224,0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-  .orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.13; pointer-events: none; z-index: 0; }
-  .orb1 { width: 420px; height: 420px; background: var(--cyan); top: -120px; right: -100px; }
-  .orb2 { width: 320px; height: 320px; background: var(--blue); bottom: -80px; left: -100px; }
-  .wrapper { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding: 48px 24px 72px; }
-  .header { text-align: center; margin-bottom: 44px; }
-  .event-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(0,200,224,0.1); border: 1px solid rgba(0,200,224,0.28);
-    border-radius: 100px; padding: 5px 16px;
-    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--cyan);
-    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 18px;
-  }
-  .event-badge::before { content: '◈'; }
-  h1 { font-size: clamp(30px, 5vw, 48px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
-  h1 em { color: var(--cyan); font-style: normal; }
-  .tagline { color: var(--gray); font-size: 15px; margin-top: 10px; }
+:root {
+  --navy:#0a1628; --blue:#1a4a8a; --cyan:#00c8e0; --gold:#f0b429;
+  --white:#fff; --gray:#8a9bb5; --success:#22d07a; --danger:#ff4d6d;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Figtree',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(0,200,224,0.04)1px,transparent 1px),linear-gradient(90deg,rgba(0,200,224,0.04)1px,transparent 1px);
+  background-size:40px 40px;}
+.orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:0.12;pointer-events:none;z-index:0;}
+.orb1{width:420px;height:420px;background:var(--cyan);top:-120px;right:-100px;}
+.orb2{width:320px;height:320px;background:var(--blue);bottom:-80px;left:-100px;}
+.wrapper{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:32px 24px 72px;}
 
-  /* Registration */
-  #registerScreen { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 40px 36px; animation: slideUp 0.3s ease; }
-  .reg-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-  .reg-sub { color: var(--gray); font-size: 14px; margin-bottom: 28px; line-height: 1.6; }
-  .field { margin-bottom: 20px; }
-  .field label { display: block; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
-  .field input { width: 100%; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 14px 16px; color: var(--white); font-family: 'Figtree', sans-serif; font-size: 16px; outline: none; transition: border-color 0.2s; }
-  .field input:focus { border-color: var(--cyan); }
-  .field input::placeholder { color: var(--gray); }
-  .field-error { color: var(--danger); font-size: 12px; font-family: 'DM Mono', monospace; margin-top: 6px; display: none; }
-  .rules-box { background: rgba(240,180,41,0.07); border: 1px solid rgba(240,180,41,0.2); border-radius: 12px; padding: 16px 18px; margin-bottom: 28px; }
-  .rules-box h3 { font-size: 13px; color: var(--gold); font-family: 'DM Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
-  .rules-box ul { list-style: none; }
-  .rules-box ul li { color: var(--gray); font-size: 13px; padding: 3px 0; display: flex; gap: 8px; }
-  .rules-box ul li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
-  .start-btn { width: 100%; background: var(--cyan); border: none; border-radius: 12px; color: var(--navy); font-family: 'Figtree', sans-serif; font-size: 16px; font-weight: 700; padding: 16px; cursor: pointer; transition: all 0.18s; }
-  .start-btn:hover { background: #00dff5; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,200,224,0.28); }
+/* ── Header ── */
+.site-header{text-align:center;margin-bottom:32px;}
+.nb-logo{height:38px;margin-bottom:14px;display:block;margin-left:auto;margin-right:auto;}
+.event-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,200,224,0.1);border:1px solid rgba(0,200,224,0.28);border-radius:100px;padding:5px 16px;font-family:'DM Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;}
+.event-badge::before{content:'◈';}
 
-  /* Already attempted */
-  #doneScreen { display: none; text-align: center; background: rgba(255,77,109,0.06); border: 1px solid rgba(255,77,109,0.2); border-radius: 20px; padding: 56px 36px; animation: slideUp 0.3s ease; }
-  .done-icon { font-size: 56px; margin-bottom: 12px; }
-  .done-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
-  .done-sub { color: var(--gray); font-size: 15px; line-height: 1.6; }
+/* ── Fixed overlays ── */
+#tabWarning{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--danger);color:#fff;padding:13px 20px;display:none;align-items:center;justify-content:center;gap:10px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.03em;animation:slideDown 0.3s ease;}
+@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+#confettiCanvas{display:none;position:fixed;inset:0;z-index:999;pointer-events:none;}
+#shareOverlay{position:fixed;inset:0;z-index:900;background:rgba(5,12,28,0.94);display:none;align-items:center;justify-content:center;padding:24px;}
+.share-card{background:var(--navy);border:1px solid rgba(0,200,224,0.3);border-radius:20px;padding:40px 36px;max-width:400px;width:100%;text-align:center;}
+.share-logo{height:30px;margin-bottom:20px;display:block;margin-left:auto;margin-right:auto;}
+.share-event{font-family:'DM Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:20px;}
+.share-player{font-size:19px;font-weight:700;margin-bottom:4px;}
+.share-big{font-size:70px;font-weight:900;color:var(--cyan);line-height:1;margin:10px 0 4px;}
+.share-of{font-size:22px;color:var(--gray);}
+.share-date{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray);margin-bottom:18px;margin-top:4px;}
+.share-hint{font-size:13px;color:var(--gray);margin-bottom:24px;line-height:1.5;}
+.share-close{background:transparent;border:1.5px solid rgba(255,255,255,0.18);border-radius:8px;color:var(--gray);font-family:'DM Mono',monospace;font-size:11px;padding:8px 20px;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;}
+.share-close:hover{border-color:var(--cyan);color:var(--white);}
 
-  /* Quiz */
-  #quizArea { display: none; }
-  .quiz-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
-  .q-counter { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; }
-  .player-tag { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--gray); }
-  .player-tag span { color: var(--white); }
-  .timer-row { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
-  .timer-track { flex: 1; background: rgba(255,255,255,0.07); border-radius: 100px; height: 6px; overflow: hidden; }
-  .timer-fill { height: 100%; border-radius: 100px; transition: width 1s linear, background 1s linear; width: 100%; background: var(--cyan); }
-  .timer-display { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--cyan); min-width: 28px; text-align: right; transition: color 0.3s; }
-  .timer-display.urgent { color: var(--danger); }
-  .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px; backdrop-filter: blur(10px); }
-  .card.animate { animation: slideUp 0.3s ease; }
-  @keyframes slideUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-  .q-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-  .q-num { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; }
-  .diff-pill { font-family: 'DM Mono', monospace; font-size: 11px; padding: 3px 11px; border-radius: 100px; letter-spacing: 0.07em; text-transform: uppercase; }
-  .d3 { background: rgba(240,180,41,0.12); color: #f0c050; border: 1px solid rgba(240,180,41,0.25); }
-  .d4 { background: rgba(255,140,0,0.12); color: #ff9f43; border: 1px solid rgba(255,140,0,0.25); }
-  .d5 { background: rgba(255,77,109,0.12); color: var(--danger); border: 1px solid rgba(255,77,109,0.3); }
-  .d6 { background: rgba(180,0,255,0.15); color: #d580ff; border: 1px solid rgba(180,0,255,0.35); }
-  .question { font-size: 20px; font-weight: 700; line-height: 1.45; margin-bottom: 26px; letter-spacing: -0.01em; }
-  .options { display: flex; flex-direction: column; gap: 11px; }
-  .opt { display: flex; align-items: flex-start; gap: 14px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.09); border-radius: 12px; padding: 15px 18px; font-size: 15px; font-weight: 500; line-height: 1.45; text-align: left; color: var(--white); font-family: 'Figtree', sans-serif; cursor: pointer; transition: all 0.16s; width: 100%; }
-  .opt-key { font-family: 'DM Mono', monospace; font-size: 11px; background: rgba(255,255,255,0.07); color: var(--gray); border-radius: 6px; padding: 3px 8px; min-width: 28px; text-align: center; flex-shrink: 0; margin-top: 2px; transition: all 0.16s; }
-  .opt:hover:not(:disabled) { border-color: rgba(0,200,224,0.45); background: rgba(0,200,224,0.07); transform: translateX(4px); }
-  .opt:hover:not(:disabled) .opt-key { background: rgba(0,200,224,0.2); color: var(--cyan); }
-  .opt.correct { border-color: var(--success); background: rgba(34,208,122,0.09); }
-  .opt.correct .opt-key { background: var(--success); color: var(--navy); }
-  .opt.wrong { border-color: var(--danger); background: rgba(255,77,109,0.08); }
-  .opt.wrong .opt-key { background: var(--danger); color: var(--white); }
-  .opt.timeout { border-color: rgba(255,255,255,0.15); opacity: 0.45; }
-  .opt:disabled { cursor: default; }
-  .feedback { margin-top: 18px; padding: 14px 18px; border-radius: 12px; font-size: 14px; line-height: 1.6; display: none; }
-  .feedback.show { display: block; animation: slideUp 0.22s ease; }
-  .feedback.ok   { background: rgba(34,208,122,0.09); border: 1px solid rgba(34,208,122,0.28); color: #b6f5d6; }
-  .feedback.bad  { background: rgba(255,77,109,0.09); border: 1px solid rgba(255,77,109,0.28); color: #ffc2cc; }
-  .feedback.timed{ background: rgba(240,180,41,0.09); border: 1px solid rgba(240,180,41,0.28); color: #ffe8a0; }
-  .feedback strong { color: var(--white); }
-  .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 22px; flex-wrap: wrap; gap: 10px; }
-  .running-score { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--gray); }
-  .running-score b { color: var(--cyan); }
-  .next-btn { background: var(--cyan); border: none; border-radius: 11px; color: var(--navy); font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 700; padding: 13px 30px; cursor: pointer; transition: all 0.18s; display: none; }
-  .next-btn.show { display: inline-flex; align-items: center; gap: 7px; }
-  .next-btn:hover { background: #00dff5; transform: translateY(-2px); }
+/* ── Common screen card ── */
+.screen-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:36px;}
+h1{font-size:clamp(26px,5vw,42px);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:10px;}
+h1 em,h2 em{color:var(--cyan);font-style:normal;}
+h2{font-size:21px;font-weight:700;margin-bottom:8px;}
+.tagline{color:var(--gray);font-size:15px;margin-bottom:28px;line-height:1.6;}
+.screen-sub{color:var(--gray);font-size:14px;margin-bottom:24px;line-height:1.6;}
 
-  /* Result */
-  .result-screen { display: none; text-align: center; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 56px 36px; }
-  .result-screen.show { display: block; animation: slideUp 0.35s ease; }
-  .result-icon { font-size: 62px; margin-bottom: 6px; }
-  .result-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
-  .result-name { font-size: 18px; font-weight: 700; color: var(--cyan); margin-bottom: 4px; }
-  .result-id { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--gray); margin-bottom: 16px; }
-  .result-big { font-size: 86px; font-weight: 800; color: var(--cyan); line-height: 1; }
-  .result-of { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--gray); margin-bottom: 4px; }
-  .result-msg { font-size: 22px; font-weight: 700; margin: 20px 0 8px; }
-  .result-sub { color: var(--gray); font-size: 15px; margin-bottom: 28px; line-height: 1.6; }
-  .done-note { display: inline-block; background: rgba(0,200,224,0.08); border: 1px solid rgba(0,200,224,0.2); border-radius: 10px; padding: 12px 24px; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--cyan); letter-spacing: 0.05em; }
-  .saving-note { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray); margin-top: 16px; }
-  @media (max-width: 580px) { .card { padding: 24px 18px; } .question { font-size: 17px; } #registerScreen { padding: 28px 20px; } }
+/* ── Prepare screen ── */
+.research-links{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+.res-link{display:block;background:rgba(0,200,224,0.07);border:1px solid rgba(0,200,224,0.2);border-radius:10px;padding:14px 18px;color:var(--white);text-decoration:none;font-size:14px;line-height:1.4;transition:all 0.18s;}
+.res-link:hover{background:rgba(0,200,224,0.13);border-color:rgba(0,200,224,0.4);transform:translateX(4px);}
+.res-link .res-arrow{color:var(--cyan);margin-right:6px;font-family:'DM Mono',monospace;}
+.rules-box{background:rgba(240,180,41,0.07);border:1px solid rgba(240,180,41,0.2);border-radius:12px;padding:16px 18px;margin-bottom:28px;}
+.rules-title{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;}
+.rules-box ul{list-style:none;}
+.rules-box li{color:var(--gray);font-size:13px;padding:4px 0 4px 16px;position:relative;}
+.rules-box li::before{content:'—';position:absolute;left:0;color:var(--gold);}
 
-  /* ── Dot progress ── */
-  .dot-row { display: flex; gap: 8px; justify-content: center; margin-bottom: 24px; }
-  .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.12); transition: all 0.3s; }
-  .dot.done-correct { background: var(--success); }
-  .dot.done-wrong   { background: var(--danger); }
-  .dot.done-timeout { background: var(--gold); }
-  .dot.active       { background: var(--cyan); transform: scale(1.3); }
+/* ── Primary button ── */
+.primary-btn{width:100%;background:var(--cyan);border:none;border-radius:12px;color:var(--navy);font-family:'Figtree',sans-serif;font-size:16px;font-weight:700;padding:16px;cursor:pointer;transition:all 0.18s;min-height:52px;}
+.primary-btn:hover{background:#00dff5;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,200,224,0.28);}
 
-  /* ── Micro-animations ── */
-  @keyframes correctPulse { 0%{box-shadow:0 0 0 0 rgba(34,208,122,0.5)} 60%{box-shadow:0 0 0 14px rgba(34,208,122,0)} 100%{box-shadow:0 0 0 0 rgba(34,208,122,0)} }
-  @keyframes wrongShake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
-  @keyframes timerPulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
-  .opt.correct { animation: correctPulse 0.6s ease; }
-  .opt.wrong   { animation: wrongShake 0.4s ease; }
-  .timer-display.pulsing { animation: timerPulse 0.7s infinite; }
+/* ── Form fields ── */
+.field{margin-bottom:20px;}
+.field label{display:block;font-family:'DM Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;}
+.field input{width:100%;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 16px;color:var(--white);font-family:'Figtree',sans-serif;font-size:16px;outline:none;transition:border-color 0.2s;min-height:52px;}
+.field input:focus{border-color:var(--cyan);}
+.field input::placeholder{color:var(--gray);}
+.field-error{color:var(--danger);font-size:12px;font-family:'DM Mono',monospace;margin-top:6px;display:none;}
 
-  /* ── Auto-advance strip ── */
-  .advance-wrap { height: 3px; background: rgba(255,255,255,0.07); border-radius: 100px; margin-top: 18px; overflow: hidden; display: none; }
-  .advance-fill { height: 100%; background: var(--cyan); border-radius: 100px; width: 100%; }
+/* ── Done screen ── */
+.done-card{border-color:rgba(255,77,109,0.2)!important;background:rgba(255,77,109,0.05)!important;}
+.done-title{font-size:20px;font-weight:700;margin-bottom:10px;}
+.done-sub{color:var(--gray);font-size:15px;line-height:1.6;}
 
-  /* ── Result breakdown ── */
-  .breakdown { margin: 20px 0 28px; display: flex; flex-direction: column; gap: 8px; text-align: left; }
-  .breakdown-row { display: flex; align-items: flex-start; gap: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 12px 14px; }
-  .breakdown-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-  .breakdown-q strong { display: block; color: var(--white); font-size: 13px; margin-bottom: 2px; }
-  .breakdown-q span { color: var(--gray); font-size: 12px; line-height: 1.5; }
+/* ── Countdown ── */
+#countdownScreen{display:none;text-align:center;padding:80px 0;}
+.cd-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;}
+.cd-num{font-size:130px;font-weight:900;color:var(--cyan);line-height:1;letter-spacing:-0.04em;}
+@keyframes cdPop{0%{transform:scale(0.65);opacity:0.4}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+.cd-num.pop{animation:cdPop 0.4s ease;}
 
-  /* ── Bigger touch targets on mobile ── */
-  @media (max-width: 580px) {
-    .opt { min-height: 52px; font-size: 14px; padding: 14px 14px; }
-    .start-btn, .next-btn { min-height: 52px; }
-  }
+/* ── Quiz area ── */
+.quiz-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.q-counter{font-family:'DM Mono',monospace;font-size:12px;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;}
+.quiz-right{display:flex;align-items:center;gap:10px;}
+.player-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray);}
+.player-tag strong{color:var(--white);}
+.sound-btn{background:transparent;border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:var(--gray);font-family:'DM Mono',monospace;font-size:10px;padding:5px 10px;cursor:pointer;transition:all 0.2s;letter-spacing:0.04em;white-space:nowrap;}
+.sound-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+.sound-btn.muted{color:var(--danger);border-color:rgba(255,77,109,0.3);}
+
+/* ── Dot progress ── */
+.dot-row{display:flex;gap:8px;justify-content:center;margin-bottom:20px;}
+.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.12);transition:all 0.3s;}
+.dot.done-correct{background:var(--success);}
+.dot.done-wrong{background:var(--danger);}
+.dot.done-timeout{background:var(--gold);}
+.dot.active{background:var(--cyan);transform:scale(1.35);}
+
+/* ── Timer ── */
+.timer-row{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+.timer-track{flex:1;background:rgba(255,255,255,0.07);border-radius:100px;height:6px;overflow:hidden;}
+.timer-fill{height:100%;border-radius:100px;transition:width 1s linear,background 1s linear;background:var(--cyan);width:100%;}
+.timer-num{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--cyan);min-width:28px;text-align:right;transition:color 0.3s;}
+@keyframes tPulse{0%,100%{opacity:1}50%{opacity:0.25}}
+.timer-num.urgent{color:var(--danger);animation:tPulse 0.65s infinite;}
+
+/* ── Card ── */
+.card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:36px;backdrop-filter:blur(10px);}
+@keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.card.animate{animation:slideUp 0.3s ease;}
+.q-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.q-num{font-family:'DM Mono',monospace;font-size:12px;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;}
+.diff-pill{font-family:'DM Mono',monospace;font-size:11px;padding:3px 11px;border-radius:100px;letter-spacing:0.07em;text-transform:uppercase;}
+.d3{background:rgba(240,180,41,0.12);color:#f0c050;border:1px solid rgba(240,180,41,0.25);}
+.d4{background:rgba(255,140,0,0.12);color:#ff9f43;border:1px solid rgba(255,140,0,0.25);}
+.d5{background:rgba(255,77,109,0.12);color:var(--danger);border:1px solid rgba(255,77,109,0.3);}
+.d6{background:rgba(180,0,255,0.15);color:#d580ff;border:1px solid rgba(180,0,255,0.35);}
+.question{font-size:20px;font-weight:700;line-height:1.45;margin-bottom:26px;letter-spacing:-0.01em;}
+
+/* ── Options ── */
+.options{display:flex;flex-direction:column;gap:11px;}
+.opt{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.09);border-radius:12px;padding:15px 18px;font-size:15px;font-weight:500;line-height:1.45;text-align:left;color:var(--white);font-family:'Figtree',sans-serif;cursor:pointer;transition:all 0.16s;width:100%;min-height:52px;}
+.opt-key{font-family:'DM Mono',monospace;font-size:11px;background:rgba(255,255,255,0.07);color:var(--gray);border-radius:6px;padding:3px 8px;min-width:28px;text-align:center;flex-shrink:0;margin-top:2px;transition:all 0.16s;}
+.opt:hover:not(:disabled){border-color:rgba(0,200,224,0.45);background:rgba(0,200,224,0.07);transform:translateX(4px);}
+.opt:hover:not(:disabled) .opt-key{background:rgba(0,200,224,0.2);color:var(--cyan);}
+@keyframes cPulse{0%{box-shadow:0 0 0 0 rgba(34,208,122,0.5)}60%{box-shadow:0 0 0 14px rgba(34,208,122,0)}100%{box-shadow:0 0 0 0 rgba(34,208,122,0)}}
+@keyframes wShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.opt.correct{border-color:var(--success);background:rgba(34,208,122,0.09);animation:cPulse 0.6s ease;}
+.opt.correct .opt-key{background:var(--success);color:var(--navy);}
+.opt.wrong{border-color:var(--danger);background:rgba(255,77,109,0.08);animation:wShake 0.4s ease;}
+.opt.wrong .opt-key{background:var(--danger);color:var(--white);}
+.opt.timeout{border-color:rgba(255,255,255,0.12);opacity:0.4;}
+.opt:disabled{cursor:default;}
+
+/* ── Feedback ── */
+.feedback{margin-top:18px;padding:14px 18px;border-radius:12px;font-size:14px;line-height:1.6;display:none;}
+.feedback.show{display:block;animation:slideUp 0.22s ease;}
+.feedback.ok{background:rgba(34,208,122,0.09);border:1px solid rgba(34,208,122,0.28);color:#b6f5d6;}
+.feedback.bad{background:rgba(255,77,109,0.09);border:1px solid rgba(255,77,109,0.28);color:#ffc2cc;}
+.feedback.timed{background:rgba(240,180,41,0.09);border:1px solid rgba(240,180,41,0.28);color:#ffe8a0;}
+.feedback strong{color:var(--white);}
+
+/* ── Auto-advance strip ── */
+.adv-wrap{height:3px;background:rgba(255,255,255,0.07);border-radius:100px;margin-top:18px;overflow:hidden;display:none;}
+.adv-fill{height:100%;background:var(--cyan);border-radius:100px;width:100%;}
+.card-foot{display:flex;justify-content:flex-end;margin-top:18px;}
+.run-score{font-family:'DM Mono',monospace;font-size:13px;color:var(--gray);}
+.run-score b{color:var(--cyan);}
+
+/* ── Result ── */
+#resultScreen{display:none;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:48px 36px;text-align:center;}
+.res-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;}
+.res-name{font-size:18px;font-weight:700;color:var(--cyan);margin-bottom:4px;}
+.res-id{font-family:'DM Mono',monospace;font-size:12px;color:var(--gray);margin-bottom:16px;}
+.res-big{font-size:86px;font-weight:900;color:var(--cyan);line-height:1;}
+.res-of{font-family:'DM Mono',monospace;font-size:13px;color:var(--gray);margin-bottom:4px;}
+.res-msg{font-size:20px;font-weight:700;margin:18px 0 6px;}
+.res-sub{color:var(--gray);font-size:15px;margin-bottom:24px;line-height:1.6;}
+.breakdown{display:flex;flex-direction:column;gap:8px;text-align:left;margin-bottom:28px;}
+.bd-row{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:12px 14px;}
+.bd-bar{width:4px;min-height:36px;border-radius:4px;flex-shrink:0;margin-top:2px;}
+.bd-c{background:var(--success);}
+.bd-w{background:var(--danger);}
+.bd-t{background:var(--gold);}
+.bd-text strong{display:block;color:var(--white);font-size:13px;margin-bottom:2px;}
+.bd-text span{color:var(--gray);font-size:12px;line-height:1.5;}
+.res-actions{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:16px;}
+.prize-note{font-family:'DM Mono',monospace;font-size:12px;color:var(--cyan);background:rgba(0,200,224,0.08);border:1px solid rgba(0,200,224,0.2);border-radius:8px;padding:10px 20px;letter-spacing:0.04em;}
+.share-btn{background:transparent;border:1.5px solid rgba(255,255,255,0.18);border-radius:10px;color:var(--white);font-family:'Figtree',sans-serif;font-size:14px;font-weight:600;padding:12px 28px;cursor:pointer;transition:all 0.2s;}
+.share-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+.save-note{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray);margin-top:8px;}
+
+/* ── Mobile ── */
+@media(max-width:580px){
+  .wrapper{padding:20px 16px 60px;}
+  .card{padding:24px 18px;}
+  .question{font-size:17px;}
+  .screen-card,#resultScreen{padding:26px 20px;}
+  .cd-num{font-size:100px;}
+  .share-card{padding:28px 20px;}
+  .share-big{font-size:56px;}
+}
 </style>
 </head>
 <body>
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
+
+<!-- Tab-switch warning banner -->
+<div id="tabWarning">
+  <strong>Tab switch detected</strong>&nbsp;&mdash;&nbsp;This has been recorded and flagged on your result.
+</div>
+
+<!-- Confetti canvas -->
+<canvas id="confettiCanvas"></canvas>
+
+<!-- Share overlay -->
+<div id="shareOverlay">
+  <div class="share-card">
+    <img src="https://netbridge.co.nz/wp-content/uploads/2023/12/Netbridge-logo.png" alt="Netbridge" class="share-logo" onerror="this.style.display='none'">
+    <div class="share-event">Industry Connect Quiz</div>
+    <div class="share-player" id="shareName"></div>
+    <div class="share-big"><span id="shareNum"></span><span class="share-of">/5</span></div>
+    <div class="share-date" id="shareDate"></div>
+    <div class="share-hint">Take a screenshot to share your result</div>
+    <button class="share-close" onclick="document.getElementById('shareOverlay').style.display='none'">Close</button>
+  </div>
+</div>
+
 <div class="wrapper">
-  <div class="header">
+
+  <!-- Always-visible site header -->
+  <div class="site-header">
+    <img src="https://netbridge.co.nz/wp-content/uploads/2023/12/Netbridge-logo.png" alt="Netbridge" class="nb-logo" onerror="this.style.display='none'">
     <div class="event-badge">Industry Connect Event</div>
-    <h1>Netbridge <em>Quiz</em></h1>
-    <p class="tagline">Research hard. Answer fast. Win the prize.</p>
   </div>
 
-  <div id="registerScreen">
-    <div class="reg-title">Enter your details to begin</div>
-    <p class="reg-sub">Your name, student ID, and score are recorded. Each student ID can only attempt once.</p>
-    <div class="field">
-      <label>Full Name</label>
-      <input type="text" id="nameInput" placeholder="e.g. Jamie Smith" autocomplete="off">
-      <div class="field-error" id="nameError">Please enter your full name.</div>
-    </div>
-    <div class="field">
-      <label>Student ID</label>
-      <input type="text" id="idInput" placeholder="e.g. 12345678" autocomplete="off">
-      <div class="field-error" id="idError">Please enter your student ID.</div>
-      <div class="field-error" id="idUsedError">This student ID has already been used.</div>
+  <!-- Screen 1: Prepare -->
+  <div id="prepareScreen">
+    <h1>Before you <em>begin</em></h1>
+    <p class="tagline">This quiz tests how well you know Netbridge. Research carefully — questions are specific and the timer does not stop. One attempt per student ID.</p>
+    <div class="research-links">
+      <a href="https://netbridge.co.nz/about-us/" target="_blank" rel="noopener" class="res-link"><span class="res-arrow">&#8594;</span>About Us &mdash; staff profiles, qualifications, and company values</a>
+      <a href="https://netbridge.co.nz/services/" target="_blank" rel="noopener" class="res-link"><span class="res-arrow">&#8594;</span>Services &mdash; every service and sub-service listed in full</a>
+      <a href="https://netbridge.co.nz/projects/" target="_blank" rel="noopener" class="res-link"><span class="res-arrow">&#8594;</span>Projects &mdash; client names, technologies deployed, and results</a>
+      <a href="https://www.linkedin.com/company/netbridge-ltd-nz-/" target="_blank" rel="noopener" class="res-link"><span class="res-arrow">&#8594;</span>LinkedIn &mdash; team members and roles</a>
     </div>
     <div class="rules-box">
-      <h3>⚡ Quiz Rules</h3>
+      <div class="rules-title">Rules</div>
       <ul>
-        <li>5 questions — 30 seconds each</li>
+        <li>5 questions &mdash; 30 seconds each, auto-advancing after each answer</li>
         <li>Questions and answer order are randomised for every player</li>
-        <li>One attempt per student ID — no replays</li>
-        <li>Show your final score screen to claim the prize</li>
+        <li>One attempt per student ID &mdash; no replays</li>
+        <li>Switching tabs is detected and recorded against your result</li>
       </ul>
     </div>
-    <button class="start-btn" onclick="startQuiz()">Start Quiz →</button>
+    <button class="primary-btn" onclick="showScreen('registerScreen')">I&rsquo;m ready &mdash; start registration</button>
   </div>
 
-  <div id="doneScreen">
-    <div class="done-icon">🔒</div>
-    <div class="done-title">Already attempted</div>
-    <p class="done-sub">Student ID <strong id="usedId"></strong> has already completed this quiz.<br>Each student ID can only be used once.</p>
+  <!-- Screen 2: Register -->
+  <div id="registerScreen" style="display:none">
+    <div class="screen-card">
+      <h2>Your <em>details</em></h2>
+      <p class="screen-sub">Your name, student ID, and score will be recorded. Each student ID can only attempt once.</p>
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" id="nameInput" placeholder="e.g. Jamie Smith" autocomplete="off">
+        <div class="field-error" id="nameError">Please enter your full name.</div>
+      </div>
+      <div class="field">
+        <label>Student ID</label>
+        <input type="text" id="idInput" placeholder="e.g. 12345678" autocomplete="off">
+        <div class="field-error" id="idError">Please enter your student ID.</div>
+        <div class="field-error" id="idUsedError">This student ID has already been used.</div>
+      </div>
+      <button class="primary-btn" onclick="register()">Confirm and start</button>
+    </div>
   </div>
 
-  <div id="quizArea">
-    <div class="quiz-meta">
+  <!-- Screen: Already attempted -->
+  <div id="doneScreen" style="display:none">
+    <div class="screen-card done-card">
+      <div class="done-title">Already attempted</div>
+      <p class="done-sub">Student ID <strong id="usedIdEl"></strong> has already completed this quiz.<br>Each student ID can only be used once.</p>
+    </div>
+  </div>
+
+  <!-- Screen 3: Countdown -->
+  <div id="countdownScreen">
+    <div class="cd-label">Get ready &mdash; starting in</div>
+    <div class="cd-num" id="cdNum">3</div>
+  </div>
+
+  <!-- Screen 4: Quiz -->
+  <div id="quizArea" style="display:none">
+    <div class="quiz-topbar">
       <span class="q-counter" id="qCounter">Question 1 of 5</span>
-      <span class="player-tag">Playing as <span id="playerName"></span></span>
+      <div class="quiz-right">
+        <span class="player-tag">Playing as <strong id="playerTag"></strong></span>
+        <button class="sound-btn" id="soundBtn" onclick="toggleMute()">SOUND ON</button>
+      </div>
     </div>
     <div class="dot-row" id="dotRow"></div>
     <div class="timer-row">
-      <div class="timer-track">
-        <div class="timer-fill" id="timerFill"></div>
-      </div>
-      <div class="timer-display" id="timerDisplay">30</div>
+      <div class="timer-track"><div class="timer-fill" id="timerFill"></div></div>
+      <div class="timer-num" id="timerNum">30</div>
     </div>
     <div class="card" id="card">
       <div class="q-header">
@@ -215,562 +300,423 @@
       <div class="question" id="questionText"></div>
       <div class="options" id="options"></div>
       <div class="feedback" id="feedback"></div>
-      <div class="advance-wrap" id="advanceWrap"><div class="advance-fill" id="advanceFill"></div></div>
-      <div class="card-footer">
-        <span class="running-score">Correct: <b id="correctCount">0</b> / <b id="answeredCount">0</b></span>
-        <button class="next-btn" id="nextBtn">Next →</button>
+      <div class="adv-wrap" id="advWrap"><div class="adv-fill" id="advFill"></div></div>
+      <div class="card-foot">
+        <span class="run-score">Correct: <b id="correctCount">0</b> / <b id="answeredCount">0</b></span>
       </div>
     </div>
   </div>
 
-  <div class="result-screen" id="resultScreen">
-    <div class="result-icon" id="resultIcon"></div>
-    <div class="result-label">Your final score</div>
-    <div class="result-name" id="resultName"></div>
-    <div class="result-id" id="resultIdDisplay"></div>
-    <div class="result-big" id="resultBig"></div>
-    <div class="result-of">out of 5</div>
-    <div class="result-msg" id="resultMsg"></div>
-    <div class="result-sub" id="resultSub"></div>
-    <div class="done-note">Show this screen to claim your prize! 🎒</div>
-    <div class="saving-note" id="savingNote"></div>
+  <!-- Screen 5: Result -->
+  <div id="resultScreen">
+    <div class="res-label">Your final score</div>
+    <div class="res-name" id="resName"></div>
+    <div class="res-id" id="resId"></div>
+    <div class="res-big" id="resBig"></div>
+    <div class="res-of">out of 5</div>
+    <div class="res-msg" id="resMsg"></div>
+    <div class="res-sub" id="resSub"></div>
+    <div class="breakdown" id="breakdownEl"></div>
+    <div class="res-actions">
+      <div class="prize-note">Show this screen to claim your prize</div>
+      <button class="share-btn" onclick="openShare()">Share my result</button>
+    </div>
+    <div class="save-note" id="saveNote"></div>
   </div>
-</div>
+
+</div><!-- /wrapper -->
 
 <script>
-// Paste your Google Apps Script URL below
-const SHEET_URL = "https://script.google.com/macros/s/AKfycby_VfYPSs1mfif77JTQrBo3ADvowLJYV-Nt5OlpGhRiwQLBKD5gRIpWRChSecq12WH7Yw/exec";
+// ── Config ────────────────────────────────────────────────────────────────────
+const SHEET_URL  = "https://script.google.com/macros/s/AKfycbwTNMwGIAqweJQ0QM4ReBCBeiZljxmluM7dVUATXJsDH5LNgvR_BXjSvFYuOi982DBysA/exec";
+const STORAGE_KEY = 'nbq_v4';
+const TIMER_SECS  = 30;
+const ADVANCE_MS  = 2600;
 
-// ─── Question bank ────────────────────────────────────────────────────────────
-// Mix of Netbridge-specific and applied industry questions.
-// Every wrong answer is a real thing — no obvious eliminations.
-
+// ── Question bank ─────────────────────────────────────────────────────────────
 const ALL_QUESTIONS = [
-
-  // ── PROJECTS — specific numbers and details from Netbridge case studies ──────
-
-  {
-    q: "The AIA Building DAS project delivered what total coverage outcome?",
-    opts: [
-      "19,722m2 total with no over-delivery achieved",
-      "13,500m2 contracted plus 1,200m2 over-delivery",
-      "16,722m2 contracted plus 3,000m2 over-delivery",
-      "16,722m2 contracted with no additional area"
-    ],
-    a: 2, diff: 5, dl: "Expert",
-    f: "Netbridge delivered 16,722m2 of contracted coverage plus an additional 3,000m2 over-delivery — including reception, dining, and serviced offices not in the original contract."
-  },
-  {
-    q: "At the AIA Building, Carrier 2 signal performance averaged what result?",
-    opts: [
-      "12.7dB above minimum — 16x stronger than required",
-      "18.4dB above minimum — 64x stronger than required",
-      "10.2dB above minimum — 8x stronger than required",
-      "22.8dB above minimum — 193x stronger than required"
-    ],
-    a: 3, diff: 5, dl: "Expert",
-    f: "Carrier 2 averaged -72.14dBm — 22.8dB above the minimum standard, making it 193x stronger than required. Carrier 1 was 16x stronger. Both specific numbers are in the case study."
-  },
-  {
-    q: "What caused the mobile signal loss at the AIA Building during construction?",
-    opts: [
-      "Reinforced concrete in the floor slabs",
-      "Steel mesh panels in the external walls",
-      "Lead lining installed in the basement ceiling",
-      "Metal oxide contained within the glass cladding"
-    ],
-    a: 3, diff: 4, dl: "Hard",
-    f: "Metal oxide in the glass cladding blocked mobile signals. This is specific to the AIA Building case study on the Netbridge website — a detail you'd only know by reading it."
-  },
-  {
-    q: "What antenna type did Netbridge use exclusively in the AIA Building DAS?",
-    opts: [
-      "Omnidirectional ceiling-mount antennas only",
-      "Panel antennas only, with mechanical down-tilt",
-      "Leaky feeder coax cable run throughout floors",
-      "Yagi directional antennas at each floor entry"
-    ],
-    a: 1, diff: 5, dl: "Expert",
-    f: "Netbridge used panel antennas only with mechanical down-tilting — this reduced antenna count while maximising coverage footprint, including areas outside the contracted zones."
-  },
-  {
-    q: "Netbridge supports the Ministry of Education across how many sites nationwide?",
-    opts: [
-      "1,800 sites nationwide",
-      "3,200 sites nationwide",
-      "4,100 sites nationwide",
-      "2,500 sites nationwide"
-    ],
-    a: 3, diff: 4, dl: "Hard",
-    f: "The Ministry of Education project involves network LAN switching and WiFi support services across 2,500 sites nationwide. It is listed on Netbridge's Projects page."
-  },
-  {
-    q: "For Metlifecare, which network technology did Netbridge specifically deploy?",
-    opts: [
-      "Dark fibre point-to-point between buildings",
-      "HFC hybrid fibre coax across all village sites",
-      "XGPON fibre with a centralised OLT per village",
-      "GPON fibre, LAN switching and wireless WiFi"
-    ],
-    a: 3, diff: 4, dl: "Hard",
-    f: "The Metlifecare solution on Netbridge's Projects page specifically lists GPON Fibre, LAN switching and wireless WiFi design, build and provisioning across multi-site village builds."
-  },
-  {
-    q: "The DCI Data Centers project was a large data centre build in which city?",
-    opts: [
-      "Hamilton CBD",
-      "Wellington CBD",
-      "Christchurch CBD",
-      "Auckland CBD"
-    ],
-    a: 3, diff: 3, dl: "Medium",
-    f: "The DCI Data Centers project was a large data centre build in Auckland — listed on Netbridge's Projects page. All four are real NZ cities where large data centres operate."
-  },
-  {
-    q: "Netbridge worked for Downer across which combination of sectors?",
-    opts: [
-      "Retail, hospitality, education, health, government",
-      "Mining, agriculture, transport, commercial, education",
-      "Defence, transport, utilities, retail, local government",
-      "Transport, construction, health, commercial, local government"
-    ],
-    a: 3, diff: 4, dl: "Hard",
-    f: "The Downer project page lists: transport, construction, health, commercial, and local government. The other options mix in sectors not mentioned — retail, mining, defence, agriculture."
-  },
-
-  // ── STAFF — all wrong answers use real names, real institutions, real quals ──
-
-  {
-    q: "What two degrees did Jack Tan complete at Auckland University?",
-    opts: [
-      "B.Eng and Masters in Business Administration",
-      "B.ComSci and Masters in Telecommunications",
-      "B.IT and Masters in Information Management",
-      "B.Eng and Masters in Business and Commercial Law"
-    ],
-    a: 3, diff: 4, dl: "Hard",
-    f: "Jack Tan holds a Bachelor of Engineering and a Masters in Business and Commercial Law from Auckland University — not an MBA, not telecoms. The Commercial Law component is what makes it distinctive."
-  },
-  {
-    q: "Where did Simran Singh complete his IT Diplomas in Information Technology and Support?",
-    opts: [
-      "Auckland University of Technology",
-      "Manukau Institute of Technology",
-      "Massey University Albany Campus",
-      "Unitec Institute of Technology"
-    ],
-    a: 3, diff: 4, dl: "Hard",
-    f: "Simran Singh holds IT Diplomas from Unitec Institute of Technology. AUT, MIT Manukau, and Massey are all real Auckland institutions — but Unitec is specifically named in his profile."
-  },
-  {
-    q: "Ashley Pirimona holds Microsoft commercial qualifications and which certification?",
-    opts: [
-      "PRINCE2 certified",
-      "CCNA certified",
-      "PMP certified",
-      "ITIL certified"
-    ],
-    a: 3, diff: 4, dl: "Hard",
-    f: "Ashley Pirimona is ITIL certified. Eviv Hu holds a CCNA. PRINCE2 and PMP are real project management certifications — but neither is mentioned for Ashley. All four are real credentials."
-  },
-  {
-    q: "Netbridge's About Us page describes Simran Singh as bringing what to projects?",
-    opts: [
-      "A sharp analytical edge and rapid problem-solving ability",
-      "A creative and innovative approach to technology deployment",
-      "A structured governance framework across all engagements",
-      "A steady hand with thoughtful insights from extensive experience"
-    ],
-    a: 3, diff: 4, dl: "Hard",
-    f: "The exact wording on his profile is: 'Simran provides a steady hand to all our projects with thoughtful insights based on his extensive experience.' The other options are invented but plausible."
-  },
-  {
-    q: "Netbridge's vision statement names three qualities for enduring relationships — which?",
-    opts: [
-      "Excellence, innovation, and accountability",
-      "Integrity, reliability, and continuous improvement",
-      "Quality, speed, and client satisfaction",
-      "Trust, transparency, and mutual respect"
-    ],
-    a: 3, diff: 4, dl: "Hard",
-    f: "The About Us page states: 'enduring relationships built on trust, transparency, and mutual respect.' All four options sound like genuine corporate values — only one is Netbridge's actual wording."
-  },
-  {
-    q: "What is Netbridge's stated ultimate aim for every project, per their mission?",
-    opts: [
-      "Deliver on time, within scope, and to full specification",
-      "Exceed client expectations while maintaining team profitability",
-      "Build long-term partnerships through consistent delivery",
-      "Complete on deadline, under budget, and surpass customer expectations"
-    ],
-    a: 3, diff: 4, dl: "Hard",
-    f: "Their exact words: 'Our ultimate aim is to complete projects on deadline, under budget, and to surpass customer expectations.' The others are real project management goals but not Netbridge's wording."
-  },
-  {
-    q: "Eviv Hu's three qualifications — which combination is exactly correct?",
-    opts: [
-      "B.Telecoms, Masters in Telecoms (AUT), Masters in Business (Lincoln)",
-      "B.Eng, Masters in Telecoms (AUT), Masters in Business (Massey)",
-      "B.Telecoms, Masters in IT (Unitec), Masters in Business (AUT)",
-      "B.IT, Masters in Telecoms (Auckland Uni), Masters in Business (Lincoln)"
-    ],
-    a: 0, diff: 5, dl: "Expert",
-    f: "Eviv Hu holds a Bachelor's in Telecommunications, a Masters in Telecommunications from AUT, and a Masters in Business from Lincoln University. The wrong options swap institutions between qualifications."
-  },
-
-  // ── SERVICES — requires reading each page carefully ─────────────────────────
-
-  {
-    q: "Which of these appears under Netbridge's Networks list, NOT Telecommunications?",
-    opts: [
-      "RF over Fiber",
-      "PBX and VoIP",
-      "4G and 5G LTE",
-      "Copper Cable G.hn"
-    ],
-    a: 3, diff: 5, dl: "Expert",
-    f: "Copper Cable G.hn Solutions is listed under Networks. RF over Fiber, PBX/VoIP, and 4G/5G LTE Services are all listed under Telecommunications. Both pages look nearly identical."
-  },
-  {
-    q: "Which item on Netbridge's Managed Services list stands out as unusual for an MSP?",
-    opts: [
-      "24x7 Escalated Support service",
-      "Network Advisory Consultancy service",
-      "AI and Chat GPT integration service",
-      "IT Roadmap and Design service"
-    ],
-    a: 2, diff: 4, dl: "Hard",
-    f: "All four are real items on Netbridge's Managed Services page — but AI and Chat GPT stands out as something no traditional MSP listed until very recently. You need to have read the full list."
-  },
-  {
-    q: "Which Netbridge cyber service specifically names industrial OT in its title?",
-    opts: [
-      "ICS Threat Detection service",
-      "OT Endpoint Protection service",
-      "SCADA Hardening and Review service",
-      "Industrial OT BMS Cyber Security"
-    ],
-    a: 3, diff: 5, dl: "Expert",
-    f: "Industrial OT BMS Cyber Security is the exact service name on Netbridge's Services page. ICS, SCADA, and OT Endpoint Protection all sound real but are fabricated for this question."
-  },
-  {
-    q: "Under Cloud Applications, which Netbridge service helps clients retain on-premise systems?",
-    opts: [
-      "Cloud Risk Assessment offering",
-      "Storage and Backups management",
-      "Legacy Systems integration offering",
-      "Cloud Migration and Enablement"
-    ],
-    a: 2, diff: 4, dl: "Hard",
-    f: "Legacy Systems is listed under Netbridge's Cloud Applications — unusual because most cloud vendors push clients fully off-premises. All four are real items from the same page."
-  },
-  {
-    q: "What does VCISO stand for as listed in Netbridge's cyber security services?",
-    opts: [
-      "Verified Cyber Infrastructure Security Officer",
-      "Validated Compliance and Information Security Oversight",
-      "Virtual Chief Information Security Officer",
-      "Virtual Cyber Incident and Security Operations"
-    ],
-    a: 2, diff: 4, dl: "Hard",
-    f: "VCISO stands for Virtual Chief Information Security Officer — an outsourced executive security leadership role. The other three expansions are fabricated but follow the same initialism."
-  },
-
-  // ── INDUSTRY — applied technical knowledge with exact values ─────────────────
-
-  {
-    q: "VoIP voice bearer traffic should be tagged with which DSCP marking?",
-    opts: [
-      "CS3 — decimal 24",
-      "AF41 — decimal 34",
-      "CS5 — decimal 40",
-      "EF — decimal 46"
-    ],
-    a: 3, diff: 5, dl: "Expert",
-    f: "DSCP EF (Expedited Forwarding, decimal 46) is the correct marking for VoIP voice bearer traffic. CS5 is for call signalling, AF41 for interactive video, CS3 for broadcast video — all real DSCP values."
-  },
-  {
-    q: "GPON at 2.488Gbps downstream splits 1:32. What is the max per ONT at full load?",
-    opts: [
-      "155.5Mbps",
-      "311Mbps",
-      "77.75Mbps",
-      "622Mbps"
-    ],
-    a: 2, diff: 5, dl: "Expert",
-    f: "2488Mbps divided by 32 equals 77.75Mbps per ONT at full saturation. In practice dynamic bandwidth allocation lets ONTs burst higher — but 77.75Mbps is the shared floor. This is why XGPON (10Gbps) matters."
-  },
-  {
-    q: "In a SASE architecture, which component specifically replaces traditional VPN?",
-    opts: [
-      "CASB — Cloud Access Security Broker",
-      "SWG — Secure Web Gateway",
-      "FWaaS — Firewall as a Service",
-      "ZTNA — Zero Trust Network Access"
-    ],
-    a: 3, diff: 5, dl: "Expert",
-    f: "ZTNA replaces VPN by granting access only to specific applications, not the whole network. CASB secures cloud app usage, SWG filters web traffic, FWaaS is the cloud firewall — all real SASE components."
-  },
-  {
-    q: "Modbus TCP — used in Netbridge's SCADA OT deployments — runs on which port?",
-    opts: [
-      "TCP 102",
-      "TCP 502",
-      "TCP 1911",
-      "TCP 4840"
-    ],
-    a: 1, diff: 5, dl: "Expert",
-    f: "Modbus TCP uses port 502. TCP 102 is Siemens S7, TCP 1911 is Niagara Fox building automation, TCP 4840 is OPC-UA — all real OT protocol ports. Knowing exact port numbers is critical for OT firewall rules."
-  },
-  {
-    q: "What specific security advantage does OSDP v2 have over legacy Wiegand?",
-    opts: [
-      "Longer RS-485 cable runs without signal loss",
-      "AES-128 encryption versus Wiegand cleartext transmission",
-      "Local credential storage without needing a controller",
-      "Bidirectional TCP/IP instead of serial signalling"
-    ],
-    a: 1, diff: 5, dl: "Expert",
-    f: "OSDP v2 provides AES-128 encryption and mutual authentication. Wiegand transmits card data in cleartext — trivially sniffable with cheap hardware. OSDP is bidirectional but still uses RS-485, not TCP/IP."
-  },
+  // PROJECTS
+  { q:"The AIA Building DAS project delivered what total coverage outcome?",
+    opts:["19,722m2 total with no over-delivery achieved","13,500m2 contracted plus 1,200m2 over-delivery","16,722m2 contracted plus 3,000m2 over-delivery","16,722m2 contracted with no additional area"],
+    a:2,diff:5,dl:"Expert",
+    f:"Netbridge delivered 16,722m2 contracted plus an additional 3,000m2 over-delivery — covering reception, dining, and serviced offices not in the original contract scope." },
+  { q:"At the AIA Building, Carrier 2 signal performance averaged what result?",
+    opts:["12.7dB above minimum — 16x stronger than required","18.4dB above minimum — 64x stronger than required","10.2dB above minimum — 8x stronger than required","22.8dB above minimum — 193x stronger than required"],
+    a:3,diff:5,dl:"Expert",
+    f:"Carrier 2 averaged -72.14dBm — 22.8dB above minimum, making it 193x stronger than required. Carrier 1 was 16x stronger. Both figures are in the case study on the Netbridge website." },
+  { q:"What caused the mobile signal loss at the AIA Building during construction?",
+    opts:["Reinforced concrete in the floor slabs","Steel mesh panels in the external walls","Lead lining installed in the basement ceiling","Metal oxide contained within the glass cladding"],
+    a:3,diff:4,dl:"Hard",
+    f:"Metal oxide in the glass cladding blocked mobile signals. This detail is specific to the AIA Building case study on the Netbridge website — only findable by reading it." },
+  { q:"What antenna type did Netbridge use exclusively in the AIA Building DAS?",
+    opts:["Omnidirectional ceiling-mount antennas only","Panel antennas only, with mechanical down-tilt","Leaky feeder coax cable run throughout floors","Yagi directional antennas at each floor entry"],
+    a:1,diff:5,dl:"Expert",
+    f:"Netbridge used panel antennas only with mechanical down-tilting. This reduced antenna count while maximising coverage footprint — including 3,000m2 beyond the contracted area." },
+  { q:"Netbridge supports the Ministry of Education across how many sites nationwide?",
+    opts:["1,800 sites nationwide","3,200 sites nationwide","4,100 sites nationwide","2,500 sites nationwide"],
+    a:3,diff:4,dl:"Hard",
+    f:"The Ministry of Education project involves LAN switching and WiFi support across 2,500 sites nationwide with 130+ points of presence. Listed on Netbridge's Projects page." },
+  { q:"For Metlifecare, which network technology did Netbridge specifically deploy?",
+    opts:["Dark fibre point-to-point between buildings","HFC hybrid fibre coax across all village sites","XGPON fibre with a centralised OLT per village","GPON fibre, LAN switching and wireless WiFi"],
+    a:3,diff:4,dl:"Hard",
+    f:"The Metlifecare solution specifically lists GPON Fibre, LAN switching, and wireless WiFi design, build and provisioning — across multi-site village builds and upgrades nationwide." },
+  { q:"The DCI Data Centers project was a large data centre build in which city?",
+    opts:["Hamilton CBD","Wellington CBD","Christchurch CBD","Auckland CBD"],
+    a:3,diff:3,dl:"Medium",
+    f:"The DCI Data Centers project was a large data centre build in Auckland. All four are real NZ cities where data centres exist — only Auckland is correct for this client." },
+  { q:"Netbridge worked for Downer across which combination of sectors?",
+    opts:["Retail, hospitality, education, health, government","Mining, agriculture, transport, commercial, education","Defence, transport, utilities, retail, local government","Transport, construction, health, commercial, local government"],
+    a:3,diff:4,dl:"Hard",
+    f:"The Downer project page lists: transport, construction, health, commercial, and local government. The wrong options include sectors like retail, mining, and defence which are not mentioned." },
+  // STAFF
+  { q:"What two degrees did Jack Tan complete at Auckland University?",
+    opts:["B.Eng and Masters in Business Administration","B.ComSci and Masters in Telecommunications","B.IT and Masters in Information Management","B.Eng and Masters in Business and Commercial Law"],
+    a:3,diff:4,dl:"Hard",
+    f:"Jack Tan holds a Bachelor of Engineering and a Masters in Business and Commercial Law from Auckland University. Not an MBA, not telecoms — the Commercial Law component is the distinguishing detail." },
+  { q:"Where did Simran Singh complete his IT Diplomas in Information Technology and Support?",
+    opts:["Auckland University of Technology","Manukau Institute of Technology","Massey University Albany Campus","Unitec Institute of Technology"],
+    a:3,diff:4,dl:"Hard",
+    f:"Simran Singh holds IT Diplomas from Unitec Institute of Technology. AUT, MIT Manukau, and Massey are all real Auckland institutions — but Unitec is specifically named in his profile." },
+  { q:"Ashley Pirimona holds Microsoft commercial qualifications and which certification?",
+    opts:["PRINCE2 certified","CCNA certified","PMP certified","ITIL certified"],
+    a:3,diff:4,dl:"Hard",
+    f:"Ashley Pirimona is ITIL certified. Eviv Hu holds a CCNA. PRINCE2 and PMP are real certifications held by project managers — but neither is listed for Ashley. All four are genuine credentials." },
+  { q:"Netbridge's About Us page describes Simran Singh as bringing what to projects?",
+    opts:["A sharp analytical edge and rapid problem-solving ability","A creative and innovative approach to technology deployment","A structured governance framework across all engagements","A steady hand with thoughtful insights from extensive experience"],
+    a:3,diff:4,dl:"Hard",
+    f:"The exact wording is: 'Simran provides a steady hand to all our projects with thoughtful insights based on his extensive experience.' The other options sound plausible but are fabricated." },
+  { q:"Netbridge's vision statement names three qualities for enduring relationships — which?",
+    opts:["Excellence, innovation, and accountability","Integrity, reliability, and continuous improvement","Quality, speed, and client satisfaction","Trust, transparency, and mutual respect"],
+    a:3,diff:4,dl:"Hard",
+    f:"The About Us page states: 'enduring relationships built on trust, transparency, and mutual respect.' All four options are genuine-sounding corporate values — only one is Netbridge's actual wording." },
+  { q:"What is Netbridge's stated ultimate aim for every project, per their mission?",
+    opts:["Deliver on time, within scope, and to full specification","Exceed client expectations while maintaining team profitability","Build long-term partnerships through consistent delivery","Complete on deadline, under budget, and surpass customer expectations"],
+    a:3,diff:4,dl:"Hard",
+    f:"Exact words from their mission: 'Our ultimate aim is to complete projects on deadline, under budget, and to surpass customer expectations.' The other options are real PM goals but not Netbridge's wording." },
+  { q:"Eviv Hu's three qualifications — which combination is exactly correct?",
+    opts:["B.Telecoms, Masters in Telecoms (AUT), Masters in Business (Lincoln)","B.Eng, Masters in Telecoms (AUT), Masters in Business (Massey)","B.Telecoms, Masters in IT (Unitec), Masters in Business (AUT)","B.IT, Masters in Telecoms (Auckland Uni), Masters in Business (Lincoln)"],
+    a:0,diff:5,dl:"Expert",
+    f:"Eviv Hu holds a Bachelor's in Telecommunications, a Masters in Telecommunications from AUT, and a Masters in Business from Lincoln University. The wrong options swap institutions between qualifications." },
+  // SERVICES
+  { q:"Which of these appears under Netbridge's Networks list, NOT Telecommunications?",
+    opts:["RF over Fiber","PBX and VoIP","4G and 5G LTE","Copper Cable G.hn"],
+    a:3,diff:5,dl:"Expert",
+    f:"Copper Cable G.hn Solutions is listed under Networks. RF over Fiber, PBX/VoIP, and 4G/5G LTE are all under Telecommunications. Both pages look nearly identical — you need to read each carefully." },
+  { q:"Which item on Netbridge's Managed Services list stands out as unusual for an MSP?",
+    opts:["24x7 Escalated Support service","Network Advisory Consultancy service","AI and Chat GPT integration service","IT Roadmap and Design service"],
+    a:2,diff:4,dl:"Hard",
+    f:"All four are real items on Netbridge's Managed Services page — but AI and Chat GPT is something no traditional MSP listed until very recently. You need to have read the full services list." },
+  { q:"Which Netbridge cyber service specifically names industrial OT in its title?",
+    opts:["ICS Threat Detection service","OT Endpoint Protection service","SCADA Hardening and Review service","Industrial OT BMS Cyber Security"],
+    a:3,diff:5,dl:"Expert",
+    f:"Industrial OT BMS Cyber Security is the exact service name on Netbridge's Services page. ICS, SCADA Hardening, and OT Endpoint Protection all sound plausible but are fabricated." },
+  { q:"Under Cloud Applications, which Netbridge service helps clients retain on-premise systems?",
+    opts:["Cloud Risk Assessment offering","Storage and Backups management","Legacy Systems integration offering","Cloud Migration and Enablement"],
+    a:2,diff:4,dl:"Hard",
+    f:"Legacy Systems is listed under Netbridge's Cloud Applications — unusual because most cloud vendors push clients fully off-premises. All four are real items from the same page." },
+  { q:"What does VCISO stand for as listed in Netbridge's cyber security services?",
+    opts:["Verified Cyber Infrastructure Security Officer","Validated Compliance and Information Security Oversight","Virtual Chief Information Security Officer","Virtual Cyber Incident and Security Operations"],
+    a:2,diff:4,dl:"Hard",
+    f:"VCISO stands for Virtual Chief Information Security Officer — an outsourced executive security leadership role. The other three expansions are fabricated but follow the same initialism pattern." },
+  // INDUSTRY
+  { q:"VoIP voice bearer traffic should be tagged with which DSCP marking?",
+    opts:["CS3 — decimal 24","AF41 — decimal 34","CS5 — decimal 40","EF — decimal 46"],
+    a:3,diff:5,dl:"Expert",
+    f:"DSCP EF (Expedited Forwarding, decimal 46) is the correct marking for VoIP voice bearer. CS5 handles call signalling, AF41 is interactive video, CS3 is broadcast video — all real DSCP values." },
+  { q:"GPON at 2.488Gbps downstream with a 1:32 split — max bandwidth per ONT at full load?",
+    opts:["155.5Mbps","311Mbps","77.75Mbps","622Mbps"],
+    a:2,diff:5,dl:"Expert",
+    f:"2488Mbps ÷ 32 = 77.75Mbps per ONT at full saturation. Dynamic bandwidth allocation lets ONTs burst when others are idle — but 77.75Mbps is the shared floor. This is why XGPON (10Gbps) matters." },
+  { q:"In a SASE architecture, which component specifically replaces traditional VPN?",
+    opts:["CASB — Cloud Access Security Broker","SWG — Secure Web Gateway","FWaaS — Firewall as a Service","ZTNA — Zero Trust Network Access"],
+    a:3,diff:5,dl:"Expert",
+    f:"ZTNA replaces VPN — granting access only to specific applications, not the whole network. CASB secures cloud app usage, SWG filters web traffic, FWaaS is the cloud firewall. All real SASE components." },
+  { q:"Modbus TCP — used in Netbridge's SCADA OT deployments — runs on which port?",
+    opts:["TCP 102","TCP 502","TCP 1911","TCP 4840"],
+    a:1,diff:5,dl:"Expert",
+    f:"Modbus TCP uses port 502. TCP 102 is Siemens S7, TCP 1911 is Niagara Fox building automation, TCP 4840 is OPC-UA — all real OT protocol ports used in similar Netbridge deployment environments." },
+  { q:"What specific security advantage does OSDP v2 have over legacy Wiegand?",
+    opts:["Longer RS-485 cable runs without signal loss","AES-128 encryption versus Wiegand cleartext transmission","Local credential storage without needing a controller","Bidirectional TCP/IP instead of serial signalling"],
+    a:1,diff:5,dl:"Expert",
+    f:"OSDP v2 provides AES-128 encryption and mutual authentication. Wiegand transmits card data in cleartext — trivially sniffable with cheap hardware. OSDP is bidirectional but still uses RS-485, not TCP/IP." },
 ];
 
-// ── Always Q5 — no guessing ───────────────────────────────────────────────────
-// Eviv Hu's direct number: +64 21 0289 9460 (About Us page)
-// All wrong options differ by exactly 1–2 digits.
+// ── Always Q5 — impossible without writing it down ────────────────────────────
 const IMPOSSIBLE = {
-  q: "What is Eviv Hu's direct phone number as listed on the Netbridge About Us page?",
-  opts: ["+64 21 0279 9460", "+64 21 0289 9460", "+64 21 0289 9640", "+64 21 0289 4960"],
-  a: 1, diff: 6, dl: "Impossible",
-  f: "Eviv Hu's direct number is +64 21 0289 9460. Every wrong option differs by one or two digits. You had to write this down from the website."
+  q:"What is Eviv Hu's direct phone number as listed on the Netbridge About Us page?",
+  opts:["+64 21 0279 9460","+64 21 0289 9460","+64 21 0289 9640","+64 21 0289 4960"],
+  a:1,diff:6,dl:"Impossible",
+  f:"Eviv Hu's direct number is +64 21 0289 9460 — listed on the About Us page. Every wrong option differs by one or two digits. You had to write this down from the website."
 };
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
   return a;
 }
-
 function shuffleOpts(q) {
-  const indexed = q.opts.map((text, i) => ({ text, correct: i === q.a }));
-  const shuffled = shuffle(indexed);
-  return { opts: shuffled.map(o => o.text), a: shuffled.findIndex(o => o.correct) };
+  const idx=q.opts.map((t,i)=>({t,c:i===q.a}));
+  const s=shuffle(idx);
+  return {opts:s.map(o=>o.t),a:s.findIndex(o=>o.c)};
 }
 
-// 4 random from pool + impossible last, answers shuffled per player
-const SESSION = shuffle(ALL_QUESTIONS).slice(0, 4).concat([IMPOSSIBLE])
-  .map(q => { const { opts, a } = shuffleOpts(q); return { ...q, opts, a }; });
+// Build session: 4 random from pool + impossible last, answer order shuffled per player
+const SESSION = shuffle(ALL_QUESTIONS).slice(0,4).concat([IMPOSSIBLE])
+  .map(q=>{const{opts,a}=shuffleOpts(q);return{...q,opts,a};});
 
 // ── State ─────────────────────────────────────────────────────────────────────
-let idx = 0, score = 0, answered = false, timerInterval = null, advanceTimeout = null, timeLeft = 30;
-let playerName = '', studentId = '';
-let dotStates = ['active','','','','']; // correct | wrong | timeout | active
-const TIMER_SECONDS = 30;
-const ADVANCE_MS = 2500; // auto-advance delay after answering
-const STORAGE_KEY = 'nbq_attempted_v2';
-let resultLog = []; // [{q, correct}]
+let idx=0,score=0,answered=false;
+let timerIv=null,advTimeout=null,timeLeft=TIMER_SECS;
+let playerName='',studentId='',tabSwitches=0,quizActive=false;
+let muted=false,audioCtx=null;
+let dotStates=['','','','',''];
+let resultLog=[];
+
+// ── Audio engine ──────────────────────────────────────────────────────────────
+function getCtx(){
+  if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==='suspended')audioCtx.resume();
+  return audioCtx;
+}
+function tone(freq,dur,type='sine',vol=0.25){
+  if(muted)return;
+  try{
+    const c=getCtx(),o=c.createOscillator(),g=c.createGain();
+    o.connect(g);g.connect(c.destination);
+    o.frequency.value=freq;o.type=type;
+    g.gain.setValueAtTime(vol,c.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+dur);
+    o.start(c.currentTime);o.stop(c.currentTime+dur);
+  }catch(e){}
+}
+function sndCorrect(){tone(523,0.1);setTimeout(()=>tone(659,0.15),85);}
+function sndWrong(){tone(270,0.22,'sawtooth',0.14);}
+function sndTick(){tone(900,0.04,'square',0.07);}
+function sndTimeout(){tone(340,0.28,'sawtooth',0.12);}
+function sndBeep(){tone(440,0.11);}
+function sndGo(){tone(660,0.08);setTimeout(()=>tone(880,0.2),70);}
+function toggleMute(){
+  muted=!muted;
+  const b=document.getElementById('soundBtn');
+  b.textContent=muted?'SOUND OFF':'SOUND ON';
+  b.classList.toggle('muted',muted);
+}
+
+// ── Confetti ──────────────────────────────────────────────────────────────────
+function launchConfetti(){
+  const cv=document.getElementById('confettiCanvas');
+  cv.style.display='block';cv.width=window.innerWidth;cv.height=window.innerHeight;
+  const cx=cv.getContext('2d');
+  const cols=['#00c8e0','#22d07a','#f0b429','#ffffff','#a78bfa','#ff9f43'];
+  const ps=Array.from({length:100},()=>({
+    x:Math.random()*cv.width,y:-10-Math.random()*120,
+    w:5+Math.random()*9,h:3+Math.random()*6,
+    c:cols[Math.floor(Math.random()*cols.length)],
+    vx:(Math.random()-0.5)*4,vy:1.5+Math.random()*3.5,
+    rot:Math.random()*360,vr:(Math.random()-0.5)*10
+  }));
+  let f=0;
+  function draw(){
+    cx.clearRect(0,0,cv.width,cv.height);
+    ps.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.vy+=0.04;p.rot+=p.vr;
+      cx.save();cx.globalAlpha=Math.max(0,1-f/190);
+      cx.translate(p.x,p.y);cx.rotate(p.rot*Math.PI/180);
+      cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      cx.restore();
+    });
+    f++;if(f<210)requestAnimationFrame(draw);else cv.style.display='none';
+  }
+  draw();
+}
+
+// ── Tab detection ─────────────────────────────────────────────────────────────
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden&&quizActive&&!answered){
+    tabSwitches++;
+    const w=document.getElementById('tabWarning');
+    w.style.display='flex';
+    setTimeout(()=>{w.style.display='none';},3200);
+  }
+});
+
+// ── Screen management ─────────────────────────────────────────────────────────
+function showScreen(id){
+  ['prepareScreen','registerScreen','doneScreen','countdownScreen','quizArea','resultScreen']
+    .forEach(s=>document.getElementById(s).style.display='none');
+  document.getElementById(id).style.display='block';
+}
 
 // ── Registration ──────────────────────────────────────────────────────────────
-function startQuiz() {
-  const nameVal = document.getElementById('nameInput').value.trim();
-  const idVal   = document.getElementById('idInput').value.trim();
-  let valid = true;
-
-  ['nameError','idError','idUsedError'].forEach(id => document.getElementById(id).style.display = 'none');
-
-  if (!nameVal) { document.getElementById('nameError').style.display = 'block'; valid = false; }
-  if (!idVal)   { document.getElementById('idError').style.display = 'block'; valid = false; }
-  if (!valid) return;
-
-  const attempted = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  if (attempted.includes(idVal)) {
-    document.getElementById('usedId').textContent = idVal;
-    document.getElementById('registerScreen').style.display = 'none';
-    document.getElementById('doneScreen').style.display = 'block';
-    return;
+function register(){
+  const n=document.getElementById('nameInput').value.trim();
+  const id=document.getElementById('idInput').value.trim();
+  let ok=true;
+  ['nameError','idError','idUsedError'].forEach(e=>document.getElementById(e).style.display='none');
+  if(!n){document.getElementById('nameError').style.display='block';ok=false;}
+  if(!id){document.getElementById('idError').style.display='block';ok=false;}
+  if(!ok)return;
+  const done=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  if(done.includes(id)){
+    document.getElementById('usedIdEl').textContent=id;
+    showScreen('doneScreen');return;
   }
-
-  playerName = nameVal;
-  studentId  = idVal;
-  document.getElementById('playerName').textContent = nameVal;
-  document.getElementById('registerScreen').style.display = 'none';
-  document.getElementById('quizArea').style.display = 'block';
-  showQuestion();
+  playerName=n;studentId=id;
+  document.getElementById('playerTag').textContent=n;
+  countdown(()=>{showScreen('quizArea');quizActive=true;showQ();});
 }
 
-// ── Timer ─────────────────────────────────────────────────────────────────────
-function startTimer() {
-  clearInterval(timerInterval);
-  timeLeft = TIMER_SECONDS;
-  updateTimerUI();
-  timerInterval = setInterval(() => {
-    timeLeft--;
-    updateTimerUI();
-    if (timeLeft <= 0) { clearInterval(timerInterval); timeExpired(); }
-  }, 1000);
+// ── Countdown ─────────────────────────────────────────────────────────────────
+function countdown(cb){
+  showScreen('countdownScreen');
+  const el=document.getElementById('cdNum');
+  let n=3;
+  el.textContent=n;el.className='cd-num pop';sndBeep();
+  const iv=setInterval(()=>{
+    n--;
+    el.className='cd-num';void el.offsetWidth;el.className='cd-num pop';
+    if(n>0){el.textContent=n;sndBeep();}
+    else if(n===0){el.textContent='GO';sndGo();}
+    else{clearInterval(iv);cb();}
+  },820);
 }
 
-function updateTimerUI() {
-  const pct  = (timeLeft / TIMER_SECONDS) * 100;
-  const fill = document.getElementById('timerFill');
-  const disp = document.getElementById('timerDisplay');
-  fill.style.width = pct + '%';
-  const red   = timeLeft <= 10 ? 255 : Math.round(34 + (255 - 34) * (1 - (timeLeft - 10) / 20));
-  const green = timeLeft <= 10 ? Math.round(208 * timeLeft / 10) : 208;
-  fill.style.background = `rgb(${red},${green},80)`;
-  disp.textContent = timeLeft;
-  disp.className = 'timer-display' + (timeLeft <= 10 ? ' urgent pulsing' : '');
-}
-
-function timeExpired() {
-  answered = true;
-  const q = SESSION[idx];
-  dotStates[idx] = 'timeout';
-  resultLog.push({ q: q.q, correct: false, correctAns: q.opts[q.a], timedOut: true });
-  document.querySelectorAll('.opt').forEach((btn, j) => {
-    btn.disabled = true;
-    if (j === q.a) btn.classList.add('correct'); else btn.classList.add('timeout');
-  });
-  document.getElementById('answeredCount').textContent = idx + 1;
-  const fb = document.getElementById('feedback');
-  fb.className = 'feedback show timed';
-  fb.innerHTML = `<strong>⏱ Time's up!</strong> ${q.f}`;
-  document.getElementById('nextBtn').className = 'next-btn';
-  startAutoAdvance();
-}
-
-// ── Question ──────────────────────────────────────────────────────────────────
-function renderDots() {
-  const row = document.getElementById('dotRow');
-  row.innerHTML = '';
-  for (let i = 0; i < 5; i++) {
-    const d = document.createElement('div');
-    d.className = 'dot' + (i < idx ? ' done-' + (dotStates[i] || 'correct') : i === idx ? ' active' : '');
+// ── Dots ──────────────────────────────────────────────────────────────────────
+function renderDots(){
+  const row=document.getElementById('dotRow');row.innerHTML='';
+  for(let i=0;i<5;i++){
+    const d=document.createElement('div');
+    d.className='dot'+(i<idx?' done-'+(dotStates[i]||'correct'):i===idx?' active':'');
     row.appendChild(d);
   }
 }
 
-function showQuestion() {
-  const q = SESSION[idx];
-  answered = false;
-  clearTimeout(advanceTimeout);
-  document.getElementById('advanceWrap').style.display = 'none';
-  document.getElementById('qCounter').textContent = `Question ${idx + 1} of 5`;
-  document.getElementById('qNum').textContent = `Q${idx + 1}`;
-  document.getElementById('correctCount').textContent = score;
-  document.getElementById('answeredCount').textContent = idx;
+// ── Timer ─────────────────────────────────────────────────────────────────────
+function startTimer(){
+  clearInterval(timerIv);timeLeft=TIMER_SECS;updateTimer();
+  timerIv=setInterval(()=>{
+    timeLeft--;updateTimer();
+    if(timeLeft>0&&timeLeft<=10)sndTick();
+    if(timeLeft<=0){clearInterval(timerIv);timeUp();}
+  },1000);
+}
+function updateTimer(){
+  const pct=(timeLeft/TIMER_SECS)*100;
+  const f=document.getElementById('timerFill'),d=document.getElementById('timerNum');
+  f.style.width=pct+'%';
+  const r=timeLeft<=10?255:Math.round(34+(221*(1-(timeLeft-10)/20)));
+  const g=timeLeft<=10?Math.round(208*timeLeft/10):208;
+  f.style.background=`rgb(${r},${g},80)`;
+  d.textContent=timeLeft;
+  d.className='timer-num'+(timeLeft<=10?' urgent':'');
+}
+function timeUp(){
+  answered=true;
+  const q=SESSION[idx];dotStates[idx]='timeout';
+  resultLog.push({q:q.q,correct:false,ans:q.opts[q.a],timedOut:true});
+  document.querySelectorAll('.opt').forEach((b,j)=>{b.disabled=true;if(j===q.a)b.classList.add('correct');else b.classList.add('timeout');});
+  document.getElementById('answeredCount').textContent=idx+1;
+  const fb=document.getElementById('feedback');fb.className='feedback show timed';
+  fb.innerHTML=`<strong>Time expired.</strong> ${q.f}`;
+  sndTimeout();advance();
+}
+
+// ── Question ──────────────────────────────────────────────────────────────────
+function showQ(){
+  const q=SESSION[idx];answered=false;
+  clearTimeout(advTimeout);document.getElementById('advWrap').style.display='none';
+  document.getElementById('qCounter').textContent=`Question ${idx+1} of 5`;
+  document.getElementById('qNum').textContent=`Q${idx+1}`;
+  document.getElementById('correctCount').textContent=score;
+  document.getElementById('answeredCount').textContent=idx;
   renderDots();
-  const dp = document.getElementById('diffPill');
-  dp.textContent = q.dl;
-  dp.className = `diff-pill d${q.diff}`;
-  document.getElementById('questionText').textContent = q.q;
-  const container = document.getElementById('options');
-  container.innerHTML = '';
-  ['A','B','C','D'].forEach((key, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'opt';
-    btn.innerHTML = `<span class="opt-key">${key}</span>${q.opts[i]}`;
-    btn.onclick = () => selectAnswer(i);
-    container.appendChild(btn);
+  const dp=document.getElementById('diffPill');dp.textContent=q.dl;dp.className=`diff-pill d${q.diff}`;
+  document.getElementById('questionText').textContent=q.q;
+  const con=document.getElementById('options');con.innerHTML='';
+  ['A','B','C','D'].forEach((k,i)=>{
+    const b=document.createElement('button');b.className='opt';
+    b.innerHTML=`<span class="opt-key">${k}</span>${q.opts[i]}`;
+    b.onclick=()=>pick(i);con.appendChild(b);
   });
-  document.getElementById('feedback').className = 'feedback';
-  document.getElementById('feedback').innerHTML = '';
-  document.getElementById('nextBtn').className = 'next-btn';
-  const card = document.getElementById('card');
-  card.classList.remove('animate'); void card.offsetWidth; card.classList.add('animate');
+  document.getElementById('feedback').className='feedback';
+  document.getElementById('feedback').innerHTML='';
+  const card=document.getElementById('card');
+  card.classList.remove('animate');void card.offsetWidth;card.classList.add('animate');
   startTimer();
 }
-
-function startAutoAdvance() {
-  const wrap = document.getElementById('advanceWrap');
-  const fill = document.getElementById('advanceFill');
-  wrap.style.display = 'block';
-  fill.style.transition = 'none';
-  fill.style.width = '100%';
-  // Force reflow then animate
-  fill.offsetWidth;
-  fill.style.transition = `width ${ADVANCE_MS}ms linear`;
-  fill.style.width = '0%';
-  advanceTimeout = setTimeout(() => {
-    if (idx < 4) { idx++; showQuestion(); } else showResult();
-  }, ADVANCE_MS);
-}
-
-function selectAnswer(i) {
-  if (answered) return;
-  answered = true;
-  clearInterval(timerInterval);
-  const q = SESSION[idx];
-  const correct = i === q.a;
-  if (correct) score++;
-  dotStates[idx] = correct ? 'correct' : 'wrong';
-  resultLog.push({ q: q.q, correct, correctAns: q.opts[q.a] });
-
-  document.getElementById('correctCount').textContent = score;
-  document.getElementById('answeredCount').textContent = idx + 1;
-  document.querySelectorAll('.opt').forEach((btn, j) => {
-    btn.disabled = true;
-    if (j === q.a) btn.classList.add('correct');
-    if (j === i && !correct) btn.classList.add('wrong');
+function pick(i){
+  if(answered)return;answered=true;clearInterval(timerIv);
+  const q=SESSION[idx];const ok=i===q.a;
+  if(ok)score++;dotStates[idx]=ok?'correct':'wrong';
+  resultLog.push({q:q.q,correct:ok,ans:q.opts[q.a]});
+  document.getElementById('correctCount').textContent=score;
+  document.getElementById('answeredCount').textContent=idx+1;
+  document.querySelectorAll('.opt').forEach((b,j)=>{
+    b.disabled=true;
+    if(j===q.a)b.classList.add('correct');
+    if(j===i&&!ok)b.classList.add('wrong');
   });
-  const fb = document.getElementById('feedback');
-  fb.className = `feedback show ${correct ? 'ok' : 'bad'}`;
-  fb.innerHTML = `<strong>${correct ? '✓ Correct!' : '✗ Not quite.'}</strong> ${q.f}`;
-  // Hide next button — auto-advance handles it
-  document.getElementById('nextBtn').className = 'next-btn';
-  startAutoAdvance();
+  const fb=document.getElementById('feedback');
+  fb.className=`feedback show ${ok?'ok':'bad'}`;
+  fb.innerHTML=`<strong>${ok?'Correct.':'Incorrect.'}</strong> ${q.f}`;
+  ok?sndCorrect():sndWrong();
+  advance();
+}
+function advance(){
+  const wrap=document.getElementById('advWrap'),fill=document.getElementById('advFill');
+  wrap.style.display='block';fill.style.transition='none';fill.style.width='100%';
+  fill.offsetWidth;fill.style.transition=`width ${ADVANCE_MS}ms linear`;fill.style.width='0%';
+  advTimeout=setTimeout(()=>{if(idx<4){idx++;showQ();}else finish();},ADVANCE_MS);
 }
 
-// Navigation handled by auto-advance
-
-// ── Result & save ─────────────────────────────────────────────────────────────
-function showResult() {
-  clearInterval(timerInterval);
-  document.getElementById('quizArea').style.display = 'none';
-  document.getElementById('resultScreen').classList.add('show');
-  document.getElementById('resultName').textContent = playerName;
-  document.getElementById('resultIdDisplay').textContent = `Student ID: ${studentId}`;
-  document.getElementById('resultBig').textContent = score;
-
-  const outcomes = [
-    { icon: '📖', msg: 'Keep digging!',    sub: 'The answers are all on netbridge.co.nz — every word matters.' },
-    { icon: '💡', msg: 'Getting warmer!',  sub: 'You\'re reading the right pages — go deeper.' },
-    { icon: '⚡', msg: 'Solid effort!',    sub: 'You\'ve clearly spent time on the site and the industry!' },
-    { icon: '🎯', msg: 'Very impressive!', sub: 'You really know Netbridge and the industry well.' },
-    { icon: '🏆', msg: 'Perfect Score!',   sub: 'Outstanding — every question nailed!' },
+// ── Result ────────────────────────────────────────────────────────────────────
+function finish(){
+  clearInterval(timerIv);clearTimeout(advTimeout);quizActive=false;
+  showScreen('resultScreen');
+  document.getElementById('resName').textContent=playerName;
+  document.getElementById('resId').textContent='Student ID: '+studentId;
+  document.getElementById('resBig').textContent=score;
+  const msgs=[
+    {m:'Keep digging',s:'Head to netbridge.co.nz — every detail matters.'},
+    {m:'Getting warmer',s:"You're on the right pages — go deeper."},
+    {m:'Solid effort',s:"You've clearly done some research."},
+    {m:'Very impressive',s:'You know Netbridge inside and out.'},
+    {m:'Perfect Score',s:'Outstanding — every question correct.'},
   ];
-  const o = outcomes[score === 5 ? 4 : score === 4 ? 3 : score === 3 ? 2 : score <= 1 ? 0 : 1];
-  document.getElementById('resultIcon').textContent = o.icon;
-  document.getElementById('resultMsg').textContent = o.msg;
-  document.getElementById('resultSub').textContent = o.sub;
-
+  const r=msgs[score===5?4:score===4?3:score===3?2:score<=1?0:1];
+  document.getElementById('resMsg').textContent=r.m;
+  document.getElementById('resSub').textContent=r.s;
+  // Breakdown
+  const bd=document.getElementById('breakdownEl');bd.innerHTML='';
+  resultLog.forEach((r,i)=>{
+    const row=document.createElement('div');row.className='bd-row';
+    const cls=r.correct?'bd-c':r.timedOut?'bd-t':'bd-w';
+    const label=r.correct?'Correct':r.timedOut?'Timed out — answer: '+r.ans:'Incorrect — answer: '+r.ans;
+    row.innerHTML=`<div class="bd-bar ${cls}"></div><div class="bd-text"><strong>Q${i+1}: ${r.q}</strong><span>${label}</span></div>`;
+    bd.appendChild(row);
+  });
+  // Confetti on perfect score
+  if(score===5)setTimeout(launchConfetti,350);
   // Lock student ID
-  const attempted = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  if (!attempted.includes(studentId)) {
-    attempted.push(studentId);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(attempted));
-  }
-
+  const done=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  if(!done.includes(studentId)){done.push(studentId);localStorage.setItem(STORAGE_KEY,JSON.stringify(done));}
   saveResult();
 }
-
-function saveResult() {
-  const note = document.getElementById('savingNote');
-  note.textContent = '⏳ Saving your result...';
-  const timestamp = new Date().toLocaleString('en-NZ', { timeZone: 'Pacific/Auckland' });
-
-  fetch(SHEET_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: playerName, studentId, score, outOf: 5, timestamp })
-  })
-  .then(() => { note.textContent = '✓ Result saved.'; })
-  .catch(() => { note.textContent = ''; });
+function openShare(){
+  document.getElementById('shareName').textContent=playerName;
+  document.getElementById('shareNum').textContent=score;
+  document.getElementById('shareDate').textContent=new Date().toLocaleDateString('en-NZ',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('shareOverlay').style.display='flex';
+}
+function saveResult(){
+  const note=document.getElementById('saveNote');note.textContent='Saving result...';
+  const ts=new Date().toLocaleString('en-NZ',{timeZone:'Pacific/Auckland',hour12:false});
+  fetch(SHEET_URL,{
+    method:'POST',mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:playerName,studentId,score,outOf:5,timestamp:ts,tabSwitches})
+  }).then(()=>{note.textContent='Result saved.';}).catch(()=>{note.textContent='';});
 }
 </script>
 </body>
