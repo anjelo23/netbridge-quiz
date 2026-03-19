@@ -20,13 +20,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#0a1628;--blue:#1a4a8a;--cyan:#00c8e0;--gold:#f0b429;
-  --white:#fff;--gray:#8a9bb5;--success:#22d07a;--danger:#ff4d6d;
+  /* Netbridge brand colours matched to netbridge.co.nz */
+  --navy:#0b1120;--blue:#1352a0;--cyan:#00c4d8;--gold:#f0b429;
+  --white:#ffffff;--gray:#8899b4;--success:#22d07a;--danger:#ff4d6d;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Figtree',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:linear-gradient(rgba(0,200,224,0.04)1px,transparent 1px),linear-gradient(90deg,rgba(0,200,224,0.04)1px,transparent 1px);
+  background-image:linear-gradient(rgba(0,196,216,0.04)1px,transparent 1px),linear-gradient(90deg,rgba(0,196,216,0.04)1px,transparent 1px);
   background-size:40px 40px;}
 .orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:0.12;pointer-events:none;z-index:0;}
 .orb1{width:420px;height:420px;background:var(--cyan);top:-120px;right:-100px;}
@@ -36,7 +37,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 /* Header */
 .site-header{text-align:center;margin-bottom:32px;}
 .nb-logo{height:38px;margin-bottom:14px;display:block;margin-left:auto;margin-right:auto;}
-.event-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,200,224,0.1);border:1px solid rgba(0,200,224,0.28);border-radius:100px;padding:5px 16px;font-family:'DM Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;}
+.event-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,196,216,0.1);border:1px solid rgba(0,196,216,0.28);border-radius:100px;padding:5px 16px;font-family:'DM Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;}
 .event-badge::before{content:'◈';}
 
 /* Overlays */
@@ -44,7 +45,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 @keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
 #confettiCanvas{display:none;position:fixed;inset:0;z-index:999;pointer-events:none;}
 #shareOverlay{position:fixed;inset:0;z-index:900;background:rgba(5,12,28,0.94);display:none;align-items:center;justify-content:center;padding:24px;}
-.share-card{background:var(--navy);border:1px solid rgba(0,200,224,0.3);border-radius:20px;padding:40px 36px;max-width:400px;width:100%;text-align:center;}
+.share-card{background:var(--navy);border:1px solid rgba(0,196,216,0.3);border-radius:20px;padding:40px 36px;max-width:400px;width:100%;text-align:center;}
 .share-logo{height:30px;margin-bottom:20px;display:block;margin-left:auto;margin-right:auto;}
 .share-event{font-family:'DM Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:20px;}
 .share-player{font-size:19px;font-weight:700;margin-bottom:4px;}
@@ -65,8 +66,8 @@ h2{font-size:21px;font-weight:700;margin-bottom:8px;}
 
 /* Prepare */
 .research-links{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
-.res-link{display:block;background:rgba(0,200,224,0.07);border:1px solid rgba(0,200,224,0.2);border-radius:10px;padding:14px 18px;color:var(--white);text-decoration:none;font-size:14px;line-height:1.4;transition:all 0.18s;}
-.res-link:hover{background:rgba(0,200,224,0.13);border-color:rgba(0,200,224,0.4);transform:translateX(4px);}
+.res-link{display:block;background:rgba(0,196,216,0.07);border:1px solid rgba(0,196,216,0.2);border-radius:10px;padding:14px 18px;color:var(--white);text-decoration:none;font-size:14px;line-height:1.4;transition:all 0.18s;}
+.res-link:hover{background:rgba(0,196,216,0.13);border-color:rgba(0,196,216,0.4);transform:translateX(4px);}
 .res-link .arr{color:var(--cyan);margin-right:8px;}
 .rules-box{background:rgba(240,180,41,0.07);border:1px solid rgba(240,180,41,0.2);border-radius:12px;padding:16px 18px;margin-bottom:28px;}
 .rules-title{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;}
@@ -76,7 +77,7 @@ h2{font-size:21px;font-weight:700;margin-bottom:8px;}
 
 /* Button */
 .primary-btn{width:100%;background:var(--cyan);border:none;border-radius:12px;color:var(--navy);font-family:'Figtree',sans-serif;font-size:16px;font-weight:700;padding:16px;cursor:pointer;transition:all 0.18s;min-height:52px;outline:none;}
-.primary-btn:hover{background:#00dff5;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,200,224,0.28);}
+.primary-btn:hover{background:#00d8ec;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,196,216,0.28);}
 
 /* Fields */
 .field{margin-bottom:20px;}
@@ -146,7 +147,9 @@ h2{font-size:21px;font-weight:700;margin-bottom:8px;}
    position, it appears "highlighted in blue" before the student clicks.
    Fix: outline:none on all opt buttons, -webkit-tap-highlight-color:transparent
    to kill iOS tap flash, and we explicitly blur activeElement before rendering. */
-.options{display:flex;flex-direction:column;gap:11px;}
+.options{display:flex;flex-direction:column;gap:11px;outline:none;}
+.options *:focus{outline:none!important;box-shadow:none!important;}
+.options *{-webkit-tap-highlight-color:rgba(0,0,0,0)!important;}
 .opt{
   display:flex;align-items:flex-start;gap:14px;
   background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.09);
@@ -168,8 +171,8 @@ h2{font-size:21px;font-weight:700;margin-bottom:8px;}
   border-radius:6px;padding:3px 8px;min-width:28px;
   text-align:center;flex-shrink:0;margin-top:2px;transition:all 0.16s;
 }
-.opt:hover:not(:disabled){border-color:rgba(0,200,224,0.45);background:rgba(0,200,224,0.07);transform:translateX(4px);}
-.opt:hover:not(:disabled) .opt-key{background:rgba(0,200,224,0.2);color:var(--cyan);}
+.opt:hover:not(:disabled){border-color:rgba(0,196,216,0.45);background:rgba(0,196,216,0.07);transform:translateX(4px);}
+.opt:hover:not(:disabled) .opt-key{background:rgba(0,196,216,0.2);color:var(--cyan);}
 @keyframes cPulse{0%{box-shadow:0 0 0 0 rgba(34,208,122,0.5)}60%{box-shadow:0 0 0 14px rgba(34,208,122,0)}100%{box-shadow:0 0 0 0 rgba(34,208,122,0)}}
 @keyframes wShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
 .opt.correct{border-color:var(--success);background:rgba(34,208,122,0.09);animation:cPulse 0.6s ease;}
@@ -214,7 +217,7 @@ h2{font-size:21px;font-weight:700;margin-bottom:8px;}
 .bd-text strong{display:block;color:var(--white);font-size:13px;margin-bottom:2px;}
 .bd-text span{color:var(--gray);font-size:12px;line-height:1.5;}
 .res-actions{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:16px;}
-.prize-note{font-family:'DM Mono',monospace;font-size:12px;color:var(--cyan);background:rgba(0,200,224,0.08);border:1px solid rgba(0,200,224,0.2);border-radius:8px;padding:10px 20px;letter-spacing:0.04em;}
+.prize-note{font-family:'DM Mono',monospace;font-size:12px;color:var(--cyan);background:rgba(0,196,216,0.08);border:1px solid rgba(0,196,216,0.2);border-radius:8px;padding:10px 20px;letter-spacing:0.04em;}
 .share-btn{background:transparent;border:1.5px solid rgba(255,255,255,0.18);border-radius:10px;color:var(--white);font-family:'Figtree',sans-serif;font-size:14px;font-weight:600;padding:12px 28px;cursor:pointer;transition:all 0.2s;outline:none;}
 .share-btn:hover{border-color:var(--cyan);color:var(--cyan);}
 .save-note{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray);margin-top:8px;}
@@ -294,6 +297,7 @@ h2{font-size:21px;font-weight:700;margin-bottom:8px;}
         <input type="text" id="idInput" placeholder="e.g. 12345678" autocomplete="off">
         <div class="field-error" id="idError">Please enter your student ID.</div>
         <div class="field-error" id="idUsedError">This student ID has already been used.</div>
+        <div class="field-error" id="idFormatError">Student ID must be at least 7 digits and numbers only (e.g. 1543675).</div>
       </div>
       <button class="primary-btn" onclick="register()">Confirm and start</button>
     </div>
@@ -544,83 +548,76 @@ function sndTimeout(){tone(340,0.28,'sawtooth',0.12);}
 function sndBeep(){tone(440,0.11);}
 function sndGo(){tone(660,0.08);setTimeout(()=>tone(880,0.2),70);}
 
-// Score result sounds — synthesised with Web Audio API
-// Each is distinct so students immediately feel the emotional result
+// Score result sounds — meme-inspired, synthesised with Web Audio API
 function sndScore(s){
   if(muted)return;
-  const t=getCtx().currentTime;
-  // Score 0 or 1: sad trombone — descending wah-wah-wah
-  if(s<=1){
-    const notes=[494,466,440,415];
-    notes.forEach((f,i)=>{
-      const o=getCtx().createOscillator(),g=getCtx().createGain();
-      o.connect(g);g.connect(getCtx().destination);
-      o.type='sawtooth';o.frequency.setValueAtTime(f,t+i*0.22);
-      g.gain.setValueAtTime(0.18,t+i*0.22);
-      g.gain.exponentialRampToValueAtTime(0.001,t+i*0.22+0.3);
-      o.start(t+i*0.22);o.stop(t+i*0.22+0.35);
-    });
-    return;
-  }
-  // Score 2: double low "womp womp"
-  if(s===2){
-    [[300,0],[240,0.35]].forEach(([f,delay])=>{
-      const o=getCtx().createOscillator(),g=getCtx().createGain();
-      o.connect(g);g.connect(getCtx().destination);
-      o.type='sawtooth';o.frequency.setValueAtTime(f,t+delay);
-      o.frequency.linearRampToValueAtTime(f*0.7,t+delay+0.28);
-      g.gain.setValueAtTime(0.15,t+delay);
-      g.gain.exponentialRampToValueAtTime(0.001,t+delay+0.32);
-      o.start(t+delay);o.stop(t+delay+0.35);
-    });
-    return;
-  }
-  // Score 3: short upward "ding!" — neutral/ok
-  if(s===3){
-    [523,659,784].forEach((f,i)=>{
-      const o=getCtx().createOscillator(),g=getCtx().createGain();
-      o.connect(g);g.connect(getCtx().destination);
-      o.type='sine';o.frequency.value=f;
-      g.gain.setValueAtTime(0.2,t+i*0.11);
-      g.gain.exponentialRampToValueAtTime(0.001,t+i*0.11+0.22);
-      o.start(t+i*0.11);o.stop(t+i*0.11+0.25);
-    });
-    return;
-  }
-  // Score 4: happy 5-note ascending jingle
-  if(s===4){
-    [523,587,659,698,784].forEach((f,i)=>{
-      const o=getCtx().createOscillator(),g=getCtx().createGain();
-      o.connect(g);g.connect(getCtx().destination);
-      o.type='triangle';o.frequency.value=f;
-      g.gain.setValueAtTime(0.22,t+i*0.1);
-      g.gain.exponentialRampToValueAtTime(0.001,t+i*0.1+0.28);
-      o.start(t+i*0.1);o.stop(t+i*0.1+0.3);
-    });
-    return;
-  }
-  // Score 5: triumphant fanfare — full ascending chord resolution
-  if(s===5){
-    const fanfare=[
-      [523,0],[659,0.1],[784,0.2],
-      [523,0.4],[659,0.5],[784,0.6],[1047,0.6],
-      [880,0.9],[1047,1.0],[1175,1.1]
-    ];
-    fanfare.forEach(([f,delay])=>{
-      const o=getCtx().createOscillator(),g=getCtx().createGain();
-      o.connect(g);g.connect(getCtx().destination);
-      o.type='triangle';o.frequency.value=f;
-      g.gain.setValueAtTime(0.2,t+delay);
-      g.gain.exponentialRampToValueAtTime(0.001,t+delay+0.35);
-      o.start(t+delay);o.stop(t+delay+0.38);
-    });
-  }
-}
-function toggleMute(){
-  muted=!muted;
-  const b=document.getElementById('soundBtn');
-  b.textContent=muted?'SOUND OFF':'SOUND ON';
-  b.classList.toggle('off',muted);
+  try{
+    const ctx=getCtx(),t=ctx.currentTime;
+
+    function n(freq,start,dur,vol,type='sine'){
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      o.type=type;o.frequency.value=freq;
+      g.gain.setValueAtTime(vol,t+start);
+      g.gain.exponentialRampToValueAtTime(0.001,t+start+dur);
+      o.start(t+start);o.stop(t+start+dur+0.05);
+    }
+
+    // 0 or 1 — Sad trombone (wah-wah-wah-wahhh descending)
+    if(s<=1){
+      const wahs=[{f:494,v:0.18},{f:466,v:0.17},{f:440,v:0.17},{f:415,v:0.22}];
+      wahs.forEach((w,i)=>n(w.f,i*0.22,0.28,w.v,'sawtooth'));
+      // extra low moan at end
+      n(200,1.0,0.5,0.14,'sawtooth');
+      return;
+    }
+
+    // 2 — Price is Right loser horn style (dun dun dun dunnnn)
+    if(s===2){
+      [[392,0,0.18],[370,0.22,0.18],[349,0.44,0.18],[294,0.66,0.5]].forEach(
+        ([f,st,d])=>n(f,st,d,0.16,'sawtooth')
+      );
+      return;
+    }
+
+    // 3 — Windows XP tada (two short cheerful tones)
+    if(s===3){
+      // First chord
+      [523,659,784].forEach(f=>n(f,0,0.18,0.12));
+      // Second chord up a fifth — tada resolution
+      [659,784,988].forEach(f=>n(f,0.25,0.35,0.14));
+      return;
+    }
+
+    // 4 — Achievement unlocked chime (ascending arpeggio with shimmer)
+    if(s===4){
+      const arp=[523,659,784,1047,1319];
+      arp.forEach((f,i)=>{
+        n(f,i*0.09,0.25,0.16,'triangle');
+        // shimmer overtone
+        n(f*2,i*0.09,0.12,0.05,'sine');
+      });
+      // final sustain chord
+      [784,988,1175].forEach(f=>n(f,0.55,0.5,0.12,'triangle'));
+      return;
+    }
+
+    // 5 — Mario-style level complete fanfare
+    if(s===5){
+      // signature 6-note Mario finish run
+      const run=[523,523,523,523,415,494,523];
+      run.forEach((f,i)=>n(f,i*0.1,0.12,0.18,'square'));
+      // hold chord
+      [523,659,784].forEach(f=>n(f,0.75,0.15,0.14,'square'));
+      // octave jump resolution
+      [1047,1319,1568].forEach(f=>n(f,1.0,0.12,0.14,'square'));
+      n(1047,1.25,0.6,0.2,'square');
+      // triumphant bass hit
+      n(130,0.75,0.2,0.15,'sawtooth');
+      n(130,1.0,0.3,0.15,'sawtooth');
+    }
+
+  }catch(e){}
 }
 
 // ── Confetti ──────────────────────────────────────────────────────────────────
@@ -673,9 +670,12 @@ function register(){
   const n=document.getElementById('nameInput').value.trim();
   const id=document.getElementById('idInput').value.trim();
   let ok=true;
-  ['nameError','idError','idUsedError'].forEach(e=>document.getElementById(e).style.display='none');
+  ['nameError','idError','idUsedError','idFormatError'].forEach(e=>document.getElementById(e).style.display='none');
   if(!n){document.getElementById('nameError').style.display='block';ok=false;}
   if(!id){document.getElementById('idError').style.display='block';ok=false;}
+  else if(!/^\d{7,}$/.test(id)){
+    document.getElementById('idFormatError').style.display='block';ok=false;
+  }
   if(!ok)return;
   const done=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
   if(done.includes(id)){
@@ -770,19 +770,34 @@ function showQ(){
     document.activeElement.blur();
   }
 
+  // Build options first so they exist, but pointer-events off during animation
+  con.style.pointerEvents='none';
   ['A','B','C','D'].forEach((k,i)=>{
     const b=document.createElement('div');
     b.className='opt';
     b.setAttribute('role','button');
-    // divs are NEVER auto-focused by browsers — no blue highlight can appear
+    b.setAttribute('tabindex','-1');
     b.innerHTML=`<span class="opt-key">${k}</span>${q.opts[i]}`;
     b.onclick=()=>pick(i);
     con.appendChild(b);
   });
   document.getElementById('feedback').className='feedback';
   document.getElementById('feedback').innerHTML='';
+  // Animate card — reflow happens here, but pointer-events are off so
+  // browser cannot assign focus to any option during the layout pass
   const card=document.getElementById('card');
   card.classList.remove('animate');void card.offsetWidth;card.classList.add('animate');
+  // Re-enable pointer events after the next paint — by this point any
+  // auto-focus the browser tried to assign has already been suppressed
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      con.style.pointerEvents='';
+      // Final safety blur — kills any lingering focus after double-rAF
+      if(document.activeElement&&document.activeElement!==document.body){
+        document.activeElement.blur();
+      }
+    });
+  });
   startTimer();
 }
 
