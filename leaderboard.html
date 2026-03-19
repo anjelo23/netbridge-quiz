@@ -9,25 +9,16 @@
 :root{--navy:#0a1628;--blue:#1a4a8a;--cyan:#00c8e0;--gold:#f0b429;--white:#fff;--gray:#8a9bb5;--success:#22d07a;--danger:#ff4d6d;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Figtree',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(0,200,224,0.04)1px,transparent 1px),linear-gradient(90deg,rgba(0,200,224,0.04)1px,transparent 1px);background-size:40px 40px;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(0,200,224,0.04)1px,transparent 1px),linear-gradient(90deg,rgba(0,200,224,0.04)1px,transparent 1px);
+  background-size:40px 40px;}
 .orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:0.12;pointer-events:none;z-index:0;}
 .orb1{width:420px;height:420px;background:var(--cyan);top:-120px;right:-100px;}
 .orb2{width:300px;height:300px;background:var(--blue);bottom:-80px;left:-80px;}
-.wrapper{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:40px 24px 72px;}
-
-/* Header */
-.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;flex-wrap:wrap;gap:16px;}
-.header-left{display:flex;align-items:center;gap:16px;}
-.nb-logo{height:34px;}
-.page-title{font-size:20px;font-weight:700;letter-spacing:-0.01em;}
-.page-sub{font-family:'DM Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;}
-.refresh-info{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray);text-align:right;}
-.refresh-info span{color:var(--cyan);}
-.refresh-btn{margin-top:6px;background:transparent;border:1px solid rgba(0,200,224,0.3);border-radius:6px;color:var(--cyan);font-family:'DM Mono',monospace;font-size:10px;padding:4px 12px;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;}
-.refresh-btn:hover{background:rgba(0,200,224,0.1);}
+.wrapper{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:40px 24px 72px;}
 
 /* Password screen */
-#pwScreen{max-width:400px;margin:80px auto;}
+#pwScreen{max-width:400px;margin:80px auto;position:relative;z-index:1;}
 .pw-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:40px 36px;text-align:center;}
 .pw-logo{height:32px;margin-bottom:20px;display:block;margin-left:auto;margin-right:auto;}
 .pw-title{font-size:18px;font-weight:700;margin-bottom:6px;}
@@ -35,12 +26,38 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
 .pw-input{width:100%;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 16px;color:var(--white);font-family:'Figtree',sans-serif;font-size:16px;outline:none;transition:border-color 0.2s;text-align:center;letter-spacing:0.08em;}
 .pw-input:focus{border-color:var(--cyan);}
 .pw-err{color:var(--danger);font-family:'DM Mono',monospace;font-size:12px;margin-top:8px;display:none;}
-.pw-btn{width:100%;margin-top:16px;background:var(--cyan);border:none;border-radius:10px;color:var(--navy);font-family:'Figtree',sans-serif;font-size:15px;font-weight:700;padding:14px;cursor:pointer;transition:all 0.18s;}
+.pw-btn{width:100%;margin-top:16px;background:var(--cyan);border:none;border-radius:10px;color:var(--navy);font-family:'Figtree',sans-serif;font-size:15px;font-weight:700;padding:14px;cursor:pointer;transition:all 0.18s;outline:none;}
 .pw-btn:hover{background:#00dff5;}
 
-/* Stats bar */
-.stats-bar{display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap;}
-.stat{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 20px;flex:1;min-width:120px;}
+/* Header */
+.header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:16px;}
+.header-left{display:flex;align-items:center;gap:16px;}
+.nb-logo{height:34px;}
+.page-title{font-size:20px;font-weight:700;letter-spacing:-0.01em;}
+.page-sub{font-family:'DM Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;margin-top:2px;}
+.header-controls{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+.refresh-info{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray);text-align:right;}
+.refresh-info span{color:var(--cyan);}
+.ctrl-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+
+/* Control buttons */
+.ctrl-btn{background:transparent;border:1px solid rgba(255,255,255,0.15);border-radius:7px;color:var(--gray);font-family:'DM Mono',monospace;font-size:10px;padding:6px 14px;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;white-space:nowrap;outline:none;}
+.ctrl-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+.ctrl-btn.active{border-color:var(--gold);color:var(--gold);}
+.ctrl-btn.danger{border-color:rgba(255,77,109,0.4);color:var(--danger);}
+.ctrl-btn.danger:hover{background:rgba(255,77,109,0.1);}
+.ctrl-btn.safe{border-color:rgba(34,208,122,0.4);color:var(--success);}
+.ctrl-btn.safe:hover{background:rgba(34,208,122,0.1);}
+
+/* Winner mode overlay banner */
+#winnerBanner{display:none;background:linear-gradient(135deg,rgba(240,180,41,0.15),rgba(240,180,41,0.05));border:1px solid rgba(240,180,41,0.4);border-radius:12px;padding:14px 20px;margin-bottom:20px;text-align:center;font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:0.06em;}
+
+/* Closed banner */
+#closedBanner{display:none;background:rgba(255,77,109,0.08);border:1px solid rgba(255,77,109,0.25);border-radius:12px;padding:12px 20px;margin-bottom:20px;text-align:center;font-family:'DM Mono',monospace;font-size:12px;color:var(--danger);letter-spacing:0.04em;}
+
+/* Stats */
+.stats-bar{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+.stat{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 20px;flex:1;min-width:110px;}
 .stat-val{font-size:28px;font-weight:800;color:var(--cyan);line-height:1;}
 .stat-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--gray);letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;}
 
@@ -48,36 +65,52 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
 .table-wrap{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;}
 table{width:100%;border-collapse:collapse;}
 thead tr{border-bottom:1px solid rgba(255,255,255,0.08);}
-thead th{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray);letter-spacing:0.08em;text-transform:uppercase;padding:14px 18px;text-align:left;}
+thead th{font-family:'DM Mono',monospace;font-size:10px;color:var(--gray);letter-spacing:0.08em;text-transform:uppercase;padding:13px 16px;text-align:left;}
 tbody tr{border-bottom:1px solid rgba(255,255,255,0.05);transition:background 0.15s;}
 tbody tr:last-child{border-bottom:none;}
-tbody tr:hover{background:rgba(255,255,255,0.03);}
-tbody td{padding:14px 18px;font-size:14px;vertical-align:middle;}
-.rank-cell{font-family:'DM Mono',monospace;font-size:13px;font-weight:600;color:var(--gray);width:48px;}
+tbody tr:hover{background:rgba(255,255,255,0.02);}
+tbody td{padding:13px 16px;font-size:14px;vertical-align:middle;}
+
+/* Winner row */
+@keyframes goldGlow{
+  0%,100%{box-shadow:inset 0 0 0 1px rgba(240,180,41,0.4),0 0 20px rgba(240,180,41,0.1);}
+  50%{box-shadow:inset 0 0 0 1px rgba(240,180,41,0.9),0 0 40px rgba(240,180,41,0.3);}
+}
+tbody tr.winner-row{animation:goldGlow 1.8s ease-in-out infinite;background:rgba(240,180,41,0.06)!important;}
+tbody tr.winner-row td{color:var(--gold)!important;}
+
+.rank-cell{font-family:'DM Mono',monospace;font-size:13px;font-weight:600;color:var(--gray);width:52px;}
 .rank-1{color:var(--gold);}
 .rank-2{color:#c0c0c0;}
 .rank-3{color:#cd7f32;}
 .name-cell{font-weight:600;}
 .id-cell{font-family:'DM Mono',monospace;font-size:12px;color:var(--gray);}
 .score-cell{font-family:'DM Mono',monospace;font-size:14px;font-weight:700;}
-.score-5{color:var(--success);}
-.score-4{color:var(--cyan);}
-.score-3{color:var(--gold);}
-.score-low{color:var(--gray);}
+.s5{color:var(--success);}
+.s4{color:var(--cyan);}
+.s3{color:var(--gold);}
+.slow{color:var(--gray);}
+.time-cell{font-family:'DM Mono',monospace;font-size:12px;color:var(--gray);}
 .flag-cell{font-family:'DM Mono',monospace;font-size:11px;}
 .flagged{color:var(--danger);}
-.clean{color:rgba(255,255,255,0.15);}
-.time-cell{font-family:'DM Mono',monospace;font-size:12px;color:var(--gray);}
-.empty-state{text-align:center;padding:60px 20px;color:var(--gray);}
-.empty-state div{font-size:15px;}
-.loading{text-align:center;padding:60px 20px;color:var(--gray);font-family:'DM Mono',monospace;font-size:13px;}
+.clean{color:rgba(255,255,255,0.12);}
+.ts-cell{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray);}
+
+.empty-state{text-align:center;padding:60px 20px;color:var(--gray);font-size:15px;}
+.loading{text-align:center;padding:60px 20px;color:var(--gray);font-family:'DM Mono',monospace;font-size:12px;}
 @keyframes spin{to{transform:rotate(360deg)}}
-.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(0,200,224,0.2);border-top-color:var(--cyan);border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:8px;}
-.error-box{background:rgba(255,77,109,0.08);border:1px solid rgba(255,77,109,0.25);border-radius:12px;padding:16px 20px;color:#ffc2cc;font-size:14px;margin-bottom:20px;display:none;}
-@media(max-width:600px){
-  thead th:nth-child(3),tbody td:nth-child(3){display:none;}
-  thead th:nth-child(5),tbody td:nth-child(5){display:none;}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(0,200,224,0.2);border-top-color:var(--cyan);border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:8px;}
+.error-box{background:rgba(255,77,109,0.08);border:1px solid rgba(255,77,109,0.25);border-radius:10px;padding:13px 16px;color:#ffc2cc;font-size:13px;margin-bottom:16px;display:none;}
+
+.export-note{font-family:'DM Mono',monospace;font-size:10px;color:var(--gray);text-align:right;margin-top:10px;}
+
+@media(max-width:640px){
+  thead th:nth-child(3),tbody td:nth-child(3),
+  thead th:nth-child(6),tbody td:nth-child(6){display:none;}
   .wrapper{padding:24px 16px 60px;}
+  .stats-bar{gap:8px;}
+  .stat{padding:12px 14px;}
+  .stat-val{font-size:22px;}
 }
 </style>
 </head>
@@ -85,7 +118,6 @@ tbody td{padding:14px 18px;font-size:14px;vertical-align:middle;}
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 
-<!-- Password screen -->
 <div id="pwScreen">
   <div class="pw-card">
     <img src="https://netbridge.co.nz/wp-content/uploads/2023/12/Netbridge-logo.png" alt="Netbridge" class="pw-logo" onerror="this.style.display='none'">
@@ -97,7 +129,6 @@ tbody td{padding:14px 18px;font-size:14px;vertical-align:middle;}
   </div>
 </div>
 
-<!-- Leaderboard -->
 <div class="wrapper" id="lbWrapper" style="display:none">
   <div class="header">
     <div class="header-left">
@@ -107,18 +138,26 @@ tbody td{padding:14px 18px;font-size:14px;vertical-align:middle;}
         <div class="page-sub">Industry Connect Quiz</div>
       </div>
     </div>
-    <div class="refresh-info">
-      Last updated: <span id="lastUpdated">—</span><br>
-      <button class="refresh-btn" onclick="loadData()">Refresh now</button>
+    <div class="header-controls">
+      <div class="refresh-info">Last updated: <span id="lastUpdated">—</span></div>
+      <div class="ctrl-row">
+        <button class="ctrl-btn" onclick="loadData()">Refresh</button>
+        <button class="ctrl-btn" id="winnerBtn" onclick="toggleWinnerMode()">Announce Winner</button>
+        <button class="ctrl-btn danger" id="closeBtn" onclick="toggleClose()">Close Submissions</button>
+        <button class="ctrl-btn" onclick="exportCSV()">Export CSV</button>
+      </div>
     </div>
   </div>
 
+  <div id="winnerBanner">WINNER ANNOUNCED — Leaderboard frozen. Press "Reset View" to resume live updates.</div>
+  <div id="closedBanner">Submissions are closed. No new quiz entries are being accepted.</div>
   <div class="error-box" id="errorBox"></div>
 
   <div class="stats-bar">
-    <div class="stat"><div class="stat-val" id="statTotal">—</div><div class="stat-label">Total Entries</div></div>
+    <div class="stat"><div class="stat-val" id="statTotal">—</div><div class="stat-label">Entries</div></div>
     <div class="stat"><div class="stat-val" id="statPerfect">—</div><div class="stat-label">Perfect Scores</div></div>
     <div class="stat"><div class="stat-val" id="statAvg">—</div><div class="stat-label">Average Score</div></div>
+    <div class="stat"><div class="stat-val" id="statBest">—</div><div class="stat-label">Best Time</div></div>
     <div class="stat"><div class="stat-val" id="statFlagged">—</div><div class="stat-label">Flagged</div></div>
   </div>
 
@@ -131,93 +170,179 @@ tbody td{padding:14px 18px;font-size:14px;vertical-align:middle;}
           <th>Name</th>
           <th>Student ID</th>
           <th>Score</th>
+          <th>Time Taken</th>
           <th>Tab Switches</th>
-          <th>Time</th>
+          <th>Submitted</th>
         </tr>
       </thead>
       <tbody id="lbBody"></tbody>
     </table>
-    <div class="empty-state" id="emptyEl" style="display:none"><div>No results yet.</div></div>
+    <div class="empty-state" id="emptyEl" style="display:none">No results yet.</div>
   </div>
+  <div class="export-note" id="exportNote"></div>
 </div>
 
 <script>
-// ── Config — set both to match your quiz setup ────────────────────────────────
-const SHEET_URL          = "https://script.google.com/macros/s/AKfycbwTNMwGIAqweJQ0QM4ReBCBeiZljxmluM7dVUATXJsDH5LNgvR_BXjSvFYuOi982DBysA/exec";  // same URL as index.html
-const LEADERBOARD_PASSWORD = "netbridge2025";  // change this to whatever you want
-const REFRESH_INTERVAL_MS  = 30000;
+// ── Config ────────────────────────────────────────────────────────────────────
+const SHEET_URL           = "https://script.google.com/macros/s/AKfycbymCzmQuKyM_nE5Ax2NTUaSl0AmJMccvGmsWP4_gZLB_n729p0sbESs2x27hL1IptDHDw/exec";
+const LEADERBOARD_PASSWORD = "netbridge2025"; // change this before the event
+const REFRESH_MS           = 30000;
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let winnerMode    = false;
+let submissionsClosed = false;
+let refreshInterval = null;
+let allRows = [];
 
 // ── Password ──────────────────────────────────────────────────────────────────
 function checkPw(){
   const v=document.getElementById('pwInput').value;
-  const err=document.getElementById('pwErr');
   if(v===LEADERBOARD_PASSWORD){
     document.getElementById('pwScreen').style.display='none';
     document.getElementById('lbWrapper').style.display='block';
     loadData();
-    setInterval(loadData,REFRESH_INTERVAL_MS);
+    refreshInterval=setInterval(()=>{if(!winnerMode)loadData();},REFRESH_MS);
   } else {
+    const err=document.getElementById('pwErr');
     err.style.display='block';
     setTimeout(()=>{err.style.display='none';},2500);
   }
+}
+
+// ── Winner mode ───────────────────────────────────────────────────────────────
+function toggleWinnerMode(){
+  winnerMode=!winnerMode;
+  const btn=document.getElementById('winnerBtn');
+  const banner=document.getElementById('winnerBanner');
+  if(winnerMode){
+    btn.textContent='Reset View';
+    btn.classList.add('active');
+    banner.style.display='block';
+    // Apply winner highlight to top row
+    highlightWinner(true);
+  } else {
+    btn.textContent='Announce Winner';
+    btn.classList.remove('active');
+    banner.style.display='none';
+    highlightWinner(false);
+    loadData(); // resume live data
+  }
+}
+
+function highlightWinner(on){
+  const rows=document.querySelectorAll('#lbBody tr');
+  if(rows.length===0)return;
+  if(on){
+    rows[0].classList.add('winner-row');
+    rows[0].scrollIntoView({behavior:'smooth',block:'center'});
+  } else {
+    rows[0].classList.remove('winner-row');
+  }
+}
+
+// ── Close / open submissions ──────────────────────────────────────────────────
+function toggleClose(){
+  submissionsClosed=!submissionsClosed;
+  const btn=document.getElementById('closeBtn');
+  const banner=document.getElementById('closedBanner');
+  if(submissionsClosed){
+    btn.textContent='Open Submissions';
+    btn.className='ctrl-btn safe';
+    banner.style.display='block';
+    // Tell Apps Script to close
+    postAction({action:'close'});
+  } else {
+    btn.textContent='Close Submissions';
+    btn.className='ctrl-btn danger';
+    banner.style.display='none';
+    postAction({action:'open'});
+  }
+}
+
+function postAction(payload){
+  fetch(SHEET_URL,{
+    method:'POST',mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(payload)
+  }).catch(()=>{});
 }
 
 // ── Load data ─────────────────────────────────────────────────────────────────
 function loadData(){
   fetch(SHEET_URL)
     .then(r=>r.json())
-    .then(rows=>{
-      render(rows);
+    .then(data=>{
+      if(data.closed!==undefined)syncClosedState(data.closed);
+      allRows=Array.isArray(data.rows)?data.rows:data;
+      render(allRows);
       document.getElementById('lastUpdated').textContent=new Date().toLocaleTimeString('en-NZ',{hour12:false});
       document.getElementById('errorBox').style.display='none';
     })
-    .catch(err=>{
+    .catch(()=>{
       const eb=document.getElementById('errorBox');
-      eb.textContent='Could not load results. Check that your Apps Script URL has a doGet function and is deployed for "Anyone" access.';
+      eb.textContent='Could not load results. Check your Apps Script URL is deployed for Anyone access.';
       eb.style.display='block';
       document.getElementById('loadingEl').style.display='none';
     });
 }
 
+function syncClosedState(isClosed){
+  if(isClosed===submissionsClosed)return;
+  submissionsClosed=isClosed;
+  const btn=document.getElementById('closeBtn');
+  const banner=document.getElementById('closedBanner');
+  if(isClosed){
+    btn.textContent='Open Submissions';btn.className='ctrl-btn safe';
+    banner.style.display='block';
+  } else {
+    btn.textContent='Close Submissions';btn.className='ctrl-btn danger';
+    banner.style.display='none';
+  }
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
 function render(rows){
   document.getElementById('loadingEl').style.display='none';
-
-  // Filter out header row if present (first row looks like column names)
-  const data=rows.filter(r=>typeof r.score==='number'||!isNaN(Number(r.score)));
-
-  if(data.length===0){
+  const valid=rows.filter(r=>!isNaN(Number(r.score)));
+  if(valid.length===0){
     document.getElementById('emptyEl').style.display='block';
     document.getElementById('lbTable').style.display='none';
     updateStats([]);return;
   }
 
-  // Sort: score descending, then timestamp ascending (first to submit wins ties)
-  const sorted=[...data].sort((a,b)=>{
+  // Sort: score descending, then time ascending (fastest wins the tie)
+  const sorted=[...valid].sort((a,b)=>{
     const sd=(Number(b.score)||0)-(Number(a.score)||0);
     if(sd!==0)return sd;
-    return new Date(a.timestamp)-new Date(b.timestamp);
+    const ta=Number(a.totalSeconds)||9999,tb=Number(b.totalSeconds)||9999;
+    return ta-tb; // faster time breaks the tie
   });
 
   updateStats(sorted);
+  const tbody=document.getElementById('lbBody');
+  const wasWinner=tbody.querySelector('.winner-row');
+  tbody.innerHTML='';
 
-  const tbody=document.getElementById('lbBody');tbody.innerHTML='';
   sorted.forEach((row,i)=>{
     const rank=i+1;
     const s=Number(row.score)||0;
     const tabs=Number(row.tabSwitches)||0;
-    const rankClass=rank===1?'rank-1':rank===2?'rank-2':rank===3?'rank-3':'';
-    const scoreClass=s===5?'score-5':s===4?'score-4':s===3?'score-3':'score-low';
-    const flagHtml=tabs>0
-      ?`<span class="flagged">${tabs} switch${tabs>1?'es':''}</span>`
-      :`<span class="clean">—</span>`;
+    const secs=Number(row.totalSeconds)||0;
+    const timeStr=secs>0?(Math.floor(secs/60)>0?`${Math.floor(secs/60)}m ${secs%60}s`:`${secs}s`):'—';
+    const rankLbl=rank===1?'1st':rank===2?'2nd':rank===3?'3rd':'#'+rank;
+    const rankCls=rank===1?'rank-1':rank===2?'rank-2':rank===3?'rank-3':'';
+    const scoreCls=s===5?'s5':s===4?'s4':s===3?'s3':'slow';
+    const flagHtml=tabs>0?`<span class="flagged">${tabs}x</span>`:`<span class="clean">—</span>`;
     const tr=document.createElement('tr');
+    if(wasWinner&&rank===1)tr.classList.add('winner-row');
     tr.innerHTML=`
-      <td class="rank-cell ${rankClass}">${rank===1?'#1 ★':rank===2?'#2':rank===3?'#3':'#'+rank}</td>
+      <td class="rank-cell ${rankCls}">${rankLbl}</td>
       <td class="name-cell">${esc(row.name||'')}</td>
       <td class="id-cell">${esc(row.studentId||'')}</td>
-      <td class="score-cell ${scoreClass}">${s} / 5</td>
+      <td class="score-cell ${scoreCls}">${s} / 5</td>
+      <td class="time-cell">${timeStr}</td>
       <td class="flag-cell">${flagHtml}</td>
-      <td class="time-cell">${esc(row.timestamp||'')}</td>
+      <td class="ts-cell">${esc(String(row.timestamp||'').slice(0,16))}</td>
     `;
     tbody.appendChild(tr);
   });
@@ -231,15 +356,35 @@ function updateStats(rows){
   const perfect=rows.filter(r=>Number(r.score)===5).length;
   const avg=total>0?(rows.reduce((s,r)=>s+Number(r.score||0),0)/total).toFixed(1):'—';
   const flagged=rows.filter(r=>Number(r.tabSwitches)>0).length;
+  const times=rows.filter(r=>Number(r.totalSeconds)>0).map(r=>Number(r.totalSeconds));
+  const best=times.length>0?Math.min(...times):null;
+  const bestStr=best?(Math.floor(best/60)>0?`${Math.floor(best/60)}m${best%60}s`:`${best}s`):'—';
   document.getElementById('statTotal').textContent=total;
   document.getElementById('statPerfect').textContent=perfect;
   document.getElementById('statAvg').textContent=avg;
+  document.getElementById('statBest').textContent=bestStr;
   document.getElementById('statFlagged').textContent=flagged;
 }
 
-function esc(s){
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+// ── Export CSV ────────────────────────────────────────────────────────────────
+function exportCSV(){
+  if(!allRows.length){document.getElementById('exportNote').textContent='No data to export.';return;}
+  const headers=['Timestamp','Name','Student ID','Score','Out Of','Time Taken (s)','Tab Switches'];
+  const rows=allRows.map(r=>[
+    r.timestamp||'',r.name||'',r.studentId||'',
+    r.score||0,r.outOf||5,r.totalSeconds||0,r.tabSwitches||0
+  ].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(','));
+  const csv=[headers.join(','),...rows].join('\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='netbridge-quiz-results.csv';a.click();
+  URL.revokeObjectURL(url);
+  document.getElementById('exportNote').textContent='CSV downloaded.';
+  setTimeout(()=>{document.getElementById('exportNote').textContent='';},3000);
 }
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 </script>
 </body>
 </html>
