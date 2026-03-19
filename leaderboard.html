@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Netbridge Quiz — Leaderboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1628;--blue:#1a4a8a;--cyan:#00c8e0;--gold:#f0b429;--white:#fff;--gray:#8a9bb5;--success:#22d07a;--danger:#ff4d6d;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Figtree',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(0,200,224,0.04)1px,transparent 1px),linear-gradient(90deg,rgba(0,200,224,0.04)1px,transparent 1px);background-size:40px 40px;}
+.orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:0.12;pointer-events:none;z-index:0;}
+.orb1{width:420px;height:420px;background:var(--cyan);top:-120px;right:-100px;}
+.orb2{width:300px;height:300px;background:var(--blue);bottom:-80px;left:-80px;}
+.wrapper{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:40px 24px 72px;}
+
+/* Header */
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;flex-wrap:wrap;gap:16px;}
+.header-left{display:flex;align-items:center;gap:16px;}
+.nb-logo{height:34px;}
+.page-title{font-size:20px;font-weight:700;letter-spacing:-0.01em;}
+.page-sub{font-family:'DM Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;}
+.refresh-info{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray);text-align:right;}
+.refresh-info span{color:var(--cyan);}
+.refresh-btn{margin-top:6px;background:transparent;border:1px solid rgba(0,200,224,0.3);border-radius:6px;color:var(--cyan);font-family:'DM Mono',monospace;font-size:10px;padding:4px 12px;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;}
+.refresh-btn:hover{background:rgba(0,200,224,0.1);}
+
+/* Password screen */
+#pwScreen{max-width:400px;margin:80px auto;}
+.pw-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:40px 36px;text-align:center;}
+.pw-logo{height:32px;margin-bottom:20px;display:block;margin-left:auto;margin-right:auto;}
+.pw-title{font-size:18px;font-weight:700;margin-bottom:6px;}
+.pw-sub{color:var(--gray);font-size:14px;margin-bottom:24px;}
+.pw-input{width:100%;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 16px;color:var(--white);font-family:'Figtree',sans-serif;font-size:16px;outline:none;transition:border-color 0.2s;text-align:center;letter-spacing:0.08em;}
+.pw-input:focus{border-color:var(--cyan);}
+.pw-err{color:var(--danger);font-family:'DM Mono',monospace;font-size:12px;margin-top:8px;display:none;}
+.pw-btn{width:100%;margin-top:16px;background:var(--cyan);border:none;border-radius:10px;color:var(--navy);font-family:'Figtree',sans-serif;font-size:15px;font-weight:700;padding:14px;cursor:pointer;transition:all 0.18s;}
+.pw-btn:hover{background:#00dff5;}
+
+/* Stats bar */
+.stats-bar{display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap;}
+.stat{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 20px;flex:1;min-width:120px;}
+.stat-val{font-size:28px;font-weight:800;color:var(--cyan);line-height:1;}
+.stat-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--gray);letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;}
+
+/* Table */
+.table-wrap{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+thead tr{border-bottom:1px solid rgba(255,255,255,0.08);}
+thead th{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray);letter-spacing:0.08em;text-transform:uppercase;padding:14px 18px;text-align:left;}
+tbody tr{border-bottom:1px solid rgba(255,255,255,0.05);transition:background 0.15s;}
+tbody tr:last-child{border-bottom:none;}
+tbody tr:hover{background:rgba(255,255,255,0.03);}
+tbody td{padding:14px 18px;font-size:14px;vertical-align:middle;}
+.rank-cell{font-family:'DM Mono',monospace;font-size:13px;font-weight:600;color:var(--gray);width:48px;}
+.rank-1{color:var(--gold);}
+.rank-2{color:#c0c0c0;}
+.rank-3{color:#cd7f32;}
+.name-cell{font-weight:600;}
+.id-cell{font-family:'DM Mono',monospace;font-size:12px;color:var(--gray);}
+.score-cell{font-family:'DM Mono',monospace;font-size:14px;font-weight:700;}
+.score-5{color:var(--success);}
+.score-4{color:var(--cyan);}
+.score-3{color:var(--gold);}
+.score-low{color:var(--gray);}
+.flag-cell{font-family:'DM Mono',monospace;font-size:11px;}
+.flagged{color:var(--danger);}
+.clean{color:rgba(255,255,255,0.15);}
+.time-cell{font-family:'DM Mono',monospace;font-size:12px;color:var(--gray);}
+.empty-state{text-align:center;padding:60px 20px;color:var(--gray);}
+.empty-state div{font-size:15px;}
+.loading{text-align:center;padding:60px 20px;color:var(--gray);font-family:'DM Mono',monospace;font-size:13px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(0,200,224,0.2);border-top-color:var(--cyan);border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:8px;}
+.error-box{background:rgba(255,77,109,0.08);border:1px solid rgba(255,77,109,0.25);border-radius:12px;padding:16px 20px;color:#ffc2cc;font-size:14px;margin-bottom:20px;display:none;}
+@media(max-width:600px){
+  thead th:nth-child(3),tbody td:nth-child(3){display:none;}
+  thead th:nth-child(5),tbody td:nth-child(5){display:none;}
+  .wrapper{padding:24px 16px 60px;}
+}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<!-- Password screen -->
+<div id="pwScreen">
+  <div class="pw-card">
+    <img src="https://netbridge.co.nz/wp-content/uploads/2023/12/Netbridge-logo.png" alt="Netbridge" class="pw-logo" onerror="this.style.display='none'">
+    <div class="pw-title">Leaderboard Access</div>
+    <p class="pw-sub">Enter the event password to view results.</p>
+    <input type="password" class="pw-input" id="pwInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()">
+    <div class="pw-err" id="pwErr">Incorrect password.</div>
+    <button class="pw-btn" onclick="checkPw()">View Leaderboard</button>
+  </div>
+</div>
+
+<!-- Leaderboard -->
+<div class="wrapper" id="lbWrapper" style="display:none">
+  <div class="header">
+    <div class="header-left">
+      <img src="https://netbridge.co.nz/wp-content/uploads/2023/12/Netbridge-logo.png" alt="Netbridge" class="nb-logo" onerror="this.style.display='none'">
+      <div>
+        <div class="page-title">Live Leaderboard</div>
+        <div class="page-sub">Industry Connect Quiz</div>
+      </div>
+    </div>
+    <div class="refresh-info">
+      Last updated: <span id="lastUpdated">—</span><br>
+      <button class="refresh-btn" onclick="loadData()">Refresh now</button>
+    </div>
+  </div>
+
+  <div class="error-box" id="errorBox"></div>
+
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-val" id="statTotal">—</div><div class="stat-label">Total Entries</div></div>
+    <div class="stat"><div class="stat-val" id="statPerfect">—</div><div class="stat-label">Perfect Scores</div></div>
+    <div class="stat"><div class="stat-val" id="statAvg">—</div><div class="stat-label">Average Score</div></div>
+    <div class="stat"><div class="stat-val" id="statFlagged">—</div><div class="stat-label">Flagged</div></div>
+  </div>
+
+  <div class="table-wrap">
+    <div class="loading" id="loadingEl"><span class="spinner"></span>Loading results...</div>
+    <table id="lbTable" style="display:none">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Student ID</th>
+          <th>Score</th>
+          <th>Tab Switches</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody id="lbBody"></tbody>
+    </table>
+    <div class="empty-state" id="emptyEl" style="display:none"><div>No results yet.</div></div>
+  </div>
+</div>
+
+<script>
+// ── Config — set both to match your quiz setup ────────────────────────────────
+const SHEET_URL          = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";  // same URL as index.html
+const LEADERBOARD_PASSWORD = "netbridge2025";  // change this to whatever you want
+const REFRESH_INTERVAL_MS  = 30000;
+
+// ── Password ──────────────────────────────────────────────────────────────────
+function checkPw(){
+  const v=document.getElementById('pwInput').value;
+  const err=document.getElementById('pwErr');
+  if(v===LEADERBOARD_PASSWORD){
+    document.getElementById('pwScreen').style.display='none';
+    document.getElementById('lbWrapper').style.display='block';
+    loadData();
+    setInterval(loadData,REFRESH_INTERVAL_MS);
+  } else {
+    err.style.display='block';
+    setTimeout(()=>{err.style.display='none';},2500);
+  }
+}
+
+// ── Load data ─────────────────────────────────────────────────────────────────
+function loadData(){
+  fetch(SHEET_URL)
+    .then(r=>r.json())
+    .then(rows=>{
+      render(rows);
+      document.getElementById('lastUpdated').textContent=new Date().toLocaleTimeString('en-NZ',{hour12:false});
+      document.getElementById('errorBox').style.display='none';
+    })
+    .catch(err=>{
+      const eb=document.getElementById('errorBox');
+      eb.textContent='Could not load results. Check that your Apps Script URL has a doGet function and is deployed for "Anyone" access.';
+      eb.style.display='block';
+      document.getElementById('loadingEl').style.display='none';
+    });
+}
+
+function render(rows){
+  document.getElementById('loadingEl').style.display='none';
+
+  // Filter out header row if present (first row looks like column names)
+  const data=rows.filter(r=>typeof r.score==='number'||!isNaN(Number(r.score)));
+
+  if(data.length===0){
+    document.getElementById('emptyEl').style.display='block';
+    document.getElementById('lbTable').style.display='none';
+    updateStats([]);return;
+  }
+
+  // Sort: score descending, then timestamp ascending (first to submit wins ties)
+  const sorted=[...data].sort((a,b)=>{
+    const sd=(Number(b.score)||0)-(Number(a.score)||0);
+    if(sd!==0)return sd;
+    return new Date(a.timestamp)-new Date(b.timestamp);
+  });
+
+  updateStats(sorted);
+
+  const tbody=document.getElementById('lbBody');tbody.innerHTML='';
+  sorted.forEach((row,i)=>{
+    const rank=i+1;
+    const s=Number(row.score)||0;
+    const tabs=Number(row.tabSwitches)||0;
+    const rankClass=rank===1?'rank-1':rank===2?'rank-2':rank===3?'rank-3':'';
+    const scoreClass=s===5?'score-5':s===4?'score-4':s===3?'score-3':'score-low';
+    const flagHtml=tabs>0
+      ?`<span class="flagged">${tabs} switch${tabs>1?'es':''}</span>`
+      :`<span class="clean">—</span>`;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td class="rank-cell ${rankClass}">${rank===1?'#1 ★':rank===2?'#2':rank===3?'#3':'#'+rank}</td>
+      <td class="name-cell">${esc(row.name||'')}</td>
+      <td class="id-cell">${esc(row.studentId||'')}</td>
+      <td class="score-cell ${scoreClass}">${s} / 5</td>
+      <td class="flag-cell">${flagHtml}</td>
+      <td class="time-cell">${esc(row.timestamp||'')}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById('lbTable').style.display='table';
+  document.getElementById('emptyEl').style.display='none';
+}
+
+function updateStats(rows){
+  const total=rows.length;
+  const perfect=rows.filter(r=>Number(r.score)===5).length;
+  const avg=total>0?(rows.reduce((s,r)=>s+Number(r.score||0),0)/total).toFixed(1):'—';
+  const flagged=rows.filter(r=>Number(r.tabSwitches)>0).length;
+  document.getElementById('statTotal').textContent=total;
+  document.getElementById('statPerfect').textContent=perfect;
+  document.getElementById('statAvg').textContent=avg;
+  document.getElementById('statFlagged').textContent=flagged;
+}
+
+function esc(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>
